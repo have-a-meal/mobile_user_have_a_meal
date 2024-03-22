@@ -1,2 +1,3 @@
 # front_have_a_meal
-flutter로 개발
+
+A new Flutter project.
