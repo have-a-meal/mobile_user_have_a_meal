@@ -3,23 +3,31 @@ class TimeParse {
     final now = DateTime.now();
     final difference = now.difference(dateTime);
 
+    int timeValue;
+    String timeUnit;
+
     if (difference.inDays >= 365) {
-      final years = (difference.inDays / 365).floor();
-      return '$years년 전';
+      timeValue = (difference.inDays / 365).floor();
+      timeUnit = '년';
     } else if (difference.inDays >= 30) {
-      final months = (difference.inDays / 30).floor();
-      return '$months개월 전';
+      timeValue = (difference.inDays / 30).floor();
+      timeUnit = '개월';
     } else if (difference.inDays >= 7) {
-      final weeks = (difference.inDays / 7).floor();
-      return '$weeks주 전';
+      timeValue = (difference.inDays / 7).floor();
+      timeUnit = '주';
     } else if (difference.inDays >= 1) {
-      return '${difference.inDays}일 전';
+      timeValue = difference.inDays;
+      timeUnit = '일';
     } else if (difference.inHours >= 1) {
-      return '${difference.inHours}시간 전';
+      timeValue = difference.inHours;
+      timeUnit = '시간';
     } else if (difference.inMinutes >= 1) {
-      return '${difference.inMinutes}분 전';
+      timeValue = difference.inMinutes;
+      timeUnit = '분';
     } else {
       return '방금 전';
     }
+
+    return '$timeValue$timeUnit 전';
   }
 }
