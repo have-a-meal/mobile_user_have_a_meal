@@ -2,4 +2,4 @@
 
 A new Flutter project.
 
-<img src="https://img.shields.io/badge/-Java-344CB7?style=flat-plastic&logo=Java&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/-Flutter-344CB7?style=flat-plastic&logo=Flutter&logoColor=white"/></a>
