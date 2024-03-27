@@ -10,6 +10,10 @@ class StudentTicket extends StatefulWidget {
 class _StudentTicketState extends State<StudentTicket> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return const Scaffold(
+      body: Center(
+        child: Text("티켓화면"),
+      ),
+    );
   }
 }

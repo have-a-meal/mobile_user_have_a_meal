@@ -10,6 +10,14 @@ class StudentMenu extends StatefulWidget {
 class _StudentMenuState extends State<StudentMenu> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("메뉴"),
+      ),
+      body: const Center(
+        child: Text("메뉴화면"),
+      ),
+    );
   }
 }

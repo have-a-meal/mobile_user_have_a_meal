@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:front_have_a_meal/constants/sizes.dart';
 import 'package:front_have_a_meal/features/student/Ticket/student_ticket.dart';
 import 'package:front_have_a_meal/features/student/menu/student_menu.dart';
+import 'package:front_have_a_meal/features/student/profile/student_profile.dart';
 import 'package:front_have_a_meal/features/student/widgets/nav_tab.dart';
 
 class StudentNavigationScreenArgs {
@@ -59,9 +60,16 @@ class _StudentNavigationScreenState extends State<StudentNavigationScreen> {
               offstage: selectedIndex != 1,
               child: const StudentTicket(),
             ),
+            Offstage(
+              offstage: selectedIndex != 2,
+              child: const StudentProfile(),
+            ),
           ],
         ),
         bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: Colors.orange.shade50,
+          ),
           child: Padding(
             padding: const EdgeInsets.all(Sizes.size12),
             child: Row(
@@ -70,17 +78,25 @@ class _StudentNavigationScreenState extends State<StudentNavigationScreen> {
                 NavTab(
                   text: "메뉴",
                   isSelected: selectedIndex == 0,
-                  unSelectedIcon: FontAwesomeIcons.store,
-                  selectedIcon: FontAwesomeIcons.store,
+                  unSelectedIcon: FontAwesomeIcons.house,
+                  selectedIcon: FontAwesomeIcons.house,
                   onTap: () => _onTap(0),
                   selectedIndex: selectedIndex,
                 ),
                 NavTab(
-                  text: "티켓",
+                  text: "식권",
                   isSelected: selectedIndex == 1,
-                  unSelectedIcon: FontAwesomeIcons.qrcode,
-                  selectedIcon: FontAwesomeIcons.qrcode,
+                  unSelectedIcon: FontAwesomeIcons.ticket,
+                  selectedIcon: FontAwesomeIcons.ticket,
                   onTap: () => _onTap(1),
+                  selectedIndex: selectedIndex,
+                ),
+                NavTab(
+                  text: "식권",
+                  isSelected: selectedIndex == 2,
+                  unSelectedIcon: FontAwesomeIcons.circleUser,
+                  selectedIcon: FontAwesomeIcons.solidCircleUser,
+                  onTap: () => _onTap(2),
                   selectedIndex: selectedIndex,
                 ),
               ],
