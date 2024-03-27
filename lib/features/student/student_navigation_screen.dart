@@ -46,61 +46,59 @@ class _StudentNavigationScreenState extends State<StudentNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: [
-            // 실제로 그 화면을 보고 있지 않더라도 랜더링 시켜주는 위젯
-            Offstage(
-              offstage: selectedIndex != 0,
-              child: const StudentMenu(),
-            ),
-            Offstage(
-              offstage: selectedIndex != 1,
-              child: const StudentTicket(),
-            ),
-            Offstage(
-              offstage: selectedIndex != 2,
-              child: const StudentProfile(),
-            ),
-          ],
-        ),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: Colors.orange.shade50,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
+          // 실제로 그 화면을 보고 있지 않더라도 랜더링 시켜주는 위젯
+          Offstage(
+            offstage: selectedIndex != 0,
+            child: const StudentMenu(),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(Sizes.size12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                NavTab(
-                  text: "메뉴",
-                  isSelected: selectedIndex == 0,
-                  unSelectedIcon: FontAwesomeIcons.house,
-                  selectedIcon: FontAwesomeIcons.house,
-                  onTap: () => _onTap(0),
-                  selectedIndex: selectedIndex,
-                ),
-                NavTab(
-                  text: "식권",
-                  isSelected: selectedIndex == 1,
-                  unSelectedIcon: FontAwesomeIcons.ticket,
-                  selectedIcon: FontAwesomeIcons.ticket,
-                  onTap: () => _onTap(1),
-                  selectedIndex: selectedIndex,
-                ),
-                NavTab(
-                  text: "식권",
-                  isSelected: selectedIndex == 2,
-                  unSelectedIcon: FontAwesomeIcons.circleUser,
-                  selectedIcon: FontAwesomeIcons.solidCircleUser,
-                  onTap: () => _onTap(2),
-                  selectedIndex: selectedIndex,
-                ),
-              ],
-            ),
+          Offstage(
+            offstage: selectedIndex != 1,
+            child: const StudentTicket(),
+          ),
+          Offstage(
+            offstage: selectedIndex != 2,
+            child: const StudentProfile(),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.orange.shade50,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(Sizes.size12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              NavTab(
+                text: "메뉴",
+                isSelected: selectedIndex == 0,
+                unSelectedIcon: FontAwesomeIcons.house,
+                selectedIcon: FontAwesomeIcons.house,
+                onTap: () => _onTap(0),
+                selectedIndex: selectedIndex,
+              ),
+              NavTab(
+                text: "식권",
+                isSelected: selectedIndex == 1,
+                unSelectedIcon: FontAwesomeIcons.ticket,
+                selectedIcon: FontAwesomeIcons.ticket,
+                onTap: () => _onTap(1),
+                selectedIndex: selectedIndex,
+              ),
+              NavTab(
+                text: "식권",
+                isSelected: selectedIndex == 2,
+                unSelectedIcon: FontAwesomeIcons.circleUser,
+                selectedIcon: FontAwesomeIcons.solidCircleUser,
+                onTap: () => _onTap(2),
+                selectedIndex: selectedIndex,
+              ),
+            ],
           ),
         ),
       ),
