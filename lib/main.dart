@@ -29,6 +29,7 @@ class MainApp extends StatelessWidget {
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
         Locale('ko', 'KR'),
@@ -37,7 +38,7 @@ class MainApp extends StatelessWidget {
       title: 'have_a_meal',
       theme: ThemeData(
         useMaterial3: true,
-        primaryColor: Colors.orange,
+        primarySwatch: Colors.orange,
         appBarTheme: const AppBarTheme(
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),

@@ -37,6 +37,12 @@ dependencies:
   # Gap 라이브러리
   gap: ^3.0.1
 
+  # 아임포트 결제 관리 라이브러리
+  iamport_flutter: ^0.10.17
+
+  flutter_localizations:
+    sdk: flutter
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

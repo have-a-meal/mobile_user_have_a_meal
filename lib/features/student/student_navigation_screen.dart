@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:front_have_a_meal/constants/sizes.dart';
-import 'package:front_have_a_meal/features/user/widgets/nav_tab.dart';
+import 'package:front_have_a_meal/features/student/Ticket/student_ticket.dart';
+import 'package:front_have_a_meal/features/student/menu/student_menu.dart';
+import 'package:front_have_a_meal/features/student/widgets/nav_tab.dart';
 
-class UserNavigationScreenArgs {
-  UserNavigationScreenArgs({required this.selectedIndex});
+class StudentNavigationScreenArgs {
+  StudentNavigationScreenArgs({required this.selectedIndex});
 
   final int selectedIndex;
 }
 
-class UserNavigationScreen extends StatefulWidget {
-  static const routeName = "navigation";
-  static const routeURL = "/navigation";
-  const UserNavigationScreen({
+class StudentNavigationScreen extends StatefulWidget {
+  static const routeName = "student_navigation";
+  static const routeURL = "/student_navigation";
+  const StudentNavigationScreen({
     super.key,
     required this.selectedIndex,
   });
@@ -20,10 +22,11 @@ class UserNavigationScreen extends StatefulWidget {
   final int selectedIndex;
 
   @override
-  State<UserNavigationScreen> createState() => _UserNavigationScreenState();
+  State<StudentNavigationScreen> createState() =>
+      _StudentNavigationScreenState();
 }
 
-class _UserNavigationScreenState extends State<UserNavigationScreen> {
+class _StudentNavigationScreenState extends State<StudentNavigationScreen> {
   int selectedIndex = 0;
 
   void _onTap(int index) {
@@ -50,7 +53,11 @@ class _UserNavigationScreenState extends State<UserNavigationScreen> {
             // 실제로 그 화면을 보고 있지 않더라도 랜더링 시켜주는 위젯
             Offstage(
               offstage: selectedIndex != 0,
-              child: const Scaffold(),
+              child: const StudentMenu(),
+            ),
+            Offstage(
+              offstage: selectedIndex != 1,
+              child: const StudentTicket(),
             ),
           ],
         ),
@@ -61,11 +68,19 @@ class _UserNavigationScreenState extends State<UserNavigationScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 NavTab(
-                  text: "가게",
+                  text: "메뉴",
                   isSelected: selectedIndex == 0,
                   unSelectedIcon: FontAwesomeIcons.store,
                   selectedIcon: FontAwesomeIcons.store,
                   onTap: () => _onTap(0),
+                  selectedIndex: selectedIndex,
+                ),
+                NavTab(
+                  text: "티켓",
+                  isSelected: selectedIndex == 1,
+                  unSelectedIcon: FontAwesomeIcons.qrcode,
+                  selectedIcon: FontAwesomeIcons.qrcode,
+                  onTap: () => _onTap(1),
                   selectedIndex: selectedIndex,
                 ),
               ],
