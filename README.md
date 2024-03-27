@@ -19,10 +19,10 @@
 
 
 # 실제 화면
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/d69dd2cb-92cd-4d55-bc48-393b0013cd05.png  width="200" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/981a8977-434e-4b1d-9618-b5ae94efad2f.png  width="200" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/f19e389f-3e6d-460d-b728-a58a996d068c.png  width="200" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/172424c3-3035-42ab-bfe8-99c3dd39bccd.png  width="200" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/d69dd2cb-92cd-4d55-bc48-393b0013cd05.png"  width="200" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/981a8977-434e-4b1d-9618-b5ae94efad2f.png"  width="200" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/f19e389f-3e6d-460d-b728-a58a996d068c.png"  width="200" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/172424c3-3035-42ab-bfe8-99c3dd39bccd.png"  width="200" height="400"/>
 
 
 
