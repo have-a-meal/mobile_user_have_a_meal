@@ -1,5 +1,6 @@
 import 'package:front_have_a_meal/features/account/sign_in_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
+import 'package:front_have_a_meal/features/student/menu/student_menu_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,16 +20,24 @@ final router = GoRouter(routes: [
     },
   ),
   GoRoute(
-    path: StudentNavigationScreen.routeURL,
-    name: StudentNavigationScreen.routeName,
-    builder: (context, state) {
-      if (state.extra != null) {
-        final args = state.extra as StudentNavigationScreenArgs;
-        return StudentNavigationScreen(
-          selectedIndex: args.selectedIndex,
-        );
-      }
-      return const StudentNavigationScreen(selectedIndex: 0);
-    },
-  ),
+      path: StudentNavigationScreen.routeURL,
+      name: StudentNavigationScreen.routeName,
+      builder: (context, state) {
+        if (state.extra != null) {
+          final args = state.extra as StudentNavigationScreenArgs;
+          return StudentNavigationScreen(
+            selectedIndex: args.selectedIndex,
+          );
+        }
+        return const StudentNavigationScreen(selectedIndex: 0);
+      },
+      routes: [
+        GoRoute(
+          path: StudentMenuPayScreen.routeURL,
+          name: StudentMenuPayScreen.routeName,
+          builder: (context, state) {
+            return const StudentMenuPayScreen();
+          },
+        ),
+      ]),
 ]);
