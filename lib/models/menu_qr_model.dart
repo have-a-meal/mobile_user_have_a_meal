@@ -1,16 +1,16 @@
-class MenuModel {
+class MenuQRModel {
   String menuId;
   String title;
   String content;
 
-  MenuModel({
+  MenuQRModel({
     required this.menuId,
     required this.title,
     required this.content,
   });
 
-  factory MenuModel.fromJson(Map<String, dynamic> json) {
-    return MenuModel(
+  factory MenuQRModel.fromJson(Map<String, dynamic> json) {
+    return MenuQRModel(
       menuId: json['menuId'] as String,
       title: json['title'] as String,
       content: json['content'] as String,

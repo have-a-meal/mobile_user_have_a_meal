@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/student/menu/widgets/menu_card.dart';
-import 'package:front_have_a_meal/models/menu_model.dart';
+import 'package:front_have_a_meal/models/menu_pay_model.dart';
+import 'package:front_have_a_meal/models/menu_qr_model.dart';
 import 'package:gap/gap.dart';
 
 class MenuCourse extends StatelessWidget {
@@ -9,11 +10,13 @@ class MenuCourse extends StatelessWidget {
     required this.courseName,
     required this.courseColor,
     required this.menuList,
+    required this.timeName,
   });
 
   final String courseName;
   final Color courseColor;
-  final List<MenuModel> menuList;
+  final List<MenuPayModel> menuList;
+  final String timeName;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,11 @@ class MenuCourse extends StatelessWidget {
         const Divider(),
         const Gap(4),
         for (int i = 0; i < menuList.length; i++)
-          MenuCard(menuData: menuList[i]),
+          MenuCard(
+            menuData: menuList[i],
+            courseName: courseName,
+            timeName: timeName,
+          ),
       ],
     );
   }

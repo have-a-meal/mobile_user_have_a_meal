@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/student/menu/widgets/menu_course.dart';
-import 'package:front_have_a_meal/models/menu_model.dart';
+import 'package:front_have_a_meal/models/menu_pay_model.dart';
+import 'package:front_have_a_meal/models/menu_qr_model.dart';
 import 'package:gap/gap.dart';
 
 class MenuTime extends StatelessWidget {
@@ -15,7 +16,7 @@ class MenuTime extends StatelessWidget {
   final String timeName;
   final String time;
   final Color timeColor;
-  final Map<String, List<MenuModel>> menuCourse;
+  final Map<String, List<MenuPayModel>> menuCourse;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,11 @@ class MenuTime extends StatelessWidget {
         horizontal: 10,
       ),
       decoration: BoxDecoration(
-        color: timeColor,
+        // color: timeColor,
+        border: Border.all(
+          color: timeColor,
+          width: 6,
+        ),
         borderRadius: const BorderRadius.all(
           Radius.circular(
             12,
@@ -58,6 +63,7 @@ class MenuTime extends StatelessWidget {
           ),
           if (menuCourse["A코스"]!.isNotEmpty)
             MenuCourse(
+              timeName: timeName,
               courseName: "A코스",
               courseColor: timeName == "조식"
                   ? const Color(0xFF81B29A)
@@ -68,6 +74,7 @@ class MenuTime extends StatelessWidget {
             ),
           if (menuCourse["B코스"]!.isNotEmpty)
             MenuCourse(
+              timeName: timeName,
               courseName: "B코스",
               courseColor: timeName == "조식"
                   ? const Color(0xFFE63946)
@@ -78,6 +85,7 @@ class MenuTime extends StatelessWidget {
             ),
           if (menuCourse["C코스"]!.isNotEmpty)
             MenuCourse(
+              timeName: timeName,
               courseName: "C코스",
               courseColor: timeName == "조식"
                   ? const Color(0xFF264653)
