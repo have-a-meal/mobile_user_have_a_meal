@@ -63,33 +63,21 @@ class MenuTime extends StatelessWidget {
             MenuCourse(
               timeName: timeName,
               courseName: "A코스",
-              courseColor: timeName == "조식"
-                  ? const Color(0xFF81B29A)
-                  : timeName == "중식"
-                      ? const Color(0xFFF4A261)
-                      : const Color(0xFFE07A5F),
+              courseColor: Colors.lightGreen,
               menuList: menuCourse["A코스"]!,
             ),
           if (menuCourse["B코스"]!.isNotEmpty)
             MenuCourse(
               timeName: timeName,
               courseName: "B코스",
-              courseColor: timeName == "조식"
-                  ? const Color(0xFFE63946)
-                  : timeName == "중식"
-                      ? const Color(0xFF2A9D8F)
-                      : const Color(0xFFF77F00),
+              courseColor: Colors.lightBlue,
               menuList: menuCourse["B코스"]!,
             ),
           if (menuCourse["C코스"]!.isNotEmpty)
             MenuCourse(
               timeName: timeName,
               courseName: "C코스",
-              courseColor: timeName == "조식"
-                  ? const Color(0xFF264653)
-                  : timeName == "중식"
-                      ? const Color(0xFF7400B8)
-                      : const Color(0xFF023E8A),
+              courseColor: Colors.purple,
               menuList: menuCourse["C코스"]!,
             ),
         ],

@@ -72,20 +72,12 @@ class _StudentMenuState extends State<StudentMenu> {
         menuId: "1", title: "조식 A코스 메뉴1", content: "조식 A코스 설명", price: "5000"));
     _menuMap["조식"]!["B코스"]!.add(MenuPayModel(
         menuId: "1", title: "조식 B코스 메뉴1", content: "조식 B코스 설명", price: "5000"));
-    // _menuMap["조식"]!["C코스"]!.add(MenuPayModel(
-    //     menuId: "1", title: "조식 C코스 메뉴1", content: "조식 C코스 설명", price: "5000"));
-    // _menuMap["중식"]!["A코스"]!.add(MenuPayModel(
-    //     menuId: "2", title: "중식 A코스 메뉴1", content: "중식 A코스 설명", price: "5000"));
     _menuMap["중식"]!["B코스"]!.add(MenuPayModel(
         menuId: "2", title: "중식 B코스 메뉴1", content: "중식 B코스 설명", price: "5000"));
     _menuMap["중식"]!["C코스"]!.add(MenuPayModel(
         menuId: "2", title: "중식 C코스 메뉴1", content: "중식 C코스 설명", price: "5000"));
     _menuMap["석식"]!["A코스"]!.add(MenuPayModel(
         menuId: "3", title: "석식 A코스 메뉴1", content: "석식 A코스 설명", price: "5000"));
-    // _menuMap["석식"]!["B코스"]!.add(MenuPayModel(
-    //     menuId: "3", title: "석식 B코스 메뉴1", content: "석식 B코스 설명", price: "5000"));
-    // _menuMap["석식"]!["C코스"]!.add(MenuPayModel(
-    //     menuId: "3", title: "석식 C코스 메뉴1", content: "석식 C코스 설명", price: "5000"));
 
     setState(() {
       _isFirstLoading = false;
