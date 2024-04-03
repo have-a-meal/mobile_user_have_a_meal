@@ -38,17 +38,7 @@ class MainApp extends StatelessWidget {
       title: 'have_a_meal',
       theme: ThemeData(
         useMaterial3: true,
-        primarySwatch: Colors.orange,
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.light,
-        ),
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        primaryColor: Colors.grey.shade600,
-        appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
-        ),
+        colorSchemeSeed: Colors.orange,
       ),
     );
   }

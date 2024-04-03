@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
 import 'package:front_have_a_meal/features/account/widgets/sign_up_outsider.dart';
 import 'package:front_have_a_meal/features/account/widgets/sign_up_student.dart';
-import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const routeName = "signUp";
@@ -17,10 +12,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final bool _isStudent = false;
   int selectedIndex = 0;
-
-  bool _isSubmitted = false;
 
   void _onTap(int index) {
     if (selectedIndex == index) return;
@@ -34,13 +26,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.initState();
   }
 
-  void _onCheckOutsiderData() {
-    setState(() {
-      _isSubmitted = true;
-    });
-  }
+  // void _onCheckOutsiderData() {
+  //   setState(() {
+  //     _isSubmitted = true;
+  //   });
+  // }
 
-  void _onSubmit() async {}
+  // void _onSubmit() async {}
 
   @override
   Widget build(BuildContext context) {

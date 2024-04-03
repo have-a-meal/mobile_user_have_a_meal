@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/features/student/menu/widgets/menu_card.dart';
-import 'package:front_have_a_meal/features/student/menu/widgets/menu_course.dart';
 import 'package:front_have_a_meal/features/student/menu/widgets/menu_time.dart';
 import 'package:front_have_a_meal/models/menu_pay_model.dart';
-import 'package:front_have_a_meal/models/menu_qr_model.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
@@ -36,6 +33,7 @@ class _StudentMenuState extends State<StudentMenu> {
   bool _isFirstLoading = false;
   // 현재 날짜를 저장할 변수
   DateTime _selectedDate = DateTime.now();
+  DateTime _now = DateTime.now();
 
   @override
   void initState() {
@@ -74,20 +72,20 @@ class _StudentMenuState extends State<StudentMenu> {
         menuId: "1", title: "조식 A코스 메뉴1", content: "조식 A코스 설명", price: "5000"));
     _menuMap["조식"]!["B코스"]!.add(MenuPayModel(
         menuId: "1", title: "조식 B코스 메뉴1", content: "조식 B코스 설명", price: "5000"));
-    _menuMap["조식"]!["C코스"]!.add(MenuPayModel(
-        menuId: "1", title: "조식 C코스 메뉴1", content: "조식 C코스 설명", price: "5000"));
-    _menuMap["중식"]!["A코스"]!.add(MenuPayModel(
-        menuId: "2", title: "중식 A코스 메뉴1", content: "중식 A코스 설명", price: "5000"));
+    // _menuMap["조식"]!["C코스"]!.add(MenuPayModel(
+    //     menuId: "1", title: "조식 C코스 메뉴1", content: "조식 C코스 설명", price: "5000"));
+    // _menuMap["중식"]!["A코스"]!.add(MenuPayModel(
+    //     menuId: "2", title: "중식 A코스 메뉴1", content: "중식 A코스 설명", price: "5000"));
     _menuMap["중식"]!["B코스"]!.add(MenuPayModel(
         menuId: "2", title: "중식 B코스 메뉴1", content: "중식 B코스 설명", price: "5000"));
     _menuMap["중식"]!["C코스"]!.add(MenuPayModel(
         menuId: "2", title: "중식 C코스 메뉴1", content: "중식 C코스 설명", price: "5000"));
     _menuMap["석식"]!["A코스"]!.add(MenuPayModel(
         menuId: "3", title: "석식 A코스 메뉴1", content: "석식 A코스 설명", price: "5000"));
-    _menuMap["석식"]!["B코스"]!.add(MenuPayModel(
-        menuId: "3", title: "석식 B코스 메뉴1", content: "석식 B코스 설명", price: "5000"));
-    _menuMap["석식"]!["C코스"]!.add(MenuPayModel(
-        menuId: "3", title: "석식 C코스 메뉴1", content: "석식 C코스 설명", price: "5000"));
+    // _menuMap["석식"]!["B코스"]!.add(MenuPayModel(
+    //     menuId: "3", title: "석식 B코스 메뉴1", content: "석식 B코스 설명", price: "5000"));
+    // _menuMap["석식"]!["C코스"]!.add(MenuPayModel(
+    //     menuId: "3", title: "석식 C코스 메뉴1", content: "석식 C코스 설명", price: "5000"));
 
     setState(() {
       _isFirstLoading = false;
@@ -121,6 +119,7 @@ class _StudentMenuState extends State<StudentMenu> {
     });
 
     _selectedDate = DateTime.now();
+    _now = DateTime.now();
     _menuMap = {
       "조식": {
         "A코스": [],
@@ -151,39 +150,74 @@ class _StudentMenuState extends State<StudentMenu> {
     return SafeArea(
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Text(
+          SliverToBoxAdapter(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+              color: Colors.orange.shade100,
+              child: const Text(
                 "Have-A-Meal",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
-                  color: Colors.orange,
+                  color: Colors.black,
                 ),
               ),
             ),
           ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 6,
-            ),
-            sliver: SliverAppBar(
-              pinned: true,
-              backgroundColor: Colors.orange.shade100,
-              title: ListTile(
-                leading: const Icon(
-                  Icons.calendar_month_outlined,
-                  size: 32,
-                ),
-                title: Text(
-                  DateFormat('yyyy-MM-dd').format(_selectedDate),
-                  style: const TextStyle(fontSize: 20),
-                ),
-                onTap: () => _selectDate(context),
+          SliverAppBar(
+            pinned: true,
+            centerTitle: true,
+            backgroundColor: Colors.orange.shade50,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: IconButton(
+                onPressed: DateTime(_selectedDate.year, _selectedDate.month,
+                            _selectedDate.day) ==
+                        DateTime(_now.year, _now.month, _now.day)
+                    ? null
+                    : () {
+                        setState(() {
+                          _selectedDate = DateTime(_selectedDate.year,
+                              _selectedDate.month, _selectedDate.day - 1);
+                        });
+                      },
+                icon: const Icon(Icons.chevron_left_rounded),
+                color: Colors.black,
+                iconSize: 32,
               ),
             ),
-          )
+            title: TextButton.icon(
+              onPressed: () => _selectDate(context),
+              icon: const Icon(
+                Icons.calendar_month_outlined,
+                size: 32,
+                color: Colors.black,
+              ),
+              label: Text(
+                DateFormat('yyyy-MM-dd(E)', 'ko_KR').format(_selectedDate),
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _selectedDate = DateTime(_selectedDate.year,
+                          _selectedDate.month, _selectedDate.day + 1);
+                    });
+                  },
+                  icon: const Icon(Icons.chevron_right_rounded),
+                  color: Colors.black,
+                  iconSize: 32,
+                ),
+              ),
+            ],
+          ),
         ],
         body: _isFirstLoading
             ? const Center(
@@ -213,26 +247,35 @@ class _StudentMenuState extends State<StudentMenu> {
                       // ),
                       children: [
                         const Gap(10),
-                        MenuTime(
-                          timeName: "조식",
-                          time: "08:00 ~ 09:00",
-                          timeColor: const Color(0xFFCAF0F8).withOpacity(0.5),
-                          menuCourse: _menuMap["조식"]!,
-                        ),
+                        if (!_menuMap["조식"]!
+                            .entries
+                            .every((courseEntry) => courseEntry.value.isEmpty))
+                          MenuTime(
+                            timeName: "조식",
+                            time: "08:00 ~ 09:00",
+                            timeColor: const Color(0xFFCAF0F8).withOpacity(0.5),
+                            menuCourse: _menuMap["조식"]!,
+                          ),
                         const Gap(10),
-                        MenuTime(
-                          timeName: "중식",
-                          time: "12:00~13:30",
-                          timeColor: const Color(0xFFFFD166).withOpacity(0.5),
-                          menuCourse: _menuMap["중식"]!,
-                        ),
+                        if (!_menuMap["중식"]!
+                            .entries
+                            .every((courseEntry) => courseEntry.value.isEmpty))
+                          MenuTime(
+                            timeName: "중식",
+                            time: "12:00~13:30",
+                            timeColor: const Color(0xFFFFD166).withOpacity(0.5),
+                            menuCourse: _menuMap["중식"]!,
+                          ),
                         const Gap(10),
-                        MenuTime(
-                          timeName: "석식",
-                          time: "17:30~18:30",
-                          timeColor: const Color(0xFF9B5DE5).withOpacity(0.4),
-                          menuCourse: _menuMap["석식"]!,
-                        ),
+                        if (!_menuMap["석식"]!
+                            .entries
+                            .every((courseEntry) => courseEntry.value.isEmpty))
+                          MenuTime(
+                            timeName: "석식",
+                            time: "17:30~18:30",
+                            timeColor: const Color(0xFF9B5DE5).withOpacity(0.4),
+                            menuCourse: _menuMap["석식"]!,
+                          ),
                         const Gap(10),
                       ],
                     ),

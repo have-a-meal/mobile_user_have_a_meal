@@ -27,7 +27,6 @@ class _SignInScreenState extends State<SignInScreen> {
   // 비밀번호 정규식
   final RegExp _passwordRegExp =
       RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$');
-  final int _minPasswordLength = 6; // 최소 비밀번호 길이
 
   String? _idErrorText; // 아이디 오류 메시지
   String? _passwordErrorText; // 비밀번호 오류 메시지

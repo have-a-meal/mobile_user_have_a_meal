@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/student/menu/widgets/menu_card.dart';
 import 'package:front_have_a_meal/models/menu_pay_model.dart';
-import 'package:front_have_a_meal/models/menu_qr_model.dart';
 import 'package:gap/gap.dart';
 
 class MenuCourse extends StatelessWidget {
