@@ -6,10 +6,11 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Text(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(
               "에러!",
               style: TextStyle(
                 fontSize: 30,
@@ -17,8 +18,8 @@ class ErrorScreen extends StatelessWidget {
                 color: Colors.red,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -46,13 +46,33 @@ class _StudentTicketState extends State<StudentTicket> {
     _ticketMap["조식"]!["A코스"]!.add(
         TicketModel(menuId: "1", time: "조식", course: "A코스", price: "5000"));
     _ticketMap["조식"]!["B코스"]!.add(
-        TicketModel(menuId: "1", time: "조식", course: "B코스", price: "5000"));
+        TicketModel(menuId: "2", time: "조식", course: "B코스", price: "5000"));
     _ticketMap["중식"]!["B코스"]!.add(
-        TicketModel(menuId: "1", time: "중식", course: "B코스", price: "5000"));
+        TicketModel(menuId: "3", time: "중식", course: "B코스", price: "5000"));
     _ticketMap["중식"]!["C코스"]!.add(
-        TicketModel(menuId: "1", time: "중식", course: "C코스", price: "5000"));
+        TicketModel(menuId: "4", time: "중식", course: "C코스", price: "5000"));
     _ticketMap["석식"]!["A코스"]!.add(
-        TicketModel(menuId: "1", time: "석식", course: "A코스", price: "5000"));
+        TicketModel(menuId: "5", time: "석식", course: "A코스", price: "5000"));
+    _ticketMap["조식"]!["A코스"]!.add(
+        TicketModel(menuId: "6", time: "조식", course: "A코스", price: "5000"));
+    _ticketMap["조식"]!["A코스"]!.add(
+        TicketModel(menuId: "7", time: "조식", course: "A코스", price: "5000"));
+    _ticketMap["조식"]!["A코스"]!.add(
+        TicketModel(menuId: "8", time: "조식", course: "A코스", price: "5000"));
+    _ticketMap["조식"]!["A코스"]!.add(
+        TicketModel(menuId: "9", time: "조식", course: "A코스", price: "5000"));
+    _ticketMap["조식"]!["A코스"]!.add(
+        TicketModel(menuId: "10", time: "조식", course: "A코스", price: "5000"));
+    _ticketMap["조식"]!["A코스"]!.add(
+        TicketModel(menuId: "11", time: "조식", course: "A코스", price: "5000"));
+    _ticketMap["조식"]!["A코스"]!.add(
+        TicketModel(menuId: "12", time: "조식", course: "A코스", price: "5000"));
+    _ticketMap["조식"]!["A코스"]!.add(
+        TicketModel(menuId: "13", time: "조식", course: "A코스", price: "5000"));
+    _ticketMap["조식"]!["A코스"]!.add(
+        TicketModel(menuId: "14", time: "조식", course: "A코스", price: "5000"));
+    _ticketMap["조식"]!["A코스"]!.add(
+        TicketModel(menuId: "15", time: "조식", course: "A코스", price: "5000"));
 
     setState(() {
       _isFirstLoading = false;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/features/student/Ticket/student_qr_screen.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
+import 'package:go_router/go_router.dart';
 
 class TicketCourse extends StatefulWidget {
   const TicketCourse({
@@ -33,57 +35,65 @@ class _TicketCourseState extends State<TicketCourse> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(
-          width: 4,
-          color: _ticketColor,
+    return InkWell(
+      onTap: () => context.pushNamed(
+        StudentQrScreen.routeName,
+        extra: StudentQrScreenArgs(
+          ticketList: widget.ticketList,
         ),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5), // 그림자 색상
-            spreadRadius: 0, // 그림자의 확장 정도
-            blurRadius: 4, // 그림자의 흐림 정도
-            offset: const Offset(4, 4), // 오른쪽과 아래쪽으로 그림자 오프셋
-          ),
-        ],
       ),
-      child: Stack(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.ticketCourse,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: _ticketColor,
-                ),
-              ),
-              const Divider(),
-              Text(
-                "가격 : ${widget.ticketList[0].price}원",
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ],
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+            width: 4,
+            color: _ticketColor,
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Text(
-              "${widget.ticketList.length}개",
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5), // 그림자 색상
+              spreadRadius: 0, // 그림자의 확장 정도
+              blurRadius: 4, // 그림자의 흐림 정도
+              offset: const Offset(4, 4), // 오른쪽과 아래쪽으로 그림자 오프셋
             ),
-          )
-        ],
+          ],
+        ),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.ticketCourse,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: _ticketColor,
+                  ),
+                ),
+                const Divider(),
+                Text(
+                  "가격 : ${widget.ticketList[0].price}원",
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Text(
+                "${widget.ticketList.length}개",
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
