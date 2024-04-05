@@ -19,11 +19,18 @@
 
 
 # 실제 화면
+## 로그인 / 회원가입
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/d69dd2cb-92cd-4d55-bc48-393b0013cd05.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/981a8977-434e-4b1d-9618-b5ae94efad2f.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/f19e389f-3e6d-460d-b728-a58a996d068c.png"  width="175" height="400"/>
+
+## 학식 조회 및 식권 결제
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/68f3c7bd-3397-4d6c-aeda-452aa57b4e53.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/556fb0ee-af91-47a5-862e-3c3802f41803.png"  width="175" height="400"/>
+
+## 내 식권 조회 및 QR 인증
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/552f33ae-57fa-4eb6-b0c3-0c08f504fca5.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/e670e0b5-3928-48aa-8afc-0ba22c729254.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/54cc8673-2041-4fc6-879c-38e5171f624a.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/da245e75-ea36-4376-be86-cfce2ed1bd2d.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/029c8788-5e5d-4023-8864-74a50ade21aa.png"  width="175" height="400"/>
 
