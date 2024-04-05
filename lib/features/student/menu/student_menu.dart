@@ -71,29 +71,29 @@ class _StudentMenuState extends State<StudentMenu> {
     _menuMap["조식"]!["A코스"]!.addAll([
       MenuModel(
           menuId: "1",
-          title: "조식 A코스 메뉴1",
-          content: "조식 A코스 설명",
-          price: "5000"),
+          menuTitle: "조식 A코스 메뉴1",
+          menuContent: "조식 A코스 설명",
+          menuPrice: "5000"),
       MenuModel(
           menuId: "1",
-          title: "조식 B코스 메뉴1",
-          content: "조식 B코스 설명",
-          price: "5000"),
+          menuTitle: "조식 B코스 메뉴1",
+          menuContent: "조식 B코스 설명",
+          menuPrice: "5000"),
       MenuModel(
           menuId: "2",
-          title: "중식 B코스 메뉴1",
-          content: "중식 B코스 설명",
-          price: "5000"),
+          menuTitle: "중식 B코스 메뉴1",
+          menuContent: "중식 B코스 설명",
+          menuPrice: "5000"),
       MenuModel(
           menuId: "2",
-          title: "중식 C코스 메뉴1",
-          content: "중식 C코스 설명",
-          price: "5000"),
+          menuTitle: "중식 C코스 메뉴1",
+          menuContent: "중식 C코스 설명",
+          menuPrice: "5000"),
       MenuModel(
           menuId: "3",
-          title: "석식 A코스 메뉴1",
-          content: "석식 A코스 설명",
-          price: "5000"),
+          menuTitle: "석식 A코스 메뉴1",
+          menuContent: "석식 A코스 설명",
+          menuPrice: "5000"),
     ]);
 
     setState(() {

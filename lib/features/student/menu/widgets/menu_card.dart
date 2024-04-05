@@ -24,7 +24,7 @@ class MenuCard extends StatelessWidget {
         StudentMenuPayScreen.routeName,
         extra: StudentMenuPayScreenArgs(
           course: courseName,
-          price: menuData.price,
+          price: menuData.menuPrice,
           time: timeName,
         ),
       ),
@@ -55,14 +55,14 @@ class MenuCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                menuData.title,
+                menuData.menuTitle,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
               ),
               const Gap(4),
-              Text(menuData.content),
+              Text(menuData.menuContent),
             ],
           ),
         ),
