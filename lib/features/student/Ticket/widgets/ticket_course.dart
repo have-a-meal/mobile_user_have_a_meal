@@ -78,7 +78,7 @@ class _TicketCourseState extends State<TicketCourse> {
                 ),
                 const Divider(),
                 Text(
-                  "가격 : ${widget.ticketList[0].price}원",
+                  "가격 : ${widget.ticketList[0].ticketPrice}원",
                   style: const TextStyle(
                     fontSize: 16,
                   ),

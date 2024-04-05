@@ -1,31 +1,31 @@
 class TicketModel {
-  String menuId;
-  String time;
-  String course;
-  String price;
+  String ticketId;
+  String ticketTime;
+  String ticketCourse;
+  String ticketPrice;
 
   TicketModel({
-    required this.menuId,
-    required this.time,
-    required this.course,
-    required this.price,
+    required this.ticketId,
+    required this.ticketTime,
+    required this.ticketCourse,
+    required this.ticketPrice,
   });
 
   factory TicketModel.fromJson(Map<String, dynamic> json) {
     return TicketModel(
-      menuId: json['menuId'] as String,
-      time: json['time'] as String,
-      course: json['course'] as String,
-      price: json['price'] as String,
+      ticketId: json['ticketId'] as String,
+      ticketTime: json['ticketTime'] as String,
+      ticketCourse: json['ticketCourse'] as String,
+      ticketPrice: json['ticketPrice'] as String,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'menuId': menuId,
-      'time': time,
-      'course': course,
-      'price': price,
+      'ticketId': ticketId,
+      'ticketTime': ticketTime,
+      'ticketCourse': ticketCourse,
+      'ticketPrice': ticketPrice,
     };
   }
 }

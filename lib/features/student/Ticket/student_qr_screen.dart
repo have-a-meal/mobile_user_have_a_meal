@@ -59,7 +59,7 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
     for (TicketModel ticket in context
         .read<TicketProvider>()
         .getTicketList(widget.ticketTime, widget.ticketCourse)) {
-      if (int.parse(ticket.menuId) % 2 == 0) {
+      if (int.parse(ticket.ticketId) % 2 == 0) {
         _ticketEnabledList.add(ticket);
       } else {
         _ticketDisabledList.add(ticket);
@@ -73,7 +73,7 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
       _selectedRefundEnabledTicket.add(_ticketEnabledList[0]);
     }
     if (_ticketEnabledList.isNotEmpty) {
-      _selectedQRTicket = _ticketEnabledList[0].menuId;
+      _selectedQRTicket = _ticketEnabledList[0].ticketId;
     }
 
     setState(() {});
@@ -217,7 +217,7 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
                                   ),
                                 ),
                                 child: RadioListTile.adaptive(
-                                  value: _ticketEnabledList[index].menuId,
+                                  value: _ticketEnabledList[index].ticketId,
                                   groupValue: _selectedQRTicket,
                                   onChanged: (value) {
                                     setState(() {
@@ -225,7 +225,7 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
                                     });
                                   },
                                   title: Text(
-                                      "${_ticketEnabledList[index].menuId}. $index일 경과"),
+                                      "${_ticketEnabledList[index].ticketId}. $index일 경과"),
                                 ),
                               ),
                             )
@@ -354,7 +354,7 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
                                         setState(() {});
                                       },
                                       title: Text(
-                                          "${_ticketEnabledList[index].menuId}. $index일 경과"),
+                                          "${_ticketEnabledList[index].ticketId}. $index일 경과"),
                                     ),
                                   ),
                                 ),
@@ -482,7 +482,7 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
                               setState(() {});
                             },
                             title: Text(
-                                "${_ticketDisabledList[index].menuId}. $index일 경과"),
+                                "${_ticketDisabledList[index].ticketId}. $index일 경과"),
                           ),
                         ),
                       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/constants/breakpoints.dart';
 import 'package:front_have_a_meal/features/student/Ticket/widgets/ticket_time.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:front_have_a_meal/providers/ticket_provider.dart';
@@ -28,19 +27,71 @@ class _StudentTicketState extends State<StudentTicket> {
     });
 
     context.read<TicketProvider>().addTicket([
-      TicketModel(menuId: "1", time: "조식", course: "A코스", price: "5000"),
-      TicketModel(menuId: "2", time: "조식", course: "B코스", price: "5000"),
-      TicketModel(menuId: "3", time: "중식", course: "B코스", price: "5000"),
-      TicketModel(menuId: "4", time: "중식", course: "C코스", price: "5000"),
-      TicketModel(menuId: "5", time: "석식", course: "A코스", price: "5000"),
-      TicketModel(menuId: "6", time: "조식", course: "A코스", price: "5000"),
-      TicketModel(menuId: "7", time: "조식", course: "A코스", price: "5000"),
-      TicketModel(menuId: "8", time: "조식", course: "A코스", price: "5000"),
-      TicketModel(menuId: "9", time: "조식", course: "A코스", price: "5000"),
-      TicketModel(menuId: "10", time: "조식", course: "A코스", price: "5000"),
-      TicketModel(menuId: "11", time: "조식", course: "A코스", price: "5000"),
-      TicketModel(menuId: "12", time: "조식", course: "A코스", price: "5000"),
-      TicketModel(menuId: "13", time: "조식", course: "A코스", price: "5000"),
+      TicketModel(
+          ticketId: "1",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "2",
+          ticketTime: "조식",
+          ticketCourse: "B코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "3",
+          ticketTime: "중식",
+          ticketCourse: "B코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "4",
+          ticketTime: "중식",
+          ticketCourse: "C코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "5",
+          ticketTime: "석식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "6",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "7",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "8",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "9",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "10",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "11",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "12",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "13",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
     ]);
 
     setState(() {
