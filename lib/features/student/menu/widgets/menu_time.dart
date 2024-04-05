@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/student/menu/widgets/menu_course.dart';
-import 'package:front_have_a_meal/models/menu_pay_model.dart';
+import 'package:front_have_a_meal/models/menu_model.dart';
 
 class MenuTime extends StatelessWidget {
   const MenuTime({
@@ -14,7 +14,7 @@ class MenuTime extends StatelessWidget {
   final String timeName;
   final String time;
   final Color timeColor;
-  final Map<String, List<MenuPayModel>> menuCourse;
+  final Map<String, List<MenuModel>> menuCourse;
 
   @override
   Widget build(BuildContext context) {

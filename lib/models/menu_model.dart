@@ -1,31 +1,22 @@
-class MenuPayModel {
+class MenuModel {
   String menuId;
   String title;
   String content;
   String price;
-  // String time;
-  // String course;
-  // String price;
 
-  MenuPayModel({
+  MenuModel({
     required this.menuId,
     required this.title,
     required this.content,
     required this.price,
-    // required this.time,
-    // required this.course,
-    // required this.price,
   });
 
-  factory MenuPayModel.fromJson(Map<String, dynamic> json) {
-    return MenuPayModel(
+  factory MenuModel.fromJson(Map<String, dynamic> json) {
+    return MenuModel(
       menuId: json['menuId'] as String,
       title: json['title'] as String,
       content: json['content'] as String,
       price: json['price'] as String,
-      // time: json['time'] as String,
-      // course: json['course'] as String,
-      // price: json['price'] as String,
     );
   }
 
@@ -35,9 +26,6 @@ class MenuPayModel {
       'title': title,
       'content': content,
       'price': price,
-      // 'time': time,
-      // 'course': course,
-      // 'price': price,
     };
   }
 }

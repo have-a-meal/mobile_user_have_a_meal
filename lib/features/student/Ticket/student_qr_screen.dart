@@ -297,20 +297,24 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
                                                     child: const Text("아니오"),
                                                   ),
                                                   ElevatedButton(
-                                                    onPressed: () {
-                                                      context
+                                                    onPressed: () async {
+                                                      if (await context
                                                           .read<
                                                               TicketProvider>()
                                                           .removeTicket(
-                                                              _selectedRefundEnabledTicket);
-                                                      for (TicketModel ticket
-                                                          in _selectedRefundEnabledTicket) {
-                                                        _ticketEnabledList
-                                                            .remove(ticket);
+                                                              _selectedRefundEnabledTicket)) {
+                                                        for (TicketModel ticket
+                                                            in _selectedRefundEnabledTicket) {
+                                                          _ticketEnabledList
+                                                              .remove(ticket);
+                                                        }
                                                       }
                                                       _selectedRefundEnabledTicket =
                                                           {};
                                                       setState(() {});
+                                                      if (!context.mounted) {
+                                                        return;
+                                                      }
                                                       context.pop();
                                                     },
                                                     child: const Text("예"),
@@ -427,18 +431,21 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
                                           child: const Text("아니오"),
                                         ),
                                         ElevatedButton(
-                                          onPressed: () {
-                                            context
+                                          onPressed: () async {
+                                            if (await context
                                                 .read<TicketProvider>()
                                                 .removeTicket(
-                                                    _selectedRefundDisabledTicket);
-                                            for (TicketModel ticket
-                                                in _selectedRefundDisabledTicket) {
-                                              _ticketDisabledList
-                                                  .remove(ticket);
+                                                    _selectedRefundDisabledTicket)) {
+                                              for (TicketModel ticket
+                                                  in _selectedRefundDisabledTicket) {
+                                                _ticketDisabledList
+                                                    .remove(ticket);
+                                              }
                                             }
+
                                             _selectedRefundDisabledTicket = {};
                                             setState(() {});
+                                            if (!context.mounted) return;
                                             context.pop();
                                           },
                                           child: const Text("예"),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/student/menu/widgets/menu_time.dart';
-import 'package:front_have_a_meal/models/menu_pay_model.dart';
+import 'package:front_have_a_meal/models/menu_model.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
@@ -12,7 +12,7 @@ class StudentMenu extends StatefulWidget {
 }
 
 class _StudentMenuState extends State<StudentMenu> {
-  Map<String, Map<String, List<MenuPayModel>>> _menuMap = {
+  Map<String, Map<String, List<MenuModel>>> _menuMap = {
     "조식": {
       "A코스": [],
       "B코스": [],
@@ -68,16 +68,33 @@ class _StudentMenuState extends State<StudentMenu> {
     //   );
     // }
 
-    _menuMap["조식"]!["A코스"]!.add(MenuPayModel(
-        menuId: "1", title: "조식 A코스 메뉴1", content: "조식 A코스 설명", price: "5000"));
-    _menuMap["조식"]!["B코스"]!.add(MenuPayModel(
-        menuId: "1", title: "조식 B코스 메뉴1", content: "조식 B코스 설명", price: "5000"));
-    _menuMap["중식"]!["B코스"]!.add(MenuPayModel(
-        menuId: "2", title: "중식 B코스 메뉴1", content: "중식 B코스 설명", price: "5000"));
-    _menuMap["중식"]!["C코스"]!.add(MenuPayModel(
-        menuId: "2", title: "중식 C코스 메뉴1", content: "중식 C코스 설명", price: "5000"));
-    _menuMap["석식"]!["A코스"]!.add(MenuPayModel(
-        menuId: "3", title: "석식 A코스 메뉴1", content: "석식 A코스 설명", price: "5000"));
+    _menuMap["조식"]!["A코스"]!.addAll([
+      MenuModel(
+          menuId: "1",
+          title: "조식 A코스 메뉴1",
+          content: "조식 A코스 설명",
+          price: "5000"),
+      MenuModel(
+          menuId: "1",
+          title: "조식 B코스 메뉴1",
+          content: "조식 B코스 설명",
+          price: "5000"),
+      MenuModel(
+          menuId: "2",
+          title: "중식 B코스 메뉴1",
+          content: "중식 B코스 설명",
+          price: "5000"),
+      MenuModel(
+          menuId: "2",
+          title: "중식 C코스 메뉴1",
+          content: "중식 C코스 설명",
+          price: "5000"),
+      MenuModel(
+          menuId: "3",
+          title: "석식 A코스 메뉴1",
+          content: "석식 A코스 설명",
+          price: "5000"),
+    ]);
 
     setState(() {
       _isFirstLoading = false;
