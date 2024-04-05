@@ -8,8 +8,10 @@ class TicketCourse extends StatefulWidget {
     super.key,
     required this.ticketCourse,
     required this.ticketList,
+    required this.ticketTime,
   });
 
+  final String ticketTime;
   final String ticketCourse;
   final List<TicketModel> ticketList;
 
@@ -39,7 +41,8 @@ class _TicketCourseState extends State<TicketCourse> {
       onTap: () => context.pushNamed(
         StudentQrScreen.routeName,
         extra: StudentQrScreenArgs(
-          ticketList: widget.ticketList,
+          ticketTime: widget.ticketTime,
+          ticketCourse: widget.ticketCourse,
         ),
       ),
       child: Container(

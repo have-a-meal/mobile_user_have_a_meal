@@ -63,12 +63,11 @@ final router = GoRouter(
             if (state.extra != null) {
               final args = state.extra as StudentQrScreenArgs;
               return StudentQrScreen(
-                ticketList: args.ticketList,
+                ticketTime: args.ticketTime,
+                ticketCourse: args.ticketCourse,
               );
             } else {
-              return const StudentQrScreen(
-                ticketList: [],
-              );
+              return const ErrorScreen();
             }
           },
         ),

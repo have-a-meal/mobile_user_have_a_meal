@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/constants/sizes.dart';
 
-void swagPlatformDialog({
+Future<void> swagPlatformDialog({
   required BuildContext context,
   required String title,
   required String message,
   required List<Widget> actions,
-}) {
+}) async {
   if (Platform.isIOS) {
     showCupertinoDialog(
       context: context,

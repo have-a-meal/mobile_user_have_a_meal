@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:front_have_a_meal/providers/ticket_provider.dart';
 import 'package:front_have_a_meal/providers/user_provider.dart';
 import 'package:front_have_a_meal/router.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (_) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TicketProvider(),
         ),
       ],
       child: const MainApp(),

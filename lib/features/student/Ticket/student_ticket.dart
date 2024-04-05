@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/constants/breakpoints.dart';
 import 'package:front_have_a_meal/features/student/Ticket/widgets/ticket_time.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
+import 'package:front_have_a_meal/providers/ticket_provider.dart';
+import 'package:provider/provider.dart';
 
 class StudentTicket extends StatefulWidget {
   const StudentTicket({super.key});
@@ -11,24 +13,6 @@ class StudentTicket extends StatefulWidget {
 }
 
 class _StudentTicketState extends State<StudentTicket> {
-  Map<String, Map<String, List<TicketModel>>> _ticketMap = {
-    "조식": {
-      "A코스": [],
-      "B코스": [],
-      "C코스": [],
-    },
-    "중식": {
-      "A코스": [],
-      "B코스": [],
-      "C코스": [],
-    },
-    "석식": {
-      "A코스": [],
-      "B코스": [],
-      "C코스": [],
-    },
-  };
-
   bool _isFirstLoading = false;
 
   @override
@@ -43,36 +27,21 @@ class _StudentTicketState extends State<StudentTicket> {
       _isFirstLoading = true;
     });
 
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "1", time: "조식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["B코스"]!.add(
-        TicketModel(menuId: "2", time: "조식", course: "B코스", price: "5000"));
-    _ticketMap["중식"]!["B코스"]!.add(
-        TicketModel(menuId: "3", time: "중식", course: "B코스", price: "5000"));
-    _ticketMap["중식"]!["C코스"]!.add(
-        TicketModel(menuId: "4", time: "중식", course: "C코스", price: "5000"));
-    _ticketMap["석식"]!["A코스"]!.add(
-        TicketModel(menuId: "5", time: "석식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "6", time: "조식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "7", time: "조식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "8", time: "조식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "9", time: "조식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "10", time: "조식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "11", time: "조식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "12", time: "조식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "13", time: "조식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "14", time: "조식", course: "A코스", price: "5000"));
-    _ticketMap["조식"]!["A코스"]!.add(
-        TicketModel(menuId: "15", time: "조식", course: "A코스", price: "5000"));
+    context.read<TicketProvider>().addTicket([
+      TicketModel(menuId: "1", time: "조식", course: "A코스", price: "5000"),
+      TicketModel(menuId: "2", time: "조식", course: "B코스", price: "5000"),
+      TicketModel(menuId: "3", time: "중식", course: "B코스", price: "5000"),
+      TicketModel(menuId: "4", time: "중식", course: "C코스", price: "5000"),
+      TicketModel(menuId: "5", time: "석식", course: "A코스", price: "5000"),
+      TicketModel(menuId: "6", time: "조식", course: "A코스", price: "5000"),
+      TicketModel(menuId: "7", time: "조식", course: "A코스", price: "5000"),
+      TicketModel(menuId: "8", time: "조식", course: "A코스", price: "5000"),
+      TicketModel(menuId: "9", time: "조식", course: "A코스", price: "5000"),
+      TicketModel(menuId: "10", time: "조식", course: "A코스", price: "5000"),
+      TicketModel(menuId: "11", time: "조식", course: "A코스", price: "5000"),
+      TicketModel(menuId: "12", time: "조식", course: "A코스", price: "5000"),
+      TicketModel(menuId: "13", time: "조식", course: "A코스", price: "5000"),
+    ]);
 
     setState(() {
       _isFirstLoading = false;
@@ -84,23 +53,7 @@ class _StudentTicketState extends State<StudentTicket> {
       _isFirstLoading = true;
     });
 
-    _ticketMap = {
-      "조식": {
-        "A코스": [],
-        "B코스": [],
-        "C코스": [],
-      },
-      "중식": {
-        "A코스": [],
-        "B코스": [],
-        "C코스": [],
-      },
-      "석식": {
-        "A코스": [],
-        "B코스": [],
-        "C코스": [],
-      },
-    };
+    context.read<TicketProvider>().resetTicket();
 
     _oninitTicket();
 
@@ -111,6 +64,8 @@ class _StudentTicketState extends State<StudentTicket> {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, Map<String, List<TicketModel>>> ticketMap =
+        context.watch<TicketProvider>().ticketMap;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -121,7 +76,7 @@ class _StudentTicketState extends State<StudentTicket> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : _ticketMap.entries.every((mealEntry) => mealEntry.value.entries
+          : ticketMap.entries.every((mealEntry) => mealEntry.value.entries
                   .every((courseEntry) => courseEntry.value.isEmpty))
               ? Center(
                   child: IconButton(
@@ -135,29 +90,29 @@ class _StudentTicketState extends State<StudentTicket> {
                   onRefresh: _onRefresh,
                   child: ListView(
                     children: [
-                      if (!_ticketMap["조식"]!
+                      if (!ticketMap["조식"]!
                           .entries
                           .every((courseEntry) => courseEntry.value.isEmpty))
                         TicketTime(
                           ticketTime: "조식",
                           eatTime: "08:00 ~ 09:00",
-                          ticketMap: _ticketMap["조식"]!,
+                          ticketMap: ticketMap["조식"]!,
                         ),
-                      if (!_ticketMap["중식"]!
+                      if (!ticketMap["중식"]!
                           .entries
                           .every((courseEntry) => courseEntry.value.isEmpty))
                         TicketTime(
                           ticketTime: "중식",
                           eatTime: "12:00~13:30",
-                          ticketMap: _ticketMap["중식"]!,
+                          ticketMap: ticketMap["중식"]!,
                         ),
-                      if (!_ticketMap["석식"]!
+                      if (!ticketMap["석식"]!
                           .entries
                           .every((courseEntry) => courseEntry.value.isEmpty))
                         TicketTime(
                           ticketTime: "석식",
                           eatTime: "17:30~18:30",
-                          ticketMap: _ticketMap["석식"]!,
+                          ticketMap: ticketMap["석식"]!,
                         ),
                     ],
                   ),
