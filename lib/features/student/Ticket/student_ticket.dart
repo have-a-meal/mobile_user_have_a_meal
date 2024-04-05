@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/features/student/Ticket/widgets/ticket_time.dart';
+import 'package:front_have_a_meal/features/student/ticket/widgets/ticket_time.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:front_have_a_meal/providers/ticket_provider.dart';
 import 'package:provider/provider.dart';
