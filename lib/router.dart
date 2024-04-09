@@ -2,10 +2,9 @@ import 'package:front_have_a_meal/features/account/sign_in_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
 import 'package:front_have_a_meal/features/error/error_screen.dart';
 import 'package:front_have_a_meal/features/outsider/outsider_navigation_screen.dart';
-import 'package:front_have_a_meal/features/student/ticket/student_qr_screen.dart';
 import 'package:front_have_a_meal/features/student/menu/student_menu_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
-import 'package:front_have_a_meal/features/student/ticket/student_qr_screen_test.dart';
+import 'package:front_have_a_meal/features/student/ticket/student_qr_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -65,22 +64,6 @@ final router = GoRouter(
             if (state.extra != null) {
               final args = state.extra as StudentQrScreenArgs;
               return StudentQrScreen(
-                ticketTime: args.ticketTime,
-                ticketCourse: args.ticketCourse,
-              );
-            } else {
-              return const ErrorScreen();
-            }
-          },
-        ),
-        GoRoute(
-          path: StudentQrScreenTest.routeURL,
-          name: StudentQrScreenTest.routeName,
-          builder: (context, state) {
-            // return const StudentQrScreen();
-            if (state.extra != null) {
-              final args = state.extra as StudentQrScreenTestArgs;
-              return StudentQrScreenTest(
                 ticketTime: args.ticketTime,
                 ticketCourse: args.ticketCourse,
               );
