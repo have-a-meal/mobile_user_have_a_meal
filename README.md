@@ -30,7 +30,6 @@
 
 ## 내 식권 조회 및 QR 인증
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/552f33ae-57fa-4eb6-b0c3-0c08f504fca5.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/54cc8673-2041-4fc6-879c-38e5171f624a.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/da245e75-ea36-4376-be86-cfce2ed1bd2d.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/029c8788-5e5d-4023-8864-74a50ade21aa.png"  width="175" height="400"/>
-
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/78b68bed-0ca1-4025-b370-0d80d551e9e4.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/476d4a14-1fe3-4620-abe5-c6ecd5353c69.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/c4c5f43f-fffc-49a4-862b-2926297fdf7f.png"  width="175" height="400"/>
