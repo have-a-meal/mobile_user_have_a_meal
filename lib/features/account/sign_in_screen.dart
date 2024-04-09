@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
@@ -21,6 +23,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final FocusNode _pwFocusNode = FocusNode();
 
   bool _rememberMe = false;
+  final bool _simpleLogin = false;
   bool _isSubmitted = true;
 
   final RegExp _idRegExp = RegExp(r'^[a-zA-Z0-9]+$'); // 아이디 정규식
@@ -239,16 +242,60 @@ class _SignInScreenState extends State<SignInScreen> {
                           const Gap(10),
                           Row(
                             children: [
-                              Checkbox(
-                                value: _rememberMe,
-                                activeColor: Colors.orange,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _rememberMe = value!;
-                                  });
-                                },
+                              Expanded(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Checkbox.adaptive(
+                                      value: _rememberMe,
+                                      activeColor: Colors.orange,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _rememberMe = value!;
+                                        });
+                                      },
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        if (_rememberMe) {
+                                          _rememberMe = false;
+                                        } else {
+                                          _rememberMe = true;
+                                        }
+                                        setState(() {});
+                                      },
+                                      child: const Text('로그인 정보 저장'),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              const Text('로그인 정보 저장'),
+                              // Expanded(
+                              //   child: Row(
+                              //     mainAxisAlignment: MainAxisAlignment.start,
+                              //     children: [
+                              //       Checkbox.adaptive(
+                              //         value: _simpleLogin,
+                              //         activeColor: Colors.orange,
+                              //         onChanged: (value) {
+                              //           setState(() {
+                              //             _simpleLogin = value!;
+                              //           });
+                              //         },
+                              //       ),
+                              //       GestureDetector(
+                              //         onTap: () {
+                              //           if (_simpleLogin) {
+                              //             _simpleLogin = false;
+                              //           } else {
+                              //             _simpleLogin = true;
+                              //           }
+                              //           setState(() {});
+                              //         },
+                              //         child: const Text('간편 로그인'),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                             ],
                           ),
                           const Gap(10),

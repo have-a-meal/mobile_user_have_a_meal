@@ -92,6 +92,81 @@ class _StudentTicketState extends State<StudentTicket> {
           ticketTime: "조식",
           ticketCourse: "A코스",
           ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "14",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "15",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "16",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "17",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "18",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "19",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "20",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "21",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "22",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "23",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "24",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "25",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "26",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "27",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
+      TicketModel(
+          ticketId: "28",
+          ticketTime: "조식",
+          ticketCourse: "A코스",
+          ticketPrice: "5000"),
     ]);
 
     setState(() {

@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:front_have_a_meal/providers/ticket_provider.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
@@ -121,52 +118,55 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
               _ticketEnabledList.isNotEmpty
                   ? NestedScrollView(
                       headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                        const SliverToBoxAdapter(
-                          child: Center(
-                            child: Icon(
-                              Icons.qr_code_2,
-                              size: 200,
-                            ),
-                          ),
-                        ),
-                        const SliverToBoxAdapter(
-                          child: TextDivider(
-                            text: "식권 선택",
-                            fontSize: 24,
-                          ),
-                        ),
-                        const SliverGap(10),
-                        SliverToBoxAdapter(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
-                                child: SegmentedButton(
-                                  segments: const [
-                                    ButtonSegment(
-                                      value: TicketMode.qr,
-                                      label: Text("QR 사용"),
-                                    ),
-                                    ButtonSegment(
-                                      value: TicketMode.refund,
-                                      label: Text("환불 하기"),
-                                    ),
-                                  ],
-                                  selected: <TicketMode>{_isEnabledTicketMode},
-                                  onSelectionChanged:
-                                      (Set<TicketMode> newSelection) {
-                                    setState(() {
-                                      _isEnabledTicketMode = newSelection.first;
-                                    });
-                                  },
+                            const SliverToBoxAdapter(
+                              child: Center(
+                                child: Icon(
+                                  Icons.qr_code_2,
+                                  size: 200,
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        const SliverGap(20),
-                      ],
+                            ),
+                            const SliverToBoxAdapter(
+                              child: TextDivider(
+                                text: "식권 선택",
+                                fontSize: 24,
+                              ),
+                            ),
+                            const SliverGap(10),
+                            SliverToBoxAdapter(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20),
+                                    child: SegmentedButton(
+                                      segments: const [
+                                        ButtonSegment(
+                                          value: TicketMode.qr,
+                                          label: Text("QR 사용"),
+                                        ),
+                                        ButtonSegment(
+                                          value: TicketMode.refund,
+                                          label: Text("환불 하기"),
+                                        ),
+                                      ],
+                                      selected: <TicketMode>{
+                                        _isEnabledTicketMode
+                                      },
+                                      onSelectionChanged:
+                                          (Set<TicketMode> newSelection) {
+                                        setState(() {
+                                          _isEnabledTicketMode =
+                                              newSelection.first;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SliverGap(20),
+                          ],
                       body: _isEnabledTicketMode == TicketMode.qr
                           ? ListView.builder(
                               itemCount: _ticketEnabledList.length,
@@ -333,8 +333,7 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
                                   ),
                                 )
                               ],
-                            ),
-                    )
+                            ))
                   : const Center(
                       child: Text(
                         "사용 가능한 식권이 존재하지 않습니다!",
@@ -421,7 +420,6 @@ class _StudentQrScreenState extends State<StudentQrScreen> {
                                                         .remove(ticket);
                                                   }
                                                 }
-
                                                 _selectedRefundDisabledTicket =
                                                     {};
                                                 setState(() {});
