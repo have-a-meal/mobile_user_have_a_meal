@@ -156,21 +156,6 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
                         Icons.badge_outlined,
                         color: Colors.grey.shade600,
                       ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0),
-                      ),
-                      // 텍스트 필드가 포커스를 받았을 때의 테두리 색상
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0),
-                      ),
-                      errorBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2.0),
-                      ),
-                      focusedErrorBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2.0),
-                      ),
                     ),
                     onTap: onChangeBarrier,
                     onChanged: _validateOutsiderName,
@@ -194,21 +179,6 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
                       prefixIcon: Icon(
                         Icons.phone_iphone_rounded,
                         color: Colors.grey.shade600,
-                      ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0),
-                      ),
-                      // 텍스트 필드가 포커스를 받았을 때의 테두리 색상
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0),
-                      ),
-                      errorBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2.0),
-                      ),
-                      focusedErrorBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2.0),
                       ),
                     ),
                     onTap: onChangeBarrier,
@@ -234,21 +204,6 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
                         Icons.lock_outline,
                         color: Colors.grey.shade600,
                       ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0),
-                      ),
-                      // 텍스트 필드가 포커스를 받았을 때의 테두리 색상
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0),
-                      ),
-                      errorBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2.0),
-                      ),
-                      focusedErrorBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2.0),
-                      ),
                     ),
                     onTap: onChangeBarrier,
                     onChanged: _validateOutsiderPw,
@@ -272,21 +227,6 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
                       prefixIcon: Icon(
                         Icons.lock_person_outlined,
                         color: Colors.grey.shade600,
-                      ),
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0),
-                      ),
-                      // 텍스트 필드가 포커스를 받았을 때의 테두리 색상
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.orange, width: 2.0),
-                      ),
-                      errorBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2.0),
-                      ),
-                      focusedErrorBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2.0),
                       ),
                     ),
                     onTap: onChangeBarrier,

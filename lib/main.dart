@@ -43,6 +43,21 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.orange,
+        inputDecorationTheme: const InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.orange, width: 2.0),
+          ),
+          // 텍스트 필드가 포커스를 받았을 때의 테두리 색상
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.orange, width: 2.0),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 2.0),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 2.0),
+          ),
+        ),
       ),
     );
   }

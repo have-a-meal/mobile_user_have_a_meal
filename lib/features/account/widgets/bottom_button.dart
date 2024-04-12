@@ -14,24 +14,21 @@ class BottomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ElevatedButton(
-        onPressed: onPressed != null
-            ? isClicked
-                ? () => onPressed!()
-                : () => onPressed!()
-            : null,
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          backgroundColor: text == "회원가입"
-              ? Colors.orange.shade200
-              : Colors.lightBlue.shade100,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-          ),
+    return ElevatedButton(
+      onPressed: onPressed != null
+          ? isClicked
+              ? () => onPressed!()
+              : () => onPressed!()
+          : null,
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        backgroundColor:
+            text == "회원가입" ? Colors.orange.shade200 : Colors.lightBlue.shade100,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
-        child: Text(text),
       ),
+      child: Text(text),
     );
   }
 }

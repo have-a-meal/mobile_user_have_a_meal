@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:front_have_a_meal/constants/http_ip.dart';
+import 'package:front_have_a_meal/features/account/id_pw_search_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
 import 'package:gap/gap.dart';
@@ -26,7 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final bool _simpleLogin = false;
   bool _isSubmitted = true;
 
-  final RegExp _idRegExp = RegExp(r'^[a-zA-Z0-9]+$'); // 아이디 정규식
+  final RegExp _idRegExp = RegExp(r'^\d{8}$'); // 아이디 정규식
   // 비밀번호 정규식
   final RegExp _passwordRegExp =
       RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$');
@@ -41,7 +42,7 @@ class _SignInScreenState extends State<SignInScreen> {
       });
     } else if (!_idRegExp.hasMatch(value)) {
       setState(() {
-        _idErrorText = '영문과 숫자만 입력하세요.';
+        _idErrorText = '8자리 숫자를 입력하세요.';
       });
     } else {
       setState(() {
@@ -99,6 +100,10 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Future<void> _onTapSignUp() async {
     await context.pushNamed(SignUpScreen.routeName);
+  }
+
+  Future<void> _onTapSearch() async {
+    await context.pushNamed(IdPwSearchScreen.routeName);
   }
 
   @override
@@ -194,21 +199,18 @@ class _SignInScreenState extends State<SignInScreen> {
                             controller: _idController,
                             focusNode: _idFocusNode,
                             autofocus: false,
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               prefixIcon: Icon(
                                 Icons.person_outline,
                                 color: Colors.grey.shade600,
                               ),
-                              labelText: '아이디',
+                              labelText: '아이디(학번)',
                               errorText: _idErrorText, // 아이디 오류 메시지 표시
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.orange, width: 2.0),
-                              ),
-                              // 텍스트 필드가 포커스를 받았을 때의 테두리 색상
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.orange, width: 2.0),
+                              labelStyle: TextStyle(
+                                color: _idErrorText == null
+                                    ? Colors.black
+                                    : Colors.red,
                               ),
                             ),
                             onChanged: _validateId, // 입력 값이 변경될 때마다 검증
@@ -226,15 +228,10 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                               labelText: '비밀번호',
                               errorText: _passwordErrorText, // 비밀번호 오류 메시지 표시
-                              // 텍스트 필드가 포커스를 받지 않았을 때의 테두리 색상
-                              enabledBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.orange, width: 2.0),
-                              ),
-                              // 텍스트 필드가 포커스를 받았을 때의 테두리 색상
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.orange, width: 2.0),
+                              labelStyle: TextStyle(
+                                color: _passwordErrorText == null
+                                    ? Colors.black
+                                    : Colors.red,
                               ),
                             ),
                             onChanged: _validatePassword, // 입력 값이 변경될 때마다 검증
@@ -304,6 +301,28 @@ class _SignInScreenState extends State<SignInScreen> {
                             onPressed:
                                 _isSubmitted ? () => _handleLogin() : null,
                             child: const Text('로그인'),
+                          ),
+                          InkWell(
+                            onTap: _onTapSearch,
+                            child: Container(
+                              padding: const EdgeInsets.only(
+                                top: 20,
+                                right: 10,
+                              ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    "아이디 / 비밀번호 찾기",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),
