@@ -96,6 +96,14 @@ class _IdSearchState extends State<IdSearch> {
   }
 
   @override
+  void dispose() {
+    _searchNameController.dispose();
+    _searchPhoneNumberController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,

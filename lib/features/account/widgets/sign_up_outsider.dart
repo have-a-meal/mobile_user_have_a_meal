@@ -118,6 +118,16 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
   }
 
   @override
+  void dispose() {
+    _outsiderPwController.dispose();
+    _outsiderPwAuthController.dispose();
+    _outsiderNameController.dispose();
+    _outsiderPhoneNumberController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,

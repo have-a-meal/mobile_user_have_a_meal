@@ -94,6 +94,14 @@ class _StudentQrScreenState extends State<StudentQrScreen>
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    _enabledTabController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 0,

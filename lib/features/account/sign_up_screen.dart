@@ -18,28 +18,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  int _selectedIndex = 0;
   SignUpType _signUpType = SignUpType.student;
-
-  void _onTap(int index) {
-    if (_selectedIndex == index) return;
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  // void _onCheckOutsiderData() {
-  //   setState(() {
-  //     _isSubmitted = true;
-  //   });
-  // }
-
-  // void _onSubmit() async {}
 
   @override
   Widget build(BuildContext context) {

@@ -115,6 +115,15 @@ class _PwSearchState extends State<PwSearch> {
   }
 
   @override
+  void dispose() {
+    _searchNameController.dispose();
+    _searchPhoneNumberController.dispose();
+    _searchIdController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,

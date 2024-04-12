@@ -95,6 +95,14 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
   }
 
   @override
+  void dispose() {
+    _resetPwController.dispose();
+    _resetPwAuthController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

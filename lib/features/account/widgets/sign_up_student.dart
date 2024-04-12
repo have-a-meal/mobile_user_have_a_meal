@@ -168,6 +168,18 @@ class _SignUpStudentState extends State<SignUpStudent> {
   }
 
   @override
+  void dispose() {
+    _studentIdController.dispose();
+    _studentIdAuthController.dispose();
+    _studentPwController.dispose();
+    _studentPwAuthController.dispose();
+    _studentNameController.dispose();
+    _studentPhoneNumberController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,

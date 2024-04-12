@@ -17,20 +17,7 @@ class IdPwSearchScreen extends StatefulWidget {
 }
 
 class _IdPwSearchScreenState extends State<IdPwSearchScreen> {
-  int _selectedIndex = 0;
   SearchType _searchType = SearchType.id;
-
-  void _onTap(int index) {
-    if (_selectedIndex == index) return;
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
