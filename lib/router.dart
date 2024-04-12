@@ -3,6 +3,7 @@ import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
 import 'package:front_have_a_meal/features/error/error_screen.dart';
 import 'package:front_have_a_meal/features/outsider/outsider_navigation_screen.dart';
 import 'package:front_have_a_meal/features/student/menu/student_menu_pay_screen.dart';
+import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
 import 'package:front_have_a_meal/features/student/ticket/student_qr_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -55,6 +56,24 @@ final router = GoRouter(
               );
             }
           },
+          routes: [
+            GoRoute(
+              path: StudentTicketPayScreen.routeURL,
+              name: StudentTicketPayScreen.routeName,
+              builder: (context, state) {
+                if (state.extra != null) {
+                  final args = state.extra as StudentTicketPayScreenArgs;
+                  return StudentTicketPayScreen(
+                    menuTime: args.menuTime,
+                    menuCourse: args.menuCourse,
+                    menuPrice: args.menuPrice,
+                  );
+                } else {
+                  return const ErrorScreen();
+                }
+              },
+            ),
+          ],
         ),
         GoRoute(
           path: StudentQrScreen.routeURL,
