@@ -22,8 +22,7 @@ class BottomButton extends StatelessWidget {
           : null,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 14),
-        backgroundColor:
-            text == "회원가입" ? Colors.orange.shade200 : Colors.lightBlue.shade100,
+        backgroundColor: Colors.orange.shade200,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
