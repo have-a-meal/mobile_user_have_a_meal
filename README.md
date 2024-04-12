@@ -32,6 +32,9 @@
 ## 학식 조회 및 식권 결제
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/68f3c7bd-3397-4d6c-aeda-452aa57b4e53.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/556fb0ee-af91-47a5-862e-3c3802f41803.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/41328f1c-a6f4-4992-a6c3-8d80042b4899.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/13858905-cf1b-46bb-b15f-4f1363fa9cb3.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/11978207-7295-496d-b5a5-2e450845f986.png"  width="175" height="400"/>
 
 ## 내 식권 조회 및 QR 인증
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/552f33ae-57fa-4eb6-b0c3-0c08f504fca5.png"  width="175" height="400"/>
