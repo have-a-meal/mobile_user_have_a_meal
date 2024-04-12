@@ -52,65 +52,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         body: Column(
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Expanded(
-            //         child: OutlinedButton(
-            //           style: OutlinedButton.styleFrom(
-            //             backgroundColor: selectedIndex == 0
-            //                 ? Colors.orange.shade100
-            //                 : Colors.white.withOpacity(0.6),
-            //             shape: const RoundedRectangleBorder(
-            //               borderRadius: BorderRadius.only(
-            //                 topLeft: Radius.circular(10),
-            //                 bottomLeft: Radius.circular(10),
-            //               ),
-            //             ),
-            //           ),
-            //           onPressed: () {
-            //             _onTap(0);
-            //           },
-            //           child: const Text(
-            //             "학생",
-            //             style: TextStyle(
-            //               color: Colors.blue,
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //       Expanded(
-            //         child: OutlinedButton(
-            //           style: OutlinedButton.styleFrom(
-            //             textStyle: const TextStyle(
-            //               color: Colors.black,
-            //             ),
-            //             backgroundColor: selectedIndex == 1
-            //                 ? Colors.orange.shade100
-            //                 : Colors.white.withOpacity(0.6),
-            //             shape: const RoundedRectangleBorder(
-            //               borderRadius: BorderRadius.only(
-            //                 topRight: Radius.circular(10),
-            //                 bottomRight: Radius.circular(10),
-            //               ),
-            //             ),
-            //           ),
-            //           onPressed: () {
-            //             _onTap(1);
-            //           },
-            //           child: const Text(
-            //             "외부인",
-            //             style: TextStyle(
-            //               color: Colors.blue,
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             Row(
               children: [
                 Expanded(
