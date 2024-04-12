@@ -87,7 +87,7 @@ class _IdPwSearchScreenState extends State<IdPwSearchScreen> {
                         _onTap(1);
                       },
                       child: const Text(
-                        "비밀번호 찾기",
+                        "비밀번호 재설정",
                         style: TextStyle(
                           color: Colors.blue,
                         ),
