@@ -43,6 +43,11 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.orange,
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          backgroundColor: Colors.orange.shade100,
+          surfaceTintColor: Colors.orange.shade100,
+        ),
         inputDecorationTheme: const InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.orange, width: 2.0),

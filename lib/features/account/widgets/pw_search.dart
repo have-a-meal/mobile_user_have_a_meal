@@ -126,7 +126,7 @@ class _PwSearchState extends State<PwSearch> {
         ),
         child: BottomButton(
           onPressed: _isSubmitted ? _onSearchPw : null,
-          text: "비밀번호 찾기",
+          text: "비밀번호 재설정",
           isClicked: _isSubmitted,
         ),
       ),

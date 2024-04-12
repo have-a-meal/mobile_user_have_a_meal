@@ -41,7 +41,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          centerTitle: true,
           title: const Text("회원가입"),
         ),
         body: Column(

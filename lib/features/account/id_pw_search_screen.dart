@@ -33,7 +33,6 @@ class _IdPwSearchScreenState extends State<IdPwSearchScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          centerTitle: true,
           title: const Text("아이디 / 비밀번호 찾기"),
         ),
         body: Column(

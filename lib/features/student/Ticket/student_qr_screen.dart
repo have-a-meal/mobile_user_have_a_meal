@@ -102,9 +102,7 @@ class _StudentQrScreenState extends State<StudentQrScreen>
         onRefresh: _onRefreshTicketList,
         child: Scaffold(
           appBar: AppBar(
-            centerTitle: true,
             title: const Text("식권 사용 / 환불"),
-            backgroundColor: Colors.orange.shade50,
             bottom: const TabBar(
               indicatorSize: TabBarIndicatorSize.label,
               splashFactory: NoSplash.splashFactory,

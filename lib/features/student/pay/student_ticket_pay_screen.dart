@@ -44,7 +44,6 @@ class StudentTicketPayScreen extends StatelessWidget {
     return IamportPayment(
       appBar: AppBar(
         title: Text(screenTitle),
-        backgroundColor: Colors.orange.shade100,
       ),
       /* 웹뷰 로딩 컴포넌트 */
       initialChild: Container(

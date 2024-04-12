@@ -34,9 +34,7 @@ class StudentTicketPayTypeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: const Text("결제 방식 선택"),
-        backgroundColor: Colors.orange.shade100,
       ),
       body: GridView(
         padding: const EdgeInsets.symmetric(

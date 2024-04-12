@@ -108,9 +108,7 @@ class _StudentMenuPayScreenState extends State<StudentMenuPayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: const Text("결제"),
-        backgroundColor: Colors.orange.shade100,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -194,9 +194,7 @@ class _StudentTicketState extends State<StudentTicket> {
         context.watch<TicketProvider>().ticketMap;
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: const Text("내 티켓"),
-        backgroundColor: Colors.orange.shade100,
       ),
       body: _isFirstLoading
           ? const Center(

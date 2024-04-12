@@ -98,7 +98,6 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: const Text("비밀번호 재설정"),
       ),
       bottomNavigationBar: Container(

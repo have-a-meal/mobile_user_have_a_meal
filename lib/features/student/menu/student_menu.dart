@@ -157,8 +157,6 @@ class _StudentMenuState extends State<StudentMenu> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        backgroundColor: Colors.orange.shade50,
-        surfaceTintColor: Colors.orange.shade50,
         titleSpacing: 30,
         title: const Text(
           "Have-A-Meal",
