@@ -1,4 +1,5 @@
 import 'package:front_have_a_meal/features/account/id_pw_search_screen.dart';
+import 'package:front_have_a_meal/features/account/password_reset_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_in_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
 import 'package:front_have_a_meal/features/error/error_screen.dart';
@@ -31,6 +32,15 @@ final router = GoRouter(
       builder: (context, state) {
         return const IdPwSearchScreen();
       },
+      routes: [
+        GoRoute(
+          path: PasswordResetScreen.routeURL,
+          name: PasswordResetScreen.routeName,
+          builder: (context, state) {
+            return const PasswordResetScreen();
+          },
+        ),
+      ],
     ),
     GoRoute(
       path: StudentNavigationScreen.routeURL,

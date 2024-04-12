@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/features/account/password_reset_screen.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
@@ -31,23 +32,23 @@ class _PwSearchState extends State<PwSearch> {
   }
 
   // ID 찾기 API
-  void _onSearchId() async {
+  void _onSearchPw() async {
     swagPlatformDialog(
       context: context,
-      title: "ID 확인",
-      message: "당신의 비밀번호는 00000000 입니다!",
+      title: "비밀번호 재설정",
+      message: "비밀번호를 재설정하시겠습니까?",
       actions: [
         ElevatedButton(
           onPressed: () {
             context.pop();
           },
-          child: const Text("취소"),
+          child: const Text("아니오"),
         ),
         ElevatedButton(
           onPressed: () {
-            context.pop();
+            context.pushNamed(PasswordResetScreen.routeName);
           },
-          child: const Text("확인"),
+          child: const Text("네"),
         ),
       ],
     );
@@ -124,7 +125,7 @@ class _PwSearchState extends State<PwSearch> {
           bottom: 10,
         ),
         child: BottomButton(
-          onPressed: _isSubmitted ? _onSearchId : null,
+          onPressed: _isSubmitted ? _onSearchPw : null,
           text: "비밀번호 찾기",
           isClicked: _isSubmitted,
         ),

@@ -5,23 +5,25 @@ import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-class IdSearch extends StatefulWidget {
-  const IdSearch({super.key});
+class PasswordResetScreen extends StatefulWidget {
+  static const routeName = "reset_password";
+  static const routeURL = "reset_password";
+  const PasswordResetScreen({super.key});
 
   @override
-  State<IdSearch> createState() => _IdSearchState();
+  State<PasswordResetScreen> createState() => _PasswordResetScreenState();
 }
 
-class _IdSearchState extends State<IdSearch> {
+class _PasswordResetScreenState extends State<PasswordResetScreen> {
   bool _isSubmitted = false;
   bool _isBarrier = false;
 
-  void _onCheckSearchData() {
+  void _onCheckResetData() {
     setState(() {
-      _isSubmitted = (_searchNameController.text.trim().isNotEmpty &&
-              _searchNameErrorText == null) &&
-          (_searchPhoneNumberController.text.trim().isNotEmpty &&
-              _searchPhoneNumberErrorText == null);
+      _isSubmitted = (_resetPwController.text.trim().isNotEmpty &&
+              _resetPwErrorText == null) &&
+          (_resetPwAuthController.text.trim().isNotEmpty &&
+              _resetPwAuthErrorText == null);
     });
   }
 
@@ -31,74 +33,74 @@ class _IdSearchState extends State<IdSearch> {
     });
   }
 
-  // ID 찾기 API
-  void _onSearchId() async {
+  // 비밀번호 재설정 API
+  void _onResetPw() async {
     swagPlatformDialog(
       context: context,
-      title: "ID 확인",
-      message: "당신의 아이디는 00000000 입니다!",
+      title: "비밀번호 재설정",
+      message: "재설정이 완료되었습니다.",
       actions: [
-        ElevatedButton(
-          onPressed: () {
-            context.pop();
-          },
-          child: const Text("취소"),
-        ),
         ElevatedButton(
           onPressed: () {
             context.pop();
             context.goNamed(SignInScreen.routeName);
           },
-          child: const Text("확인"),
+          child: const Text("알겠습니다"),
         ),
       ],
     );
   }
 
-  // 전화번호 정규식
-  final RegExp _regExpPhoneNumber = RegExp(
-      r'^(02|0[3-9][0-9]{1,2})-[0-9]{3,4}-[0-9]{4}$|^(02|0[3-9][0-9]{1,2})[0-9]{7,8}$|^01[0-9]{9}$|^070-[0-9]{4}-[0-9]{4}$|^070[0-9]{8}$');
+  // 비밀번호 정규식
+  final RegExp _regExpPw =
+      RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$');
 
-  final TextEditingController _searchNameController = TextEditingController();
-  String? _searchNameErrorText;
-  final TextEditingController _searchPhoneNumberController =
-      TextEditingController();
-  String? _searchPhoneNumberErrorText;
+  final TextEditingController _resetPwController = TextEditingController();
+  String? _resetPwErrorText;
+  final TextEditingController _resetPwAuthController = TextEditingController();
+  String? _resetPwAuthErrorText;
 
-  void _validateSearchName(String value) {
+  void _validateResetPw(String value) {
     if (value.isEmpty) {
       setState(() {
-        _searchNameErrorText = '이름(실명)을 입력하세요.';
+        _resetPwErrorText = '비밀번호를 입력하세요!';
+      });
+    } else if (!_regExpPw.hasMatch(value)) {
+      setState(() {
+        _resetPwErrorText = '영대소문자와 숫자, 특수기호를 포함한 8자 이상 입력하세요.';
       });
     } else {
       setState(() {
-        _searchNameErrorText = null;
+        _resetPwErrorText = null;
       });
-      _onCheckSearchData();
+      _onCheckResetData();
     }
   }
 
-  void _validateSearchPhoneNumber(String value) {
+  void _validateResetPwAuth(String value) {
     if (value.isEmpty) {
       setState(() {
-        _searchPhoneNumberErrorText = '전화번호를 입력하세요.';
+        _resetPwAuthErrorText = '비밀번호 확인을 입력하세요!';
       });
-    } else if (!_regExpPhoneNumber.hasMatch(value)) {
+    } else if (value != _resetPwController.text) {
       setState(() {
-        _searchPhoneNumberErrorText = "전화번호 규칙에 맞게 입력하세요.";
+        _resetPwAuthErrorText = '비밀번호와 같지 않습니다!';
       });
     } else {
       setState(() {
-        _searchPhoneNumberErrorText = null;
+        _resetPwAuthErrorText = null;
       });
-      _onCheckSearchData();
+      _onCheckResetData();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("비밀번호 재설정"),
+      ),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.only(
           left: 20,
@@ -106,8 +108,8 @@ class _IdSearchState extends State<IdSearch> {
           bottom: 10,
         ),
         child: BottomButton(
-          onPressed: _isSubmitted ? _onSearchId : null,
-          text: "아이디 찾기",
+          onPressed: _isSubmitted ? _onResetPw : null,
+          text: "비밀번호 재설정",
           isClicked: _isSubmitted,
         ),
       ),
@@ -120,50 +122,50 @@ class _IdSearchState extends State<IdSearch> {
                 children: [
                   const Gap(10),
                   TextFormField(
-                    controller: _searchNameController,
-                    keyboardType: TextInputType.name,
+                    controller: _resetPwController,
+                    obscureText: true,
                     decoration: InputDecoration(
-                      labelText: '이름(실명)',
-                      errorText: _searchNameErrorText,
+                      labelText: '비밀번호',
+                      errorText: _resetPwErrorText,
                       labelStyle: TextStyle(
-                        color: _searchNameErrorText == null
+                        color: _resetPwErrorText == null
                             ? Colors.black
                             : Colors.red,
                       ),
                       prefixIcon: Icon(
-                        Icons.badge_outlined,
+                        Icons.lock_outline,
                         color: Colors.grey.shade600,
                       ),
                     ),
                     onTap: onChangeBarrier,
-                    onChanged: _validateSearchName,
+                    onChanged: _validateResetPw,
                     onFieldSubmitted: (value) {
                       FocusScope.of(context).unfocus();
-                      _onCheckSearchData();
+                      _onCheckResetData();
                     },
                   ),
                   const Gap(10),
                   TextFormField(
-                    controller: _searchPhoneNumberController,
-                    keyboardType: TextInputType.number,
+                    controller: _resetPwAuthController,
+                    obscureText: true,
                     decoration: InputDecoration(
-                      labelText: '전화번호',
-                      errorText: _searchPhoneNumberErrorText,
+                      labelText: '비밀번호 확인',
+                      errorText: _resetPwAuthErrorText,
                       labelStyle: TextStyle(
-                        color: _searchPhoneNumberErrorText == null
+                        color: _resetPwAuthErrorText == null
                             ? Colors.black
                             : Colors.red,
                       ),
                       prefixIcon: Icon(
-                        Icons.phone_iphone_rounded,
+                        Icons.lock_person_outlined,
                         color: Colors.grey.shade600,
                       ),
                     ),
                     onTap: onChangeBarrier,
-                    onChanged: _validateSearchPhoneNumber,
+                    onChanged: _validateResetPwAuth,
                     onFieldSubmitted: (value) {
                       FocusScope.of(context).unfocus();
-                      _onCheckSearchData();
+                      _onCheckResetData();
                     },
                   ),
                 ],
