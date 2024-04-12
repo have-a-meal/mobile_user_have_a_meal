@@ -23,6 +23,8 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/e4af55f2-3b05-441a-859a-f1bdc08955c9.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/981a8977-434e-4b1d-9618-b5ae94efad2f.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/f19e389f-3e6d-460d-b728-a58a996d068c.png"  width="175" height="400"/>
+
+## 아이디 찾기 / 비밀번호 재설정
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/3c613654-d278-405e-987a-6f5983ced226.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/f7760271-c851-4eb5-90c9-611b9f405eda.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/324396e6-ea51-455d-813d-46b88380e433.png"  width="175" height="400"/>
