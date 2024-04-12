@@ -7,11 +7,13 @@ class StudentTicketPayScreenArgs {
   final String menuTime;
   final String menuCourse;
   final int menuPrice;
+  final String payType;
 
   StudentTicketPayScreenArgs({
     required this.menuTime,
     required this.menuCourse,
     required this.menuPrice,
+    required this.payType,
   });
 }
 
@@ -23,11 +25,13 @@ class StudentTicketPayScreen extends StatelessWidget {
     required this.menuTime,
     required this.menuCourse,
     required this.menuPrice,
+    required this.payType,
   });
 
   final String menuTime;
   final String menuCourse;
   final int menuPrice;
+  final String payType;
 
   @override
   Widget build(BuildContext context) {
@@ -44,23 +48,25 @@ class StudentTicketPayScreen extends StatelessWidget {
               Image.asset('assets/images/iamport-logo.png'),
               Container(
                 padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-                child: const Text('잠시만 기다려주세요...',
-                    style: TextStyle(fontSize: 20.0)),
+                child: const Text(
+                  '잠시만 기다려주세요...',
+                  style: TextStyle(fontSize: 20.0),
+                ),
               ),
             ],
           ),
         ),
       ),
       /* [필수입력] 가맹점 식별코드 */
-      userCode: 'iamport',
+      userCode: 'imp83174485',
       /* [필수입력] 결제 데이터 */
       // PG사 : kakaopay, tosspay
       data: PaymentData(
-        pg: 'tosspay', // PG사
+        pg: 'kakaopay', // PG사
         payMethod: 'card', // 결제수단
         name: '$menuTime $menuCourse', // 주문명
         merchantUid: 'mid_${DateTime.now().millisecondsSinceEpoch}', // 주문번호
-        amount: 1, // 결제금액
+        amount: 100, // 결제금액
         buyerName: '이재현', // 구매자 이름
         buyerTel: '01049049193', // 구매자 연락처
         buyerEmail: 'dlwogus1027@naver.com', // 구매자 이메일
@@ -70,6 +76,7 @@ class StudentTicketPayScreen extends StatelessWidget {
       ),
       /* [필수입력] 콜백 함수 */
       callback: (Map<String, String> result) {
+        print(result);
         context.pop();
       },
     );

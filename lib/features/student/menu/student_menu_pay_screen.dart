@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_screen.dart';
+import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_type_screen.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -89,8 +90,8 @@ class _StudentMenuPayScreenState extends State<StudentMenuPayScreen> {
         ElevatedButton(
           onPressed: () {
             context.pushNamed(
-              StudentTicketPayScreen.routeName,
-              extra: StudentTicketPayScreenArgs(
+              StudentTicketPayTypeScreen.routeName,
+              extra: StudentTicketPayTypeScreenArgs(
                 menuTime: widget.time,
                 menuCourse: widget.course,
                 menuPrice: int.parse(widget.price),

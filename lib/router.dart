@@ -6,6 +6,7 @@ import 'package:front_have_a_meal/features/error/error_screen.dart';
 import 'package:front_have_a_meal/features/outsider/outsider_navigation_screen.dart';
 import 'package:front_have_a_meal/features/student/menu/student_menu_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_screen.dart';
+import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_type_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
 import 'package:front_have_a_meal/features/student/ticket/student_qr_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -76,12 +77,12 @@ final router = GoRouter(
           },
           routes: [
             GoRoute(
-              path: StudentTicketPayScreen.routeURL,
-              name: StudentTicketPayScreen.routeName,
+              path: StudentTicketPayTypeScreen.routeURL,
+              name: StudentTicketPayTypeScreen.routeName,
               builder: (context, state) {
                 if (state.extra != null) {
-                  final args = state.extra as StudentTicketPayScreenArgs;
-                  return StudentTicketPayScreen(
+                  final args = state.extra as StudentTicketPayTypeScreenArgs;
+                  return StudentTicketPayTypeScreen(
                     menuTime: args.menuTime,
                     menuCourse: args.menuCourse,
                     menuPrice: args.menuPrice,
@@ -90,6 +91,25 @@ final router = GoRouter(
                   return const ErrorScreen();
                 }
               },
+              routes: [
+                GoRoute(
+                  path: StudentTicketPayScreen.routeURL,
+                  name: StudentTicketPayScreen.routeName,
+                  builder: (context, state) {
+                    if (state.extra != null) {
+                      final args = state.extra as StudentTicketPayScreenArgs;
+                      return StudentTicketPayScreen(
+                        menuTime: args.menuTime,
+                        menuCourse: args.menuCourse,
+                        menuPrice: args.menuPrice,
+                        payType: args.payType,
+                      );
+                    } else {
+                      return const ErrorScreen();
+                    }
+                  },
+                ),
+              ],
             ),
           ],
         ),
