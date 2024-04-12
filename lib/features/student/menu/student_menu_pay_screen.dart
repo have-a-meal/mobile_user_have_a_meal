@@ -115,6 +115,7 @@ class _StudentMenuPayScreenState extends State<StudentMenuPayScreen> {
         children: [
           const Gap(20),
           SegmentedButton(
+            showSelectedIcon: false,
             segments: const [
               ButtonSegment(
                 value: TicketTime.breakfast,
@@ -138,6 +139,7 @@ class _StudentMenuPayScreenState extends State<StudentMenuPayScreen> {
           ),
           const Gap(20),
           SegmentedButton(
+            showSelectedIcon: false,
             segments: const [
               ButtonSegment(
                 value: TicketCourse.a,
