@@ -35,9 +35,16 @@ class StudentTicketPayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String screenTitle = "";
+    if (payType == "kakaopay") {
+      screenTitle = "카카오페이 결제";
+    } else if (payType == "tosspay") {
+      screenTitle = "토스페이 결제";
+    }
     return IamportPayment(
       appBar: AppBar(
-        title: const Text('아임포트 결제'),
+        title: Text(screenTitle),
+        backgroundColor: Colors.orange.shade100,
       ),
       /* 웹뷰 로딩 컴포넌트 */
       initialChild: Container(
@@ -62,7 +69,7 @@ class StudentTicketPayScreen extends StatelessWidget {
       /* [필수입력] 결제 데이터 */
       // PG사 : kakaopay, tosspay
       data: PaymentData(
-        pg: 'kakaopay', // PG사
+        pg: payType, // PG사
         payMethod: 'card', // 결제수단
         name: '$menuTime $menuCourse', // 주문명
         merchantUid: 'mid_${DateTime.now().millisecondsSinceEpoch}', // 주문번호

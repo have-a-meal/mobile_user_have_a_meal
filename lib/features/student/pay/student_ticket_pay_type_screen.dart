@@ -36,6 +36,7 @@ class StudentTicketPayTypeScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text("결제 방식 선택"),
+        backgroundColor: Colors.orange.shade100,
       ),
       body: GridView(
         padding: const EdgeInsets.symmetric(
@@ -46,6 +47,7 @@ class StudentTicketPayTypeScreen extends StatelessWidget {
           crossAxisCount: 2,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
+          childAspectRatio: 4 / 3,
         ),
         children: [
           InkWell(
@@ -67,7 +69,7 @@ class StudentTicketPayTypeScreen extends StatelessWidget {
                   // Icon(Icons.credit_card),
                   Expanded(
                     child: Image.asset(
-                        "assets/images/payment_icon_yellow_medium.png"),
+                        "assets/images/payment_icon_yellow_small.png"),
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
