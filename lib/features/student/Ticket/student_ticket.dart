@@ -67,106 +67,6 @@ class _StudentTicketState extends State<StudentTicket> {
           ticketTime: "조식",
           ticketCourse: "A코스",
           ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "9",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "10",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "11",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "12",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "13",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "14",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "15",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "16",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "17",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "18",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "19",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "20",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "21",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "22",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "23",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "24",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "25",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "26",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "27",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "28",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
     ]);
 
     setState(() {
@@ -194,7 +94,7 @@ class _StudentTicketState extends State<StudentTicket> {
         context.watch<TicketProvider>().ticketMap;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("내 티켓"),
+        title: const Text("내 식권"),
       ),
       body: _isFirstLoading
           ? const Center(

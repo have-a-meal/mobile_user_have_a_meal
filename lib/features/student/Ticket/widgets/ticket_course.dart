@@ -71,18 +71,18 @@ class _TicketCourseState extends State<TicketCourse> {
                 Text(
                   widget.ticketCourse,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                     color: _ticketColor,
                   ),
                 ),
-                const Divider(),
-                Text(
-                  "가격 : ${widget.ticketList[0].ticketPrice}원",
-                  style: const TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
+                // const Divider(),
+                // Text(
+                //   "가격 : ${widget.ticketList[0].ticketPrice}원",
+                //   style: const TextStyle(
+                //     fontSize: 16,
+                //   ),
+                // ),
               ],
             ),
             Align(

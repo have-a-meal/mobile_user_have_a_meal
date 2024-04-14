@@ -7,6 +7,7 @@ import 'package:front_have_a_meal/features/outsider/outsider_navigation_screen.d
 import 'package:front_have_a_meal/features/student/menu/student_menu_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_type_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/student_ticket_refund_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
 import 'package:front_have_a_meal/features/student/ticket/student_qr_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -127,6 +128,13 @@ final router = GoRouter(
             } else {
               return const ErrorScreen();
             }
+          },
+        ),
+        GoRoute(
+          path: StudentTicketRefundScreen.routeURL,
+          name: StudentTicketRefundScreen.routeName,
+          builder: (context, state) {
+            return const StudentTicketRefundScreen();
           },
         ),
       ],

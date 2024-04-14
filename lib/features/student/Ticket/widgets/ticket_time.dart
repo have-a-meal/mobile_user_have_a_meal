@@ -15,22 +15,6 @@ class TicketTime extends StatelessWidget {
   final String eatTime;
   final Map<String, List<TicketModel>> ticketMap;
 
-  int _countNonEmptyCourses(Map<String, List<TicketModel>> courses) {
-    int count = 0;
-    // courses Map을 순회하면서 각 코스의 리스트가 비어있는지 확인합니다.
-    courses.forEach((key, value) {
-      if (value.isNotEmpty) {
-        // 리스트가 비어있지 않다면, 카운트를 1 증가시킵니다.
-        count++;
-      }
-    });
-    if (count <= 1) {
-      return 2;
-    } else {
-      return count;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
