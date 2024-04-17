@@ -7,6 +7,9 @@ import 'package:front_have_a_meal/features/outsider/outsider_navigation_screen.d
 import 'package:front_have_a_meal/features/student/menu/student_menu_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_type_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/student_Inform_update_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/student_pay_check_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/student_setting_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/student_ticket_refund_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
 import 'package:front_have_a_meal/features/student/ticket/student_qr_screen.dart';
@@ -136,6 +139,27 @@ final router = GoRouter(
           builder: (context, state) {
             return const StudentTicketRefundScreen();
           },
+        ),
+        GoRoute(
+          path: StudentPayCheckScreen.routeURL,
+          name: StudentPayCheckScreen.routeName,
+          builder: (context, state) {
+            return const StudentPayCheckScreen();
+          },
+        ),
+        GoRoute(
+          path: StudentSettingScreen.routeURL,
+          name: StudentSettingScreen.routeName,
+          builder: (context, state) => const StudentSettingScreen(),
+          routes: [
+            GoRoute(
+              path: StudentInfromUpdateScreen.routeURL,
+              name: StudentInfromUpdateScreen.routeName,
+              builder: (context, state) {
+                return const StudentInfromUpdateScreen();
+              },
+            ),
+          ],
         ),
       ],
     ),

@@ -18,7 +18,11 @@ class _StudentTicketState extends State<StudentTicket> {
   void initState() {
     super.initState();
 
-    _oninitTicket();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _oninitTicket();
+    });
+
+    // _oninitTicket();
   }
 
   Future<void> _oninitTicket() async {
@@ -26,7 +30,7 @@ class _StudentTicketState extends State<StudentTicket> {
       _isFirstLoading = true;
     });
 
-    context.read<TicketProvider>().addTicket([
+    await context.read<TicketProvider>().addTicket([
       TicketModel(
           ticketId: "1",
           ticketTime: "조식",

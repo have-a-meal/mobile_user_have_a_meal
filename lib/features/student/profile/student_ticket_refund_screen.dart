@@ -163,15 +163,14 @@ class _StudentTicketRefundScreenState extends State<StudentTicketRefundScreen>
                                           ),
                                           ElevatedButton(
                                             onPressed: () async {
-                                              if (await context
+                                              await context
                                                   .read<TicketProvider>()
                                                   .removeTicket(
-                                                      _selectedRefundEnabledTicket)) {
-                                                for (TicketModel ticket
-                                                    in _selectedRefundEnabledTicket) {
-                                                  _ticketEnabledList
-                                                      .remove(ticket);
-                                                }
+                                                      _selectedRefundEnabledTicket);
+                                              for (TicketModel ticket
+                                                  in _selectedRefundEnabledTicket) {
+                                                _ticketEnabledList
+                                                    .remove(ticket);
                                               }
                                               if (_ticketEnabledList
                                                   .isNotEmpty) {
@@ -313,15 +312,14 @@ class _StudentTicketRefundScreenState extends State<StudentTicketRefundScreen>
                                               ),
                                               ElevatedButton(
                                                 onPressed: () async {
-                                                  if (await context
+                                                  await context
                                                       .read<TicketProvider>()
                                                       .removeTicket(
-                                                          _selectedRefundDisabledTicket)) {
-                                                    for (TicketModel ticket
-                                                        in _selectedRefundDisabledTicket) {
-                                                      _ticketDisabledList
-                                                          .remove(ticket);
-                                                    }
+                                                          _selectedRefundDisabledTicket);
+                                                  for (TicketModel ticket
+                                                      in _selectedRefundDisabledTicket) {
+                                                    _ticketDisabledList
+                                                        .remove(ticket);
                                                   }
                                                   _selectedRefundDisabledTicket =
                                                       {};
