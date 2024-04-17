@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/account/sign_in_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_Inform_update_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/student_Inform_screen.dart';
 import 'package:front_have_a_meal/providers/user_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +78,7 @@ class StudentSettingScreen extends StatelessWidget {
                 onTap: () {
                   // _userInquiryTap;
                   context.pushNamed(
-                    StudentInfromUpdateScreen.routeName,
+                    StudentInfromScreen.routeName,
                   );
                 },
                 title: const Text(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:front_have_a_meal/features/student/profile/student_Inform_update_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/student_Inform_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/student_setting_screen.dart';
 import 'package:front_have_a_meal/providers/user_provider.dart';
 import 'package:go_router/go_router.dart';
@@ -63,7 +63,7 @@ class _UserProfileCardState extends State<UserProfileCard> {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        context.pushNamed(StudentInfromUpdateScreen.routeName);
+        context.pushNamed(StudentInfromScreen.routeName);
       },
       leading: CircleAvatar(
         radius: 40,
@@ -76,7 +76,7 @@ class _UserProfileCardState extends State<UserProfileCard> {
       ),
       title: const Text(
         // context.watch<UserProvider>().userData!.userId,
-        "유저이름",
+        "홍길동",
         style: TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 18,
