@@ -37,7 +37,9 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/11978207-7295-496d-b5a5-2e450845f986.png"  width="175" height="400"/>
 
 ## 내 식권 조회 및 QR 인증
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/552f33ae-57fa-4eb6-b0c3-0c08f504fca5.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/78b68bed-0ca1-4025-b370-0d80d551e9e4.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/476d4a14-1fe3-4620-abe5-c6ecd5353c69.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/c4c5f43f-fffc-49a4-862b-2926297fdf7f.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/8726ddb5-0c72-43f2-abab-9571a9233e92.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/807f0b74-a7ca-47d3-9a1a-5a88df4b679c.png"  width="175" height="400"/>
+
+## 식권 환불
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/7de7a639-5a36-4a12-a0e1-633fbc12e622.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/62a2b510-f410-4259-960a-90ff6b11ed3a.png"  width="175" height="400"/>
