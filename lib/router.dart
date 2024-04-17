@@ -9,9 +9,9 @@ import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_screen
 import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_type_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/student_Inform_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/student_Infrom_update_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_pay_check_screen.dart';
+import 'package:front_have_a_meal/features/student/pay_check/student_pay_check_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/student_setting_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_ticket_refund_screen.dart';
+import 'package:front_have_a_meal/features/student/pay_check/student_ticket_refund_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
 import 'package:front_have_a_meal/features/student/ticket/student_qr_screen.dart';
 import 'package:go_router/go_router.dart';

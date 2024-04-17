@@ -1,14 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
-import 'package:front_have_a_meal/providers/ticket_provider.dart';
-import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
-import 'package:front_have_a_meal/widget_tools/text_divider.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class StudentQrScreenArgs {
   StudentQrScreenArgs({
@@ -31,6 +22,13 @@ class StudentQrScreen extends StatefulWidget {
 
   final String ticketTime;
   final String ticketCourse;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ticketTime': ticketTime,
+      'ticketCourse': ticketCourse,
+    };
+  }
 
   @override
   State<StudentQrScreen> createState() => _StudentQrScreenState();

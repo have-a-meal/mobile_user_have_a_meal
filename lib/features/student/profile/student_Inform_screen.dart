@@ -62,7 +62,7 @@ class _StudentInfromScreenState extends State<StudentInfromScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("내 정보"),
+        title: const Text("내 정보 조회"),
       ),
       body: _isFirstLoading
           ? const Center(

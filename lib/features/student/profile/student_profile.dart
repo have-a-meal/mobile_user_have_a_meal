@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/account/sign_in_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_pay_check_screen.dart';
+import 'package:front_have_a_meal/features/student/pay_check/student_pay_check_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/student_setting_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_ticket_refund_screen.dart';
+import 'package:front_have_a_meal/features/student/pay_check/student_ticket_refund_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/widgets/profile_button.dart';
 import 'package:front_have_a_meal/features/student/profile/widgets/user_profile_card.dart';
 import 'package:gap/gap.dart';
@@ -18,31 +18,19 @@ class StudentProfile extends StatefulWidget {
 class _StudentProfileState extends State<StudentProfile> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("내 정보"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.pushNamed(StudentSettingScreen.routeName);
-            },
-            icon: const Icon(Icons.settings_outlined),
-            iconSize: 36,
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
           ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Gap(20),
-            const UserProfileCard(),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 30,
-                vertical: 20,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Column(
+            children: [
+              const Gap(20),
+              const UserProfileCard(),
+              const Gap(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ProfileButton(
                     onPressed: () {
@@ -50,15 +38,20 @@ class _StudentProfileState extends State<StudentProfile> {
                     },
                     icon: Icons.playlist_play_rounded,
                     text: "결제 내역",
-                    color: Colors.grey,
                   ),
                   ProfileButton(
                     onPressed: () {
                       context.pushNamed(StudentTicketRefundScreen.routeName);
                     },
                     icon: Icons.attach_money,
-                    text: "환불하기",
-                    color: Colors.grey,
+                    text: "식권 환불",
+                  ),
+                  ProfileButton(
+                    onPressed: () {
+                      context.pushNamed(StudentTicketRefundScreen.routeName);
+                    },
+                    icon: Icons.settings_outlined,
+                    text: "설정",
                   ),
                   // ProfileButton(
                   //   icon: Icons.data_exploration_outlined,
@@ -67,8 +60,8 @@ class _StudentProfileState extends State<StudentProfile> {
                   // ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

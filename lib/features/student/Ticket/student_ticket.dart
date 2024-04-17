@@ -12,24 +12,22 @@ class StudentTicket extends StatefulWidget {
 }
 
 class _StudentTicketState extends State<StudentTicket> {
-  bool _isFirstLoading = false;
+  bool _isFirstLoading = true;
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _oninitTicket();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _oninitTicket();
+
+      _isFirstLoading = false;
     });
 
     // _oninitTicket();
   }
 
   Future<void> _oninitTicket() async {
-    setState(() {
-      _isFirstLoading = true;
-    });
-
     await context.read<TicketProvider>().addTicket([
       TicketModel(
           ticketId: "1",
@@ -72,10 +70,6 @@ class _StudentTicketState extends State<StudentTicket> {
           ticketCourse: "A코스",
           ticketPrice: "5000"),
     ]);
-
-    setState(() {
-      _isFirstLoading = false;
-    });
   }
 
   Future<void> _onRefresh() async {
@@ -94,8 +88,7 @@ class _StudentTicketState extends State<StudentTicket> {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, Map<String, List<TicketModel>>> ticketMap =
-        context.watch<TicketProvider>().ticketMap;
+    final ticketMap = context.watch<TicketProvider>().ticketMap;
     return Scaffold(
       appBar: AppBar(
         title: const Text("내 식권"),
