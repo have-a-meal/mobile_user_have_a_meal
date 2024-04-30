@@ -143,7 +143,7 @@ class _StudentInfromUpdateScreenState extends State<StudentInfromUpdateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("내정보 변경"),
+        title: const Text("회원 정보 변경"),
       ),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.only(
