@@ -10,6 +10,7 @@ import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_type_s
 import 'package:front_have_a_meal/features/student/profile/student_Inform_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/student_Infrom_update_screen.dart';
 import 'package:front_have_a_meal/features/student/pay_check/student_pay_check_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/student_email_auth_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/student_setting_screen.dart';
 import 'package:front_have_a_meal/features/student/pay_check/student_ticket_refund_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
@@ -161,20 +162,30 @@ final router = GoRouter(
               },
               routes: [
                 GoRoute(
+                  path: StudentEmailAuthScreen.routeURL,
+                  name: StudentEmailAuthScreen.routeName,
+                  builder: (context, state) {
+                    return const StudentEmailAuthScreen();
+                  },
+                ),
+                GoRoute(
                   path: StudentInfromUpdateScreen.routeURL,
                   name: StudentInfromUpdateScreen.routeName,
                   builder: (context, state) {
-                    if (state.extra != null) {
-                      final args = state.extra as StudentInfromUpdateScreenArgs;
-                      return StudentInfromUpdateScreen(
-                        updateType: args.updateType,
-                      );
-                    } else {
-                      return const StudentInfromUpdateScreen(
-                        updateType: UpdateType.pw,
-                      );
-                    }
+                    return const StudentInfromUpdateScreen();
                   },
+                  // builder: (context, state) {
+                  //   if (state.extra != null) {
+                  //     final args = state.extra as StudentInfromUpdateScreenArgs;
+                  //     return StudentInfromUpdateScreen(
+                  //       updateType: args.updateType,
+                  //     );
+                  //   } else {
+                  //     return const StudentInfromUpdateScreen(
+                  //       updateType: UpdateType.pw,
+                  //     );
+                  //   }
+                  // },
                 )
               ],
             ),

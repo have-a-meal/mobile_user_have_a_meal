@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/constants/http_ip.dart';
+import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
 import 'package:front_have_a_meal/features/student/profile/student_Infrom_update_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/student_email_auth_screen.dart';
 import 'package:front_have_a_meal/models/user_model.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -58,11 +60,27 @@ class _StudentInfromScreenState extends State<StudentInfromScreen> {
     });
   }
 
+  void _onPushEmailAuthPage() {
+    context.pushNamed(StudentEmailAuthScreen.routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("내 정보 조회"),
+      ),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          bottom: 10,
+        ),
+        child: BottomButton(
+          onPressed: _onPushEmailAuthPage,
+          text: "수정",
+          isClicked: true,
+        ),
       ),
       body: _isFirstLoading
           ? const Center(
@@ -72,10 +90,11 @@ class _StudentInfromScreenState extends State<StudentInfromScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 10,
-                  horizontal: 20,
+                  horizontal: 10,
                 ),
                 child: Column(
                   children: [
+                    const Gap(10),
                     TextFormField(
                       // initialValue: _userData!.userId,
                       initialValue: "00000000",
@@ -89,136 +108,44 @@ class _StudentInfromScreenState extends State<StudentInfromScreen> {
                       ),
                     ),
                     const Gap(20),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            // initialValue: _userData!.password,
-                            initialValue: "0000000000",
-                            readOnly: true,
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: "비밀번호",
-                              prefixIcon: Icon(
-                                Icons.lock_person_outlined,
-                                color: Colors.grey.shade600,
-                              ),
-                            ),
-                          ),
+                    TextFormField(
+                      // initialValue: _userData!.password,
+                      initialValue: "0000000000",
+                      readOnly: true,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: "비밀번호",
+                        prefixIcon: Icon(
+                          Icons.lock_person_outlined,
+                          color: Colors.grey.shade600,
                         ),
-                        const Gap(10),
-                        ElevatedButton(
-                          onPressed: () async {
-                            await context.pushNamed(
-                              StudentInfromUpdateScreen.routeName,
-                              extra: StudentInfromUpdateScreenArgs(
-                                updateType: UpdateType.pw,
-                              ),
-                            );
-
-                            _initUserData();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.all(22),
-                            textStyle: const TextStyle(fontSize: 14),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                          child: const Text("수정"),
-                        ),
-                      ],
+                      ),
                     ),
                     const Gap(20),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            // initialValue: _userData!.name,
-                            initialValue: "홍길동",
-                            readOnly: true,
-                            decoration: InputDecoration(
-                              labelText: "이름(실명)",
-                              prefixIcon: Icon(
-                                Icons.badge_outlined,
-                                color: Colors.grey.shade600,
-                              ),
-                            ),
-                          ),
+                    TextFormField(
+                      // initialValue: _userData!.name,
+                      initialValue: "홍길동",
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        labelText: "이름(실명)",
+                        prefixIcon: Icon(
+                          Icons.badge_outlined,
+                          color: Colors.grey.shade600,
                         ),
-                        const Gap(10),
-                        ElevatedButton(
-                          onPressed: () async {
-                            await context.pushNamed(
-                              StudentInfromUpdateScreen.routeName,
-                              extra: StudentInfromUpdateScreenArgs(
-                                updateType: UpdateType.name,
-                              ),
-                            );
-
-                            _initUserData();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.all(22),
-                            textStyle: const TextStyle(fontSize: 14),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                          child: const Text("수정"),
-                        ),
-                      ],
+                      ),
                     ),
                     const Gap(20),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            // initialValue: _userData!.phoneNumber,
-                            initialValue: "010-0000-0000",
-                            readOnly: true,
-                            decoration: InputDecoration(
-                              labelText: "전화번호",
-                              prefixIcon: Icon(
-                                Icons.phone_iphone_rounded,
-                                color: Colors.grey.shade600,
-                              ),
-                            ),
-                          ),
+                    TextFormField(
+                      // initialValue: _userData!.phoneNumber,
+                      initialValue: "010-0000-0000",
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        labelText: "전화번호",
+                        prefixIcon: Icon(
+                          Icons.phone_iphone_rounded,
+                          color: Colors.grey.shade600,
                         ),
-                        const Gap(10),
-                        IntrinsicHeight(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              await context.pushNamed(
-                                StudentInfromUpdateScreen.routeName,
-                                extra: StudentInfromUpdateScreenArgs(
-                                  updateType: UpdateType.phoneNumber,
-                                ),
-                              );
-
-                              _initUserData();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.all(22),
-                              textStyle: const TextStyle(fontSize: 14),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                            ),
-                            child: const Text("수정"),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),

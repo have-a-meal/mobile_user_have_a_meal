@@ -24,43 +24,45 @@ class _StudentProfileState extends State<StudentProfile> {
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
           ),
-          child: Column(
-            children: [
-              const Gap(20),
-              const UserProfileCard(),
-              const Gap(20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ProfileButton(
-                    onPressed: () {
-                      context.pushNamed(StudentPayCheckScreen.routeName);
-                    },
-                    icon: Icons.playlist_play_rounded,
-                    text: "결제 내역",
-                  ),
-                  ProfileButton(
-                    onPressed: () {
-                      context.pushNamed(StudentTicketRefundScreen.routeName);
-                    },
-                    icon: Icons.attach_money,
-                    text: "식권 환불",
-                  ),
-                  ProfileButton(
-                    onPressed: () {
-                      context.pushNamed(StudentTicketRefundScreen.routeName);
-                    },
-                    icon: Icons.settings_outlined,
-                    text: "설정",
-                  ),
-                  // ProfileButton(
-                  //   icon: Icons.data_exploration_outlined,
-                  //   text: "가격 통계",
-                  //   color: Colors.grey,
-                  // ),
-                ],
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Gap(20),
+                const UserProfileCard(),
+                const Gap(20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ProfileButton(
+                      onPressed: () {
+                        context.pushNamed(StudentPayCheckScreen.routeName);
+                      },
+                      icon: Icons.playlist_play_rounded,
+                      text: "결제 내역",
+                    ),
+                    ProfileButton(
+                      onPressed: () {
+                        context.pushNamed(StudentTicketRefundScreen.routeName);
+                      },
+                      icon: Icons.attach_money,
+                      text: "식권 환불",
+                    ),
+                    ProfileButton(
+                      onPressed: () {
+                        context.pushNamed(StudentSettingScreen.routeName);
+                      },
+                      icon: Icons.settings_outlined,
+                      text: "설정",
+                    ),
+                    // ProfileButton(
+                    //   icon: Icons.data_exploration_outlined,
+                    //   text: "가격 통계",
+                    //   color: Colors.grey,
+                    // ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

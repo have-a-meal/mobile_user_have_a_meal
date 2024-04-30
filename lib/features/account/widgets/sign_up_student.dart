@@ -30,11 +30,14 @@ class _SignUpStudentState extends State<SignUpStudent> {
     });
   }
 
-  void onChangeBarrier() {
+  void _onChangeBarrier() {
     setState(() {
       _isBarrier = true;
     });
   }
+
+  // 학번 인증코드 요청하기 API
+  void _onRequestIdCode() async {}
 
   // 학번 인증하기 API
   void _onCheckIdAuthCode() async {
@@ -204,6 +207,7 @@ class _SignUpStudentState extends State<SignUpStudent> {
                 children: [
                   const Gap(10),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: TextFormField(
@@ -212,6 +216,7 @@ class _SignUpStudentState extends State<SignUpStudent> {
                           maxLength: 8,
                           decoration: InputDecoration(
                             labelText: '학번',
+                            suffixText: '@st.yc.ac.kr',
                             errorText: _studentIdErrorText,
                             counterText: '', // 글자수 제한 표시 없애기
                             labelStyle: TextStyle(
@@ -223,25 +228,8 @@ class _SignUpStudentState extends State<SignUpStudent> {
                               Icons.person_outline,
                               color: Colors.grey.shade600,
                             ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.orange, width: 2.0),
-                            ),
-                            // 텍스트 필드가 포커스를 받았을 때의 테두리 색상
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.orange, width: 2.0),
-                            ),
-                            errorBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.red, width: 2.0),
-                            ),
-                            focusedErrorBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.red, width: 2.0),
-                            ),
                           ),
-                          onTap: onChangeBarrier,
+                          onTap: _onChangeBarrier,
                           onChanged: _validateStudentId,
                           onFieldSubmitted: (value) {
                             FocusScope.of(context).unfocus();
@@ -249,12 +237,24 @@ class _SignUpStudentState extends State<SignUpStudent> {
                           },
                         ),
                       ),
-                      const Gap(9),
-                      const Text(
-                        '@st.yc.ac.kr',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                      const Gap(6),
+                      ElevatedButton(
+                        onPressed: _studentIdController.text.isNotEmpty &&
+                                _studentIdErrorText == null
+                            ? _onRequestIdCode
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(23),
+                          textStyle: const TextStyle(fontSize: 14),
+                          backgroundColor: Colors.orange.shade200,
+                          shape: const ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          "코드요청",
                         ),
                       ),
                     ],
@@ -265,48 +265,31 @@ class _SignUpStudentState extends State<SignUpStudent> {
                       Expanded(
                         child: TextFormField(
                           controller: _studentIdAuthController,
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            labelText: '학번인증',
-                            errorText: _studentIdAuthErrorText,
+                            labelText: '인증코드',
+                            // errorText: _studentIdAuthErrorText,
                             labelStyle: TextStyle(
                               color: _studentIdAuthErrorText == null
                                   ? Colors.black
                                   : Colors.red,
                             ),
                             prefixIcon: Icon(
-                              Icons.person_outline,
+                              Icons.numbers_outlined,
                               color: Colors.grey.shade600,
                             ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.orange, width: 2.0),
-                            ),
-                            // 텍스트 필드가 포커스를 받았을 때의 테두리 색상
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.orange, width: 2.0),
-                            ),
-                            errorBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.red, width: 2.0),
-                            ),
-                            focusedErrorBorder: const OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.red, width: 2.0),
-                            ),
                           ),
-                          onTap: onChangeBarrier,
+                          onTap: _onChangeBarrier,
                           onChanged: _validateStudentIdAuth,
                         ),
                       ),
                       const Gap(6),
                       ElevatedButton(
-                        onPressed: _studentIdAuthErrorText == null
+                        onPressed: _studentIdAuthController.text.isNotEmpty
                             ? _onCheckIdAuthCode
                             : null,
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(24),
+                          padding: const EdgeInsets.all(23),
                           textStyle: const TextStyle(fontSize: 14),
                           backgroundColor: Colors.orange.shade200,
                           shape: const ContinuousRectangleBorder(
@@ -317,35 +300,33 @@ class _SignUpStudentState extends State<SignUpStudent> {
                         ),
                         child: const Text(
                           "인증하기",
-                          style: TextStyle(color: Colors.blue),
                         ),
                       ),
                     ],
                   ),
-                  if (_studentIdAuth)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 2),
-                      child: Text(
-                        "인증이 완료되었습니다!",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.lightGreen,
+                  _studentIdAuth
+                      ? const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2),
+                          child: Text(
+                            "인증이 완료되었습니다!",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.lightGreen,
+                            ),
+                          ),
+                        )
+                      : const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2),
+                          child: Text(
+                            "인증이 필요합니다!",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.red,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  if (!_studentIdAuth)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 2),
-                      child: Text(
-                        "인증이 필요합니다!",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ),
                   const Gap(10),
                   TextFormField(
                     controller: _studentPwController,
@@ -363,7 +344,7 @@ class _SignUpStudentState extends State<SignUpStudent> {
                         color: Colors.grey.shade600,
                       ),
                     ),
-                    onTap: onChangeBarrier,
+                    onTap: _onChangeBarrier,
                     onChanged: _validateStudentPw,
                     onFieldSubmitted: (value) {
                       FocusScope.of(context).unfocus();
@@ -387,7 +368,7 @@ class _SignUpStudentState extends State<SignUpStudent> {
                         color: Colors.grey.shade600,
                       ),
                     ),
-                    onTap: onChangeBarrier,
+                    onTap: _onChangeBarrier,
                     onChanged: _validateStudentPwAuth,
                     onFieldSubmitted: (value) {
                       FocusScope.of(context).unfocus();
@@ -411,7 +392,7 @@ class _SignUpStudentState extends State<SignUpStudent> {
                         color: Colors.grey.shade600,
                       ),
                     ),
-                    onTap: onChangeBarrier,
+                    onTap: _onChangeBarrier,
                     onChanged: _validateStudentName,
                     onFieldSubmitted: (value) {
                       FocusScope.of(context).unfocus();
@@ -435,7 +416,7 @@ class _SignUpStudentState extends State<SignUpStudent> {
                         color: Colors.grey.shade600,
                       ),
                     ),
-                    onTap: onChangeBarrier,
+                    onTap: _onChangeBarrier,
                     onChanged: _validateStudentPhoneNumber,
                     onFieldSubmitted: (value) {
                       FocusScope.of(context).unfocus();

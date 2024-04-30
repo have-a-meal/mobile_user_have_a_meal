@@ -22,7 +22,12 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
           (_outsiderNameController.text.trim().isNotEmpty &&
               _outsiderNameErrorText == null) &&
           (_outsiderPhoneNumberController.text.trim().isNotEmpty &&
-              _outsiderPhoneNumberErrorText == null);
+              _outsiderPhoneNumberErrorText == null) &&
+          (_outsiderEmailController.text.trim().isNotEmpty &&
+              _outsiderEmailErrorText == null) &&
+          (_outsiderEmailAuthController.text.trim().isNotEmpty &&
+              _outsiderEmailAuthErrorText == null &&
+              _isEmailAuth);
     });
   }
 
@@ -41,6 +46,9 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
   // 전화번호 정규식
   final RegExp _regExpPhoneNumber = RegExp(
       r'^(02|0[3-9][0-9]{1,2})-[0-9]{3,4}-[0-9]{4}$|^(02|0[3-9][0-9]{1,2})[0-9]{7,8}$|^01[0-9]{9}$|^070-[0-9]{4}-[0-9]{4}$|^070[0-9]{8}$');
+  // 이메일 정규식
+  final RegExp _regExpEmail = RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
   final TextEditingController _outsiderPwController = TextEditingController();
   String? _outsiderPwErrorText;
@@ -52,6 +60,13 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
   final TextEditingController _outsiderPhoneNumberController =
       TextEditingController();
   String? _outsiderPhoneNumberErrorText;
+  final TextEditingController _outsiderEmailController =
+      TextEditingController();
+  String? _outsiderEmailErrorText;
+  final TextEditingController _outsiderEmailAuthController =
+      TextEditingController();
+  String? _outsiderEmailAuthErrorText;
+  bool _isEmailAuth = false;
 
   void _validateOutsiderPw(String value) {
     if (value.isEmpty) {
@@ -117,6 +132,47 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
     }
   }
 
+  void _validateOutsiderEmail(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        _outsiderEmailErrorText = '이메일을 입력하세요.';
+      });
+    } else if (!_regExpEmail.hasMatch(value)) {
+      setState(() {
+        _outsiderEmailErrorText = "이메일 규칙에 맞게 입력하세요.";
+      });
+    } else {
+      setState(() {
+        _outsiderEmailErrorText = null;
+      });
+      _onCheckOutsiderData();
+    }
+  }
+
+  void _validateOutsiderEmailAuth(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        _outsiderEmailErrorText = '인증코드를 입력하세요.';
+      });
+    } else {
+      setState(() {
+        _outsiderEmailErrorText = null;
+      });
+      _onCheckOutsiderData();
+    }
+  }
+
+  // 이메일 인증코드 요청하기 API
+  void _onRequestEmailAuthCode() async {}
+
+  // 이메일 인증하기 API
+  void _onCheckEmailAuthCode() async {
+    setState(() {
+      _isEmailAuth = !_isEmailAuth;
+    });
+    _onCheckOutsiderData();
+  }
+
   @override
   void dispose() {
     _outsiderPwController.dispose();
@@ -150,6 +206,126 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
             SingleChildScrollView(
               child: Column(
                 children: [
+                  const Gap(10),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: _outsiderEmailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: '이메일',
+                            errorText: _outsiderEmailErrorText,
+                            counterText: '', // 글자수 제한 표시 없애기
+                            labelStyle: TextStyle(
+                              color: _outsiderEmailErrorText == null
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.email_outlined,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          onTap: onChangeBarrier,
+                          onChanged: _validateOutsiderEmail,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).unfocus();
+                            _onCheckOutsiderData();
+                          },
+                        ),
+                      ),
+                      const Gap(6),
+                      ElevatedButton(
+                        onPressed: _outsiderEmailController.text.isNotEmpty &&
+                                _outsiderEmailErrorText == null
+                            ? _onRequestEmailAuthCode
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(23),
+                          textStyle: const TextStyle(fontSize: 14),
+                          backgroundColor: Colors.orange.shade200,
+                          shape: const ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          "코드요청",
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Gap(10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: _outsiderEmailAuthController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: '인증코드',
+                            // errorText: _studentIdAuthErrorText,
+                            labelStyle: TextStyle(
+                              color: _outsiderEmailAuthErrorText == null
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.numbers_outlined,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          onTap: onChangeBarrier,
+                          onChanged: _validateOutsiderEmailAuth,
+                        ),
+                      ),
+                      const Gap(6),
+                      ElevatedButton(
+                        onPressed: _outsiderEmailAuthController.text.isNotEmpty
+                            ? _onCheckEmailAuthCode
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(23),
+                          textStyle: const TextStyle(fontSize: 14),
+                          backgroundColor: Colors.orange.shade200,
+                          shape: const ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          "인증하기",
+                        ),
+                      ),
+                    ],
+                  ),
+                  _isEmailAuth
+                      ? const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2),
+                          child: Text(
+                            "인증이 완료되었습니다!",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.lightGreen,
+                            ),
+                          ),
+                        )
+                      : const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2),
+                          child: Text(
+                            "인증이 필요합니다!",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
                   const Gap(10),
                   TextFormField(
                     controller: _outsiderNameController,
