@@ -47,9 +47,7 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/928cb52c-731c-4f4d-b15e-4c79b9c6da83.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/af6505b0-82a9-484f-886d-36ce462c1990.png"  width="175" height="400"/>
 
-## 결제 내역
+## 결제 내역 / 식권 환불
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/32037e10-3f02-4783-9e7e-3a717b1af8c0.png"  width="175" height="400"/>
-
-## 식권 환불
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/7de7a639-5a36-4a12-a0e1-633fbc12e622.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/62a2b510-f410-4259-960a-90ff6b11ed3a.png"  width="175" height="400"/>
