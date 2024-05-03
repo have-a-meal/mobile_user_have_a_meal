@@ -8,11 +8,11 @@ class LoginStorage {
   static const _keyLoginDataType = "loginType";
 
   static Future saveLoginData(
-      {required String id, required String pw, required bool isStored}) async {
+      {required String id, required String pw, required bool isStudent}) async {
     await storage.write(key: _keyLoginDataId, value: id);
     await storage.write(key: _keyLoginDataPw, value: pw);
     await storage.write(
-        key: _keyLoginDataType, value: isStored ? "true" : "false");
+        key: _keyLoginDataType, value: isStudent ? "true" : "false");
   }
 
   static Future<List<String?>> getLoginData() async {
