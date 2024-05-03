@@ -27,12 +27,12 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/7cb61774-c777-42ba-82da-717ad1562acd.png"  width="175" height="400"/>
 
 ## 아이디 찾기 / 비밀번호 재설정
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/3c613654-d278-405e-987a-6f5983ced226.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/f7760271-c851-4eb5-90c9-611b9f405eda.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/324396e6-ea51-455d-813d-46b88380e433.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/2a149ed8-1e51-4128-8906-91d6772bb751.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/0108aa87-b955-4e26-a529-d536ab6558ea.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/179af06e-d447-4acd-9686-039531ad6e39.png"  width="175" height="400"/>
 
 ## 학식 조회 및 식권 결제
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/68f3c7bd-3397-4d6c-aeda-452aa57b4e53.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/ab682220-3dee-4e5f-844d-3f407e4b4eee.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/556fb0ee-af91-47a5-862e-3c3802f41803.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/41328f1c-a6f4-4992-a6c3-8d80042b4899.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/13858905-cf1b-46bb-b15f-4f1363fa9cb3.png"  width="175" height="400"/>
@@ -42,7 +42,7 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/8726ddb5-0c72-43f2-abab-9571a9233e92.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/807f0b74-a7ca-47d3-9a1a-5a88df4b679c.png"  width="175" height="400"/>
 
-## 마이페이지
+## 마이페이지 / 설정
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a1e62708-d6af-455d-b7a4-4910ee637f7b.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a1c46807-c16d-4292-a806-f2e7f0bbc043.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/1e957206-e4b3-4ef2-a09a-40f3ece234c5.png"  width="175" height="400"/>
