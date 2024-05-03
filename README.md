@@ -21,8 +21,10 @@
 # 실제 화면
 ## 로그인 / 회원가입
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/e4af55f2-3b05-441a-859a-f1bdc08955c9.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/9f812cc3-437e-4a78-884e-83a5cdf46d9e.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/8f9ecc17-669d-49e8-8c59-614b971f6720.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/14ff9498-2ad6-4ede-b8e1-3d381c846f86.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/c1fd0b95-c2f3-42fd-aafb-e8a0509dcad1.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/60aeecd8-73be-413f-a8db-5cf855e6c549.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/7cb61774-c777-42ba-82da-717ad1562acd.png"  width="175" height="400"/>
 
 ## 아이디 찾기 / 비밀번호 재설정
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/3c613654-d278-405e-987a-6f5983ced226.png"  width="175" height="400"/>
@@ -48,6 +50,7 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/af6505b0-82a9-484f-886d-36ce462c1990.png"  width="175" height="400"/>
 
 ## 결제 내역 / 식권 환불
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/32037e10-3f02-4783-9e7e-3a717b1af8c0.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/af9ba6cc-4cce-4de6-9ad5-203302afcc75.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/24dc58f9-c942-400c-a148-17598b48f5b3.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/7de7a639-5a36-4a12-a0e1-633fbc12e622.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/62a2b510-f410-4259-960a-90ff6b11ed3a.png"  width="175" height="400"/>
