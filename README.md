@@ -42,7 +42,7 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/8726ddb5-0c72-43f2-abab-9571a9233e92.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/807f0b74-a7ca-47d3-9a1a-5a88df4b679c.png"  width="175" height="400"/>
 
-## 마이페이지
+## 마이페이지 / 설정
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a1e62708-d6af-455d-b7a4-4910ee637f7b.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a1c46807-c16d-4292-a806-f2e7f0bbc043.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/1e957206-e4b3-4ef2-a09a-40f3ece234c5.png"  width="175" height="400"/>
