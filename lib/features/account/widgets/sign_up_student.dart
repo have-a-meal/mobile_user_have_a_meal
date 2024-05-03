@@ -328,101 +328,108 @@ class _SignUpStudentState extends State<SignUpStudent> {
                           ),
                         ),
                   const Gap(10),
-                  TextFormField(
-                    controller: _studentPwController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: '비밀번호',
-                      errorText: _studentPwErrorText,
-                      labelStyle: TextStyle(
-                        color: _studentPwErrorText == null
-                            ? Colors.black
-                            : Colors.red,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.lock_outline,
-                        color: Colors.grey.shade600,
-                      ),
+                  if (_studentIdAuth &&
+                      _studentIdController.text.trim().isNotEmpty &&
+                      _studentIdErrorText == null)
+                    Column(
+                      children: [
+                        TextFormField(
+                          controller: _studentPwController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: '비밀번호',
+                            errorText: _studentPwErrorText,
+                            labelStyle: TextStyle(
+                              color: _studentPwErrorText == null
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.lock_outline,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          onTap: _onChangeBarrier,
+                          onChanged: _validateStudentPw,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).unfocus();
+                            _onCheckStudentData();
+                          },
+                        ),
+                        const Gap(10),
+                        TextFormField(
+                          controller: _studentPwAuthController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: '비밀번호 확인',
+                            errorText: _studentPwAuthErrorText,
+                            labelStyle: TextStyle(
+                              color: _studentPwAuthErrorText == null
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.lock_person_outlined,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          onTap: _onChangeBarrier,
+                          onChanged: _validateStudentPwAuth,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).unfocus();
+                            _onCheckStudentData();
+                          },
+                        ),
+                        const Gap(10),
+                        TextFormField(
+                          controller: _studentNameController,
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                            labelText: '이름(실명)',
+                            errorText: _studentNameErrorText,
+                            labelStyle: TextStyle(
+                              color: _studentNameErrorText == null
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.badge_outlined,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          onTap: _onChangeBarrier,
+                          onChanged: _validateStudentName,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).unfocus();
+                            _onCheckStudentData();
+                          },
+                        ),
+                        const Gap(10),
+                        TextFormField(
+                          controller: _studentPhoneNumberController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: '전화번호',
+                            errorText: _studentPhoneNumberErrorText,
+                            labelStyle: TextStyle(
+                              color: _studentPhoneNumberErrorText == null
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.phone_iphone_rounded,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          onTap: _onChangeBarrier,
+                          onChanged: _validateStudentPhoneNumber,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).unfocus();
+                            _onCheckStudentData();
+                          },
+                        ),
+                      ],
                     ),
-                    onTap: _onChangeBarrier,
-                    onChanged: _validateStudentPw,
-                    onFieldSubmitted: (value) {
-                      FocusScope.of(context).unfocus();
-                      _onCheckStudentData();
-                    },
-                  ),
-                  const Gap(10),
-                  TextFormField(
-                    controller: _studentPwAuthController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: '비밀번호 확인',
-                      errorText: _studentPwAuthErrorText,
-                      labelStyle: TextStyle(
-                        color: _studentPwAuthErrorText == null
-                            ? Colors.black
-                            : Colors.red,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.lock_person_outlined,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                    onTap: _onChangeBarrier,
-                    onChanged: _validateStudentPwAuth,
-                    onFieldSubmitted: (value) {
-                      FocusScope.of(context).unfocus();
-                      _onCheckStudentData();
-                    },
-                  ),
-                  const Gap(10),
-                  TextFormField(
-                    controller: _studentNameController,
-                    keyboardType: TextInputType.name,
-                    decoration: InputDecoration(
-                      labelText: '이름(실명)',
-                      errorText: _studentNameErrorText,
-                      labelStyle: TextStyle(
-                        color: _studentNameErrorText == null
-                            ? Colors.black
-                            : Colors.red,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.badge_outlined,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                    onTap: _onChangeBarrier,
-                    onChanged: _validateStudentName,
-                    onFieldSubmitted: (value) {
-                      FocusScope.of(context).unfocus();
-                      _onCheckStudentData();
-                    },
-                  ),
-                  const Gap(10),
-                  TextFormField(
-                    controller: _studentPhoneNumberController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: '전화번호',
-                      errorText: _studentPhoneNumberErrorText,
-                      labelStyle: TextStyle(
-                        color: _studentPhoneNumberErrorText == null
-                            ? Colors.black
-                            : Colors.red,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.phone_iphone_rounded,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                    onTap: _onChangeBarrier,
-                    onChanged: _validateStudentPhoneNumber,
-                    onFieldSubmitted: (value) {
-                      FocusScope.of(context).unfocus();
-                      _onCheckStudentData();
-                    },
-                  ),
                 ],
               ),
             ),

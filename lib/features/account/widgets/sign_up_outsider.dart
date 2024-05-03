@@ -152,11 +152,11 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
   void _validateOutsiderEmailAuth(String value) {
     if (value.isEmpty) {
       setState(() {
-        _outsiderEmailErrorText = '인증코드를 입력하세요.';
+        _outsiderEmailAuthErrorText = '인증코드를 입력하세요.';
       });
     } else {
       setState(() {
-        _outsiderEmailErrorText = null;
+        _outsiderEmailAuthErrorText = null;
       });
       _onCheckOutsiderData();
     }
@@ -327,101 +327,108 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
                           ),
                         ),
                   const Gap(10),
-                  TextFormField(
-                    controller: _outsiderNameController,
-                    keyboardType: TextInputType.name,
-                    decoration: InputDecoration(
-                      labelText: '이름(실명)',
-                      errorText: _outsiderNameErrorText,
-                      labelStyle: TextStyle(
-                        color: _outsiderNameErrorText == null
-                            ? Colors.black
-                            : Colors.red,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.badge_outlined,
-                        color: Colors.grey.shade600,
-                      ),
+                  if (_isEmailAuth &&
+                      _outsiderEmailController.text.trim().isNotEmpty &&
+                      _outsiderEmailErrorText == null)
+                    Column(
+                      children: [
+                        TextFormField(
+                          controller: _outsiderNameController,
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                            labelText: '이름(실명)',
+                            errorText: _outsiderNameErrorText,
+                            labelStyle: TextStyle(
+                              color: _outsiderNameErrorText == null
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.badge_outlined,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          onTap: onChangeBarrier,
+                          onChanged: _validateOutsiderName,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).unfocus();
+                            _onCheckOutsiderData();
+                          },
+                        ),
+                        const Gap(10),
+                        TextFormField(
+                          controller: _outsiderPhoneNumberController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: '전화번호',
+                            errorText: _outsiderPhoneNumberErrorText,
+                            labelStyle: TextStyle(
+                              color: _outsiderPhoneNumberErrorText == null
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.phone_iphone_rounded,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          onTap: onChangeBarrier,
+                          onChanged: _validateOutsiderPhoneNumber,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).unfocus();
+                            _onCheckOutsiderData();
+                          },
+                        ),
+                        const Gap(10),
+                        TextFormField(
+                          controller: _outsiderPwController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: '비밀번호',
+                            errorText: _outsiderPwErrorText,
+                            labelStyle: TextStyle(
+                              color: _outsiderPwErrorText == null
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.lock_outline,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          onTap: onChangeBarrier,
+                          onChanged: _validateOutsiderPw,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).unfocus();
+                            _onCheckOutsiderData();
+                          },
+                        ),
+                        const Gap(10),
+                        TextFormField(
+                          controller: _outsiderPwAuthController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: '비밀번호 확인',
+                            errorText: _outsiderPwAuthErrorText,
+                            labelStyle: TextStyle(
+                              color: _outsiderPwAuthErrorText == null
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.lock_person_outlined,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          onTap: onChangeBarrier,
+                          onChanged: _validateOutsiderPwAuth,
+                          onFieldSubmitted: (value) {
+                            FocusScope.of(context).unfocus();
+                            _onCheckOutsiderData();
+                          },
+                        ),
+                      ],
                     ),
-                    onTap: onChangeBarrier,
-                    onChanged: _validateOutsiderName,
-                    onFieldSubmitted: (value) {
-                      FocusScope.of(context).unfocus();
-                      _onCheckOutsiderData();
-                    },
-                  ),
-                  const Gap(10),
-                  TextFormField(
-                    controller: _outsiderPhoneNumberController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: '전화번호',
-                      errorText: _outsiderPhoneNumberErrorText,
-                      labelStyle: TextStyle(
-                        color: _outsiderPhoneNumberErrorText == null
-                            ? Colors.black
-                            : Colors.red,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.phone_iphone_rounded,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                    onTap: onChangeBarrier,
-                    onChanged: _validateOutsiderPhoneNumber,
-                    onFieldSubmitted: (value) {
-                      FocusScope.of(context).unfocus();
-                      _onCheckOutsiderData();
-                    },
-                  ),
-                  const Gap(10),
-                  TextFormField(
-                    controller: _outsiderPwController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: '비밀번호',
-                      errorText: _outsiderPwErrorText,
-                      labelStyle: TextStyle(
-                        color: _outsiderPwErrorText == null
-                            ? Colors.black
-                            : Colors.red,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.lock_outline,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                    onTap: onChangeBarrier,
-                    onChanged: _validateOutsiderPw,
-                    onFieldSubmitted: (value) {
-                      FocusScope.of(context).unfocus();
-                      _onCheckOutsiderData();
-                    },
-                  ),
-                  const Gap(10),
-                  TextFormField(
-                    controller: _outsiderPwAuthController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: '비밀번호 확인',
-                      errorText: _outsiderPwAuthErrorText,
-                      labelStyle: TextStyle(
-                        color: _outsiderPwAuthErrorText == null
-                            ? Colors.black
-                            : Colors.red,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.lock_person_outlined,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                    onTap: onChangeBarrier,
-                    onChanged: _validateOutsiderPwAuth,
-                    onFieldSubmitted: (value) {
-                      FocusScope.of(context).unfocus();
-                      _onCheckOutsiderData();
-                    },
-                  ),
                 ],
               ),
             ),
