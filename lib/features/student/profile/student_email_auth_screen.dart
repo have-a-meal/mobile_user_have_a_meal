@@ -126,6 +126,7 @@ class _StudentEmailAuthScreenState extends State<StudentEmailAuthScreen> {
                         child: TextFormField(
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
+                          maxLength: 254,
                           decoration: InputDecoration(
                             labelText: '이메일',
                             errorText: _emailErrorText,

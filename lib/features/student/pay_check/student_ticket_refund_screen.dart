@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:front_have_a_meal/providers/ticket_provider.dart';
+import 'package:front_have_a_meal/providers/ticket_refund_provider.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -28,10 +29,11 @@ class _StudentTicketRefundScreenState extends State<StudentTicketRefundScreen>
   void initState() {
     super.initState();
 
-    _onCheckedEnabledTicket();
+    _onInitEnabledTicket();
   }
 
-  Future<void> _onCheckedEnabledTicket() async {
+  // 티켓 리스트 초기화 API
+  Future<void> _onInitEnabledTicket() async {
     _ticketEnabledList = [];
     _ticketDisabledList = [];
 
@@ -76,7 +78,43 @@ class _StudentTicketRefundScreenState extends State<StudentTicketRefundScreen>
   }
 
   Future<void> _onRefreshTicketList() async {
-    _onCheckedEnabledTicket();
+    _onInitEnabledTicket();
+  }
+
+  Future<void> _onEnabledTicketRefund(BuildContext context) async {
+    await context
+        .read<TicketRefundProvider>()
+        .removeTicket(_selectedRefundEnabledTicket);
+    for (TicketModel ticket in _selectedRefundEnabledTicket) {
+      _ticketEnabledList.remove(ticket);
+    }
+    if (_ticketEnabledList.isNotEmpty) {
+      // _selectedQRTicket =
+      //     _ticketEnabledList[
+      //             0]
+      //         .ticketId;
+    }
+    _selectedRefundEnabledTicket = {};
+    setState(() {});
+    if (!context.mounted) {
+      return;
+    }
+    context.pop();
+  }
+
+  Future<void> _onDisabledTicketRefund(BuildContext context) async {
+    await context
+        .read<TicketRefundProvider>()
+        .removeTicket(_selectedRefundDisabledTicket);
+    for (TicketModel ticket in _selectedRefundDisabledTicket) {
+      _ticketDisabledList.remove(ticket);
+    }
+    _selectedRefundDisabledTicket = {};
+    setState(() {});
+    if (!context.mounted) {
+      return;
+    }
+    context.pop();
   }
 
   @override
@@ -162,30 +200,8 @@ class _StudentTicketRefundScreenState extends State<StudentTicketRefundScreen>
                                             child: const Text("아니오"),
                                           ),
                                           ElevatedButton(
-                                            onPressed: () async {
-                                              await context
-                                                  .read<TicketProvider>()
-                                                  .removeTicket(
-                                                      _selectedRefundEnabledTicket);
-                                              for (TicketModel ticket
-                                                  in _selectedRefundEnabledTicket) {
-                                                _ticketEnabledList
-                                                    .remove(ticket);
-                                              }
-                                              if (_ticketEnabledList
-                                                  .isNotEmpty) {
-                                                // _selectedQRTicket =
-                                                //     _ticketEnabledList[
-                                                //             0]
-                                                //         .ticketId;
-                                              }
-                                              _selectedRefundEnabledTicket = {};
-                                              setState(() {});
-                                              if (!context.mounted) {
-                                                return;
-                                              }
-                                              context.pop();
-                                            },
+                                            onPressed: () =>
+                                                _onEnabledTicketRefund,
                                             child: const Text("예"),
                                           ),
                                         ],
@@ -311,24 +327,8 @@ class _StudentTicketRefundScreenState extends State<StudentTicketRefundScreen>
                                                 child: const Text("아니오"),
                                               ),
                                               ElevatedButton(
-                                                onPressed: () async {
-                                                  await context
-                                                      .read<TicketProvider>()
-                                                      .removeTicket(
-                                                          _selectedRefundDisabledTicket);
-                                                  for (TicketModel ticket
-                                                      in _selectedRefundDisabledTicket) {
-                                                    _ticketDisabledList
-                                                        .remove(ticket);
-                                                  }
-                                                  _selectedRefundDisabledTicket =
-                                                      {};
-                                                  setState(() {});
-                                                  if (!context.mounted) {
-                                                    return;
-                                                  }
-                                                  context.pop();
-                                                },
+                                                onPressed: () =>
+                                                    _onDisabledTicketRefund,
                                                 child: const Text("예"),
                                               ),
                                             ],

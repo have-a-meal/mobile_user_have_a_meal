@@ -40,6 +40,17 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
   // 외부인 회원가입 API
   void _onSignUpOutsider() async {}
 
+  // 이메일 인증코드 요청하기 API
+  void _onRequestEmailAuthCode() async {}
+
+  // 이메일 인증하기 API
+  void _onCheckEmailAuthCode() async {
+    setState(() {
+      _isEmailAuth = !_isEmailAuth;
+    });
+    _onCheckOutsiderData();
+  }
+
   // 비밀번호 정규식
   final RegExp _regExpPw =
       RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$');
@@ -162,23 +173,14 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
     }
   }
 
-  // 이메일 인증코드 요청하기 API
-  void _onRequestEmailAuthCode() async {}
-
-  // 이메일 인증하기 API
-  void _onCheckEmailAuthCode() async {
-    setState(() {
-      _isEmailAuth = !_isEmailAuth;
-    });
-    _onCheckOutsiderData();
-  }
-
   @override
   void dispose() {
     _outsiderPwController.dispose();
     _outsiderPwAuthController.dispose();
     _outsiderNameController.dispose();
     _outsiderPhoneNumberController.dispose();
+    _outsiderEmailAuthController.dispose();
+    _outsiderEmailController.dispose();
 
     super.dispose();
   }
@@ -214,6 +216,7 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
                         child: TextFormField(
                           controller: _outsiderEmailController,
                           keyboardType: TextInputType.emailAddress,
+                          maxLength: 254,
                           decoration: InputDecoration(
                             labelText: '이메일',
                             errorText: _outsiderEmailErrorText,

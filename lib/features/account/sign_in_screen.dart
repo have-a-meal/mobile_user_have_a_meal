@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/account/pw_reset_auth_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
@@ -33,7 +31,11 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _isSubmitted = true;
   LoginType _loginType = LoginType.student;
 
-  final RegExp _idRegExp = RegExp(r'^\d{8}$'); // 아이디 정규식
+  // 학번 정규식
+  final RegExp _idRegExp = RegExp(r'^\d{8}$');
+  // 전화번호 정규식
+  final RegExp _regExpPhoneNumber = RegExp(
+      r'^(02|0[3-9][0-9]{1,2})-[0-9]{3,4}-[0-9]{4}$|^(02|0[3-9][0-9]{1,2})[0-9]{7,8}$|^01[0-9]{9}$|^070-[0-9]{4}-[0-9]{4}$|^070[0-9]{8}$');
   // 비밀번호 정규식
   final RegExp _passwordRegExp =
       RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$');
@@ -41,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
   String? _idErrorText; // 아이디 오류 메시지
   String? _passwordErrorText; // 비밀번호 오류 메시지
 
-  void _validateId(String value) {
+  void _validateIdStudentNumber(String value) {
     if (value.isEmpty) {
       setState(() {
         _idErrorText = '아이디를 입력하세요.';
@@ -49,6 +51,23 @@ class _SignInScreenState extends State<SignInScreen> {
     } else if (!_idRegExp.hasMatch(value)) {
       setState(() {
         _idErrorText = '8자리 숫자를 입력하세요.';
+      });
+    } else {
+      setState(() {
+        _idErrorText = null; // 오류가 없을 경우 null로 설정
+      });
+      _checkSubmitted();
+    }
+  }
+
+  void _validateIdEmail(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        _idErrorText = '전화번호를 입력하세요.';
+      });
+    } else if (!_idRegExp.hasMatch(value)) {
+      setState(() {
+        _idErrorText = '전화번호 규칙에 맞게 입력하세요.';
       });
     } else {
       setState(() {
@@ -193,24 +212,49 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                     ),
                     const Gap(6),
-                    SegmentedButton(
-                      showSelectedIcon: false,
-                      segments: const [
-                        ButtonSegment(
-                          value: LoginType.student,
-                          label: Text("학생"),
-                        ),
-                        ButtonSegment(
-                          value: LoginType.outsider,
-                          label: Text("외부인"),
-                        ),
-                      ],
-                      selected: <LoginType>{_loginType},
-                      onSelectionChanged: (Set<LoginType> newSelection) {
-                        setState(() {
-                          _loginType = newSelection.first;
-                        });
-                      },
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: SegmentedButton(
+                              showSelectedIcon: false,
+                              style: const ButtonStyle(
+                                shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              segments: const [
+                                ButtonSegment(
+                                  value: LoginType.student,
+                                  label: Text("학생"),
+                                ),
+                                ButtonSegment(
+                                  value: LoginType.outsider,
+                                  label: Text("외부인"),
+                                ),
+                              ],
+                              selected: <LoginType>{_loginType},
+                              onSelectionChanged:
+                                  (Set<LoginType> newSelection) {
+                                setState(() {
+                                  _idController.text = '';
+                                  _passwordController.text = '';
+                                  _idErrorText = null;
+                                  _passwordErrorText = null;
+                                  _idFocusNode.unfocus();
+                                  _pwFocusNode.unfocus();
+                                  _loginType = newSelection.first;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const Gap(10),
                     Container(
@@ -232,15 +276,22 @@ class _SignInScreenState extends State<SignInScreen> {
                             controller: _idController,
                             focusNode: _idFocusNode,
                             autofocus: false,
-                            keyboardType: TextInputType.number,
+                            keyboardType: _loginType == LoginType.student
+                                ? TextInputType.number
+                                : TextInputType.phone,
+                            maxLength:
+                                _loginType == LoginType.student ? 8 : 254,
                             decoration: InputDecoration(
                               prefixIcon: Icon(
-                                Icons.person_outline,
+                                _loginType == LoginType.student
+                                    ? Icons.person_outline
+                                    : Icons.phone_iphone_rounded,
                                 color: Colors.grey.shade600,
                               ),
                               labelText: _loginType == LoginType.student
                                   ? '학번'
                                   : '전화번호',
+                              counterText: '', // 글자수 제한 표시 없애기
                               errorText: _idErrorText, // 아이디 오류 메시지 표시
                               labelStyle: TextStyle(
                                 color: _idErrorText == null
@@ -248,7 +299,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                     : Colors.red,
                               ),
                             ),
-                            onChanged: _validateId, // 입력 값이 변경될 때마다 검증
+                            onChanged: _loginType == LoginType.student
+                                ? _validateIdStudentNumber
+                                : _validateIdEmail, // 입력 값이 변경될 때마다 검증
                           ),
                           const Gap(10),
                           TextFormField(

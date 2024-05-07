@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:front_have_a_meal/features/account/pw_reset_screen.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
+enum AuthType {
+  student,
+  outsider,
+}
+
 class PwResetAuthScreen extends StatefulWidget {
   static const routeName = "pw_reset";
-  static const routeURL = "/pw_reset";
+  static const routeURL = "pw_reset";
   const PwResetAuthScreen({super.key});
 
   @override
@@ -17,13 +23,14 @@ class PwResetAuthScreen extends StatefulWidget {
 class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
   bool _isSubmitted = false;
   bool _isBarrier = false;
+  AuthType _authType = AuthType.student;
 
   void _onCheckResetData() {
     setState(() {
-      _isSubmitted = (_outsiderEmailController.text.trim().isNotEmpty &&
-              _outsiderEmailErrorText == null) &&
-          (_outsiderEmailAuthController.text.trim().isNotEmpty &&
-              _outsiderEmailAuthErrorText == null &&
+      _isSubmitted = (_emailController.text.trim().isNotEmpty &&
+              _emailErrorText == null) &&
+          (_emailAuthController.text.trim().isNotEmpty &&
+              _emailAuthErrorText == null &&
               _isEmailAuth);
     });
   }
@@ -57,30 +64,47 @@ class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
     );
   }
 
+  // 학번 정규식
+  final RegExp _idRegExp = RegExp(r'^\d{8}$');
   // 이메일 정규식
   final RegExp _regExpEmail = RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
-  final TextEditingController _outsiderEmailController =
-      TextEditingController();
-  String? _outsiderEmailErrorText;
-  final TextEditingController _outsiderEmailAuthController =
-      TextEditingController();
-  String? _outsiderEmailAuthErrorText;
+  final TextEditingController _emailController = TextEditingController();
+  String? _emailErrorText;
+  final TextEditingController _emailAuthController = TextEditingController();
+  String? _emailAuthErrorText;
   bool _isEmailAuth = false;
+
+  void _validateStudentNumber(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        _emailErrorText = '학번을 입력하세요.';
+      });
+    } else if (!_idRegExp.hasMatch(value)) {
+      setState(() {
+        _emailErrorText = '학번을 제대로 입력해주세요!';
+      });
+    } else {
+      setState(() {
+        _emailErrorText = null;
+      });
+      _onCheckResetData();
+    }
+  }
 
   void _validateOutsiderEmail(String value) {
     if (value.isEmpty) {
       setState(() {
-        _outsiderEmailErrorText = '이메일을 입력하세요.';
+        _emailErrorText = '이메일을 입력하세요.';
       });
     } else if (!_regExpEmail.hasMatch(value)) {
       setState(() {
-        _outsiderEmailErrorText = "이메일 규칙에 맞게 입력하세요.";
+        _emailErrorText = "이메일 규칙에 맞게 입력하세요.";
       });
     } else {
       setState(() {
-        _outsiderEmailErrorText = null;
+        _emailErrorText = null;
       });
       _onCheckResetData();
     }
@@ -89,11 +113,11 @@ class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
   void _validateOutsiderEmailAuth(String value) {
     if (value.isEmpty) {
       setState(() {
-        _outsiderEmailAuthErrorText = '인증코드를 입력하세요.';
+        _emailAuthErrorText = '인증코드를 입력하세요.';
       });
     } else {
       setState(() {
-        _outsiderEmailAuthErrorText = null;
+        _emailAuthErrorText = null;
       });
       _onCheckResetData();
     }
@@ -112,8 +136,8 @@ class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
 
   @override
   void dispose() {
-    _outsiderEmailController.dispose();
-    _outsiderEmailAuthController.dispose();
+    _emailController.dispose();
+    _emailAuthController.dispose();
 
     super.dispose();
   }
@@ -122,6 +146,9 @@ class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        title: const Text("비밀번호 재설정 인증"),
+      ),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.only(
           left: 20,
@@ -141,30 +168,86 @@ class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const Gap(10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 30,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: SegmentedButton(
+                            showSelectedIcon: false,
+                            style: const ButtonStyle(
+                              shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            segments: const [
+                              ButtonSegment(
+                                value: AuthType.student,
+                                label: Text("학생"),
+                              ),
+                              ButtonSegment(
+                                value: AuthType.outsider,
+                                label: Text("외부인"),
+                              ),
+                            ],
+                            selected: <AuthType>{_authType},
+                            onSelectionChanged: (Set<AuthType> newSelection) {
+                              setState(() {
+                                _emailController.text = '';
+                                _emailAuthController.text = '';
+                                _emailErrorText = null;
+                                _emailAuthErrorText = null;
+                                _isEmailAuth = false;
+                                _onCheckResetData();
+                                _authType = newSelection.first;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: TextFormField(
-                          controller: _outsiderEmailController,
-                          keyboardType: TextInputType.emailAddress,
+                          controller: _emailController,
+                          keyboardType: _authType == AuthType.student
+                              ? TextInputType.number
+                              : TextInputType.emailAddress,
+                          maxLength: _authType == AuthType.student ? 8 : 254,
                           decoration: InputDecoration(
-                            labelText: '이메일',
-                            errorText: _outsiderEmailErrorText,
+                            labelText:
+                                _authType == AuthType.student ? '학번' : '이메일',
+                            suffixText: _authType == AuthType.student
+                                ? '@st.yc.ac.kr'
+                                : null,
                             counterText: '', // 글자수 제한 표시 없애기
+                            errorText: _emailErrorText,
                             labelStyle: TextStyle(
-                              color: _outsiderEmailErrorText == null
+                              color: _emailErrorText == null
                                   ? Colors.black
                                   : Colors.red,
                             ),
                             prefixIcon: Icon(
-                              Icons.email_outlined,
+                              _authType == AuthType.student
+                                  ? Icons.person_outline
+                                  : Icons.email_outlined,
                               color: Colors.grey.shade600,
                             ),
                           ),
                           onTap: _onChangeBarrier,
-                          onChanged: _validateOutsiderEmail,
+                          onChanged: _authType == AuthType.student
+                              ? _validateStudentNumber
+                              : _validateOutsiderEmail,
                           onFieldSubmitted: (value) {
                             FocusScope.of(context).unfocus();
                             _onCheckResetData();
@@ -173,8 +256,8 @@ class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
                       ),
                       const Gap(6),
                       ElevatedButton(
-                        onPressed: _outsiderEmailController.text.isNotEmpty &&
-                                _outsiderEmailErrorText == null
+                        onPressed: _emailController.text.isNotEmpty &&
+                                _emailErrorText == null
                             ? _onRequestEmailAuthCode
                             : null,
                         style: ElevatedButton.styleFrom(
@@ -198,13 +281,13 @@ class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
                     children: [
                       Expanded(
                         child: TextFormField(
-                          controller: _outsiderEmailAuthController,
+                          controller: _emailAuthController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             labelText: '인증코드',
                             // errorText: _studentIdAuthErrorText,
                             labelStyle: TextStyle(
-                              color: _outsiderEmailAuthErrorText == null
+                              color: _emailAuthErrorText == null
                                   ? Colors.black
                                   : Colors.red,
                             ),
@@ -219,7 +302,7 @@ class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
                       ),
                       const Gap(6),
                       ElevatedButton(
-                        onPressed: _outsiderEmailAuthController.text.isNotEmpty
+                        onPressed: _emailAuthController.text.isNotEmpty
                             ? _onCheckEmailAuthCode
                             : null,
                         style: ElevatedButton.styleFrom(

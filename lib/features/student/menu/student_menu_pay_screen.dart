@@ -74,7 +74,7 @@ class _StudentMenuPayScreenState extends State<StudentMenuPayScreen> {
     }
   }
 
-  // 티켓 결제 함수
+  // 티켓 결제 API
   Future<void> _onTicketPay(BuildContext context) async {
     swagPlatformDialog(
       context: context,
