@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/features/account/sign_in_screen.dart';
-import 'package:front_have_a_meal/features/student/pay_check/student_pay_check_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_setting_screen.dart';
-import 'package:front_have_a_meal/features/student/pay_check/student_ticket_refund_screen.dart';
+import 'package:front_have_a_meal/features/student/pay_check/pay_check_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/setting_screen.dart';
+import 'package:front_have_a_meal/features/student/pay_check/ticket_refund_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/widgets/profile_button.dart';
 import 'package:front_have_a_meal/features/student/profile/widgets/user_profile_card.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-class StudentProfile extends StatefulWidget {
-  const StudentProfile({super.key});
+class UserProfile extends StatefulWidget {
+  const UserProfile({super.key});
 
   @override
-  State<StudentProfile> createState() => _StudentProfileState();
+  State<UserProfile> createState() => _UserProfileState();
 }
 
-class _StudentProfileState extends State<StudentProfile> {
+class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,21 +34,21 @@ class _StudentProfileState extends State<StudentProfile> {
                   children: [
                     ProfileButton(
                       onPressed: () {
-                        context.pushNamed(StudentPayCheckScreen.routeName);
+                        context.pushNamed(PayCheckScreen.routeName);
                       },
                       icon: Icons.playlist_play_rounded,
                       text: "결제 내역",
                     ),
                     ProfileButton(
                       onPressed: () {
-                        context.pushNamed(StudentTicketRefundScreen.routeName);
+                        context.pushNamed(TicketRefundScreen.routeName);
                       },
                       icon: Icons.attach_money,
                       text: "식권 환불",
                     ),
                     ProfileButton(
                       onPressed: () {
-                        context.pushNamed(StudentSettingScreen.routeName);
+                        context.pushNamed(SettingScreen.routeName);
                       },
                       icon: Icons.settings_outlined,
                       text: "설정",

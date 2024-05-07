@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/features/student/ticket/student_qr_screen.dart';
+import 'package:front_have_a_meal/features/student/ticket/qr_use_screen.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,8 +20,8 @@ class TicketCourse extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.pushNamed(
-          StudentQrScreen.routeName,
-          extra: StudentQrScreenArgs(
+          QrUseScreen.routeName,
+          extra: QrUseScreenArgs(
             ticketTime: ticketTime,
             ticketCourse: ticketCourse,
           ),

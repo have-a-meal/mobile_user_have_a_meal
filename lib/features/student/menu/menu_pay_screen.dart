@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_screen.dart';
-import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_type_screen.dart';
+import 'package:front_have_a_meal/features/student/pay/ticket_pay_type_screen.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -17,8 +16,8 @@ enum TicketCourse {
   c,
 }
 
-class StudentMenuPayScreenArgs {
-  StudentMenuPayScreenArgs({
+class MenuPayScreenArgs {
+  MenuPayScreenArgs({
     required this.course,
     required this.price,
     required this.time,
@@ -29,10 +28,10 @@ class StudentMenuPayScreenArgs {
   final String price;
 }
 
-class StudentMenuPayScreen extends StatefulWidget {
+class MenuPayScreen extends StatefulWidget {
   static const routeName = "student_menu_pay";
   static const routeURL = "student_menu_pay";
-  const StudentMenuPayScreen({
+  const MenuPayScreen({
     super.key,
     required this.time,
     required this.course,
@@ -44,10 +43,10 @@ class StudentMenuPayScreen extends StatefulWidget {
   final String price;
 
   @override
-  State<StudentMenuPayScreen> createState() => _StudentMenuPayScreenState();
+  State<MenuPayScreen> createState() => _MenuPayScreenState();
 }
 
-class _StudentMenuPayScreenState extends State<StudentMenuPayScreen> {
+class _MenuPayScreenState extends State<MenuPayScreen> {
   TicketTime _ticketTime = TicketTime.breakfast;
   TicketCourse _ticketCourse = TicketCourse.a;
 
@@ -90,8 +89,8 @@ class _StudentMenuPayScreenState extends State<StudentMenuPayScreen> {
         ElevatedButton(
           onPressed: () {
             context.pushNamed(
-              StudentTicketPayTypeScreen.routeName,
-              extra: StudentTicketPayTypeScreenArgs(
+              TicketPayTypeScreen.routeName,
+              extra: TicketPayTypeScreenArgs(
                 menuTime: widget.time,
                 menuCourse: widget.course,
                 menuPrice: int.parse(widget.price),

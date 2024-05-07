@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:front_have_a_meal/features/account/widgets/sign_up_outsider.dart';
 import 'package:front_have_a_meal/features/account/widgets/sign_up_student.dart';
 

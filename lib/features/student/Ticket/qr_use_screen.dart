@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 
-class StudentQrScreenArgs {
-  StudentQrScreenArgs({
+class QrUseScreenArgs {
+  QrUseScreenArgs({
     required this.ticketTime,
     required this.ticketCourse,
   });
@@ -11,10 +11,10 @@ class StudentQrScreenArgs {
   final String ticketCourse;
 }
 
-class StudentQrScreen extends StatefulWidget {
+class QrUseScreen extends StatefulWidget {
   static const routeName = "student_ticket_qr";
   static const routeURL = "student_ticket_qr";
-  const StudentQrScreen({
+  const QrUseScreen({
     super.key,
     required this.ticketTime,
     required this.ticketCourse,
@@ -31,10 +31,10 @@ class StudentQrScreen extends StatefulWidget {
   }
 
   @override
-  State<StudentQrScreen> createState() => _StudentQrScreenState();
+  State<QrUseScreen> createState() => _QrUseScreenState();
 }
 
-class _StudentQrScreenState extends State<StudentQrScreen> {
+class _QrUseScreenState extends State<QrUseScreen> {
   List<TicketModel> _ticketEnabledList = [];
 
   bool _isLoading = true;

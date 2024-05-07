@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
-import 'package:front_have_a_meal/features/student/profile/student_Infrom_update_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_email_auth_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/email_auth_screen.dart';
 import 'package:front_have_a_meal/models/user_model.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-class StudentInfromScreen extends StatefulWidget {
+class InfromViewScreen extends StatefulWidget {
   static const routeName = "student_infrom";
   static const routeURL = "student_infrom";
-  const StudentInfromScreen({super.key});
+  const InfromViewScreen({super.key});
 
   @override
-  State<StudentInfromScreen> createState() => _StudentInfromScreenState();
+  State<InfromViewScreen> createState() => _InfromViewScreenState();
 }
 
-class _StudentInfromScreenState extends State<StudentInfromScreen> {
+class _InfromViewScreenState extends State<InfromViewScreen> {
   UserModel? _userData;
 
   bool _isFirstLoading = false;
@@ -61,7 +59,7 @@ class _StudentInfromScreenState extends State<StudentInfromScreen> {
   }
 
   void _onPushEmailAuthPage() {
-    context.pushNamed(StudentEmailAuthScreen.routeName);
+    context.pushNamed(EmailAuthScreen.routeName);
   }
 
   @override

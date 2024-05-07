@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
-import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
+import 'package:front_have_a_meal/features/student/navigation_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-// class StudentInfromUpdateScreenArgs {
+// class InfromUpdateScreenArgs {
 //   final UpdateType updateType;
 
-//   StudentInfromUpdateScreenArgs({required this.updateType});
+//   InfromUpdateScreenArgs({required this.updateType});
 // }
 
-class StudentInfromUpdateScreen extends StatefulWidget {
+class InfromUpdateScreen extends StatefulWidget {
   static const routeName = "student_infrom_update";
   static const routeURL = "student_infrom_update";
-  const StudentInfromUpdateScreen({
+  const InfromUpdateScreen({
     super.key,
   });
 
   @override
-  State<StudentInfromUpdateScreen> createState() =>
-      _StudentInfromUpdateScreenState();
+  State<InfromUpdateScreen> createState() => _InfromUpdateScreenState();
 }
 
-class _StudentInfromUpdateScreenState extends State<StudentInfromUpdateScreen> {
+class _InfromUpdateScreenState extends State<InfromUpdateScreen> {
   bool _isBarrier = false;
   bool _isSubmitted = false;
 
@@ -126,7 +125,7 @@ class _StudentInfromUpdateScreenState extends State<StudentInfromUpdateScreen> {
 
   // 사용자 정보 수정하기 API 호출
   void _onUpdateUserData() async {
-    context.goNamed(StudentNavigationScreen.routeName);
+    context.goNamed(NavigationScreen.routeName);
   }
 
   @override

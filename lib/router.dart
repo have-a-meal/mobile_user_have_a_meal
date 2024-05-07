@@ -3,17 +3,17 @@ import 'package:front_have_a_meal/features/account/pw_reset_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_in_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
 import 'package:front_have_a_meal/features/error/error_screen.dart';
-import 'package:front_have_a_meal/features/student/menu/student_menu_pay_screen.dart';
-import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_screen.dart';
-import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_type_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_Inform_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_Infrom_update_screen.dart';
-import 'package:front_have_a_meal/features/student/pay_check/student_pay_check_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_email_auth_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_setting_screen.dart';
-import 'package:front_have_a_meal/features/student/pay_check/student_ticket_refund_screen.dart';
-import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
-import 'package:front_have_a_meal/features/student/ticket/student_qr_screen.dart';
+import 'package:front_have_a_meal/features/student/menu/menu_pay_screen.dart';
+import 'package:front_have_a_meal/features/student/pay/ticket_pay_screen.dart';
+import 'package:front_have_a_meal/features/student/pay/ticket_pay_type_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/inform_view_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/infrom_update_screen.dart';
+import 'package:front_have_a_meal/features/student/pay_check/pay_check_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/email_auth_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/setting_screen.dart';
+import 'package:front_have_a_meal/features/student/pay_check/ticket_refund_screen.dart';
+import 'package:front_have_a_meal/features/student/navigation_screen.dart';
+import 'package:front_have_a_meal/features/student/ticket/qr_use_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -40,10 +40,10 @@ final router = GoRouter(
           },
           routes: [
             GoRoute(
-              path: pwResetScreen.routeURL,
-              name: pwResetScreen.routeName,
+              path: PwResetScreen.routeURL,
+              name: PwResetScreen.routeName,
               builder: (context, state) {
-                return const pwResetScreen();
+                return const PwResetScreen();
               },
             ),
           ],
@@ -51,31 +51,31 @@ final router = GoRouter(
       ],
     ),
     GoRoute(
-      path: StudentNavigationScreen.routeURL,
-      name: StudentNavigationScreen.routeName,
+      path: NavigationScreen.routeURL,
+      name: NavigationScreen.routeName,
       builder: (context, state) {
         if (state.extra != null) {
-          final args = state.extra as StudentNavigationScreenArgs;
-          return StudentNavigationScreen(
+          final args = state.extra as NavigationScreenArgs;
+          return NavigationScreen(
             selectedIndex: args.selectedIndex,
           );
         }
-        return const StudentNavigationScreen(selectedIndex: 0);
+        return const NavigationScreen(selectedIndex: 0);
       },
       routes: [
         GoRoute(
-          path: StudentMenuPayScreen.routeURL,
-          name: StudentMenuPayScreen.routeName,
+          path: MenuPayScreen.routeURL,
+          name: MenuPayScreen.routeName,
           builder: (context, state) {
             if (state.extra != null) {
-              final args = state.extra as StudentMenuPayScreenArgs;
-              return StudentMenuPayScreen(
+              final args = state.extra as MenuPayScreenArgs;
+              return MenuPayScreen(
                 time: args.time,
                 course: args.course,
                 price: args.price,
               );
             } else {
-              return const StudentMenuPayScreen(
+              return const MenuPayScreen(
                 time: "중식",
                 course: "B코스",
                 price: "0",
@@ -84,12 +84,12 @@ final router = GoRouter(
           },
           routes: [
             GoRoute(
-              path: StudentTicketPayTypeScreen.routeURL,
-              name: StudentTicketPayTypeScreen.routeName,
+              path: TicketPayTypeScreen.routeURL,
+              name: TicketPayTypeScreen.routeName,
               builder: (context, state) {
                 if (state.extra != null) {
-                  final args = state.extra as StudentTicketPayTypeScreenArgs;
-                  return StudentTicketPayTypeScreen(
+                  final args = state.extra as TicketPayTypeScreenArgs;
+                  return TicketPayTypeScreen(
                     menuTime: args.menuTime,
                     menuCourse: args.menuCourse,
                     menuPrice: args.menuPrice,
@@ -100,12 +100,12 @@ final router = GoRouter(
               },
               routes: [
                 GoRoute(
-                  path: StudentTicketPayScreen.routeURL,
-                  name: StudentTicketPayScreen.routeName,
+                  path: TicketPayScreen.routeURL,
+                  name: TicketPayScreen.routeName,
                   builder: (context, state) {
                     if (state.extra != null) {
-                      final args = state.extra as StudentTicketPayScreenArgs;
-                      return StudentTicketPayScreen(
+                      final args = state.extra as TicketPayScreenArgs;
+                      return TicketPayScreen(
                         menuTime: args.menuTime,
                         menuCourse: args.menuCourse,
                         menuPrice: args.menuPrice,
@@ -121,13 +121,13 @@ final router = GoRouter(
           ],
         ),
         GoRoute(
-          path: StudentQrScreen.routeURL,
-          name: StudentQrScreen.routeName,
+          path: QrUseScreen.routeURL,
+          name: QrUseScreen.routeName,
           builder: (context, state) {
-            // return const StudentQrScreen();
+            // return const QrUseScreen();
             if (state.extra != null) {
-              final args = state.extra as StudentQrScreenArgs;
-              return StudentQrScreen(
+              final args = state.extra as QrUseScreenArgs;
+              return QrUseScreen(
                 ticketTime: args.ticketTime,
                 ticketCourse: args.ticketCourse,
               );
@@ -137,52 +137,52 @@ final router = GoRouter(
           },
         ),
         GoRoute(
-          path: StudentTicketRefundScreen.routeURL,
-          name: StudentTicketRefundScreen.routeName,
+          path: TicketRefundScreen.routeURL,
+          name: TicketRefundScreen.routeName,
           builder: (context, state) {
-            return const StudentTicketRefundScreen();
+            return const TicketRefundScreen();
           },
         ),
         GoRoute(
-          path: StudentPayCheckScreen.routeURL,
-          name: StudentPayCheckScreen.routeName,
+          path: PayCheckScreen.routeURL,
+          name: PayCheckScreen.routeName,
           builder: (context, state) {
-            return const StudentPayCheckScreen();
+            return const PayCheckScreen();
           },
         ),
         GoRoute(
-          path: StudentSettingScreen.routeURL,
-          name: StudentSettingScreen.routeName,
-          builder: (context, state) => const StudentSettingScreen(),
+          path: SettingScreen.routeURL,
+          name: SettingScreen.routeName,
+          builder: (context, state) => const SettingScreen(),
           routes: [
             GoRoute(
-              path: StudentInfromScreen.routeURL,
-              name: StudentInfromScreen.routeName,
+              path: InfromViewScreen.routeURL,
+              name: InfromViewScreen.routeName,
               builder: (context, state) {
-                return const StudentInfromScreen();
+                return const InfromViewScreen();
               },
               routes: [
                 GoRoute(
-                  path: StudentEmailAuthScreen.routeURL,
-                  name: StudentEmailAuthScreen.routeName,
+                  path: EmailAuthScreen.routeURL,
+                  name: EmailAuthScreen.routeName,
                   builder: (context, state) {
-                    return const StudentEmailAuthScreen();
+                    return const EmailAuthScreen();
                   },
                 ),
                 GoRoute(
-                  path: StudentInfromUpdateScreen.routeURL,
-                  name: StudentInfromUpdateScreen.routeName,
+                  path: InfromUpdateScreen.routeURL,
+                  name: InfromUpdateScreen.routeName,
                   builder: (context, state) {
-                    return const StudentInfromUpdateScreen();
+                    return const InfromUpdateScreen();
                   },
                   // builder: (context, state) {
                   //   if (state.extra != null) {
-                  //     final args = state.extra as StudentInfromUpdateScreenArgs;
-                  //     return StudentInfromUpdateScreen(
+                  //     final args = state.extra as InfromUpdateScreenArgs;
+                  //     return InfromUpdateScreen(
                   //       updateType: args.updateType,
                   //     );
                   //   } else {
-                  //     return const StudentInfromUpdateScreen(
+                  //     return const InfromUpdateScreen(
                   //       updateType: UpdateType.pw,
                   //     );
                   //   }

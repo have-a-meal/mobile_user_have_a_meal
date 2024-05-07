@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:front_have_a_meal/features/student/pay/student_ticket_pay_screen.dart';
-import 'package:gap/gap.dart';
+import 'package:front_have_a_meal/features/student/pay/ticket_pay_screen.dart';
 import 'package:go_router/go_router.dart';
 
-class StudentTicketPayTypeScreenArgs {
+class TicketPayTypeScreenArgs {
   final String menuTime;
   final String menuCourse;
   final int menuPrice;
 
-  StudentTicketPayTypeScreenArgs({
+  TicketPayTypeScreenArgs({
     required this.menuTime,
     required this.menuCourse,
     required this.menuPrice,
   });
 }
 
-class StudentTicketPayTypeScreen extends StatelessWidget {
+class TicketPayTypeScreen extends StatelessWidget {
   static const routeName = "student_ticket_pay_type";
   static const routeURL = "student_ticket_pay_type";
-  const StudentTicketPayTypeScreen({
+  const TicketPayTypeScreen({
     super.key,
     required this.menuTime,
     required this.menuCourse,
@@ -51,8 +49,8 @@ class StudentTicketPayTypeScreen extends StatelessWidget {
           InkWell(
             onTap: () {
               context.pushNamed(
-                StudentTicketPayScreen.routeName,
-                extra: StudentTicketPayScreenArgs(
+                TicketPayScreen.routeName,
+                extra: TicketPayScreenArgs(
                   menuTime: menuTime,
                   menuCourse: menuCourse,
                   menuPrice: menuPrice,
@@ -88,8 +86,8 @@ class StudentTicketPayTypeScreen extends StatelessWidget {
           InkWell(
             onTap: () {
               context.pushNamed(
-                StudentTicketPayScreen.routeName,
-                extra: StudentTicketPayScreenArgs(
+                TicketPayScreen.routeName,
+                extra: TicketPayScreenArgs(
                   menuTime: menuTime,
                   menuCourse: menuCourse,
                   menuPrice: menuPrice,

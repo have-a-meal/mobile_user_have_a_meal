@@ -4,14 +4,14 @@ import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:front_have_a_meal/providers/ticket_provider.dart';
 import 'package:provider/provider.dart';
 
-class StudentTicket extends StatefulWidget {
-  const StudentTicket({super.key});
+class TicketView extends StatefulWidget {
+  const TicketView({super.key});
 
   @override
-  State<StudentTicket> createState() => _StudentTicketState();
+  State<TicketView> createState() => _TicketViewState();
 }
 
-class _StudentTicketState extends State<StudentTicket> {
+class _TicketViewState extends State<TicketView> {
   bool _isFirstLoading = true;
 
   @override

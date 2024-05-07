@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/account/sign_in_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_Inform_screen.dart';
-import 'package:front_have_a_meal/providers/user_provider.dart';
+import 'package:front_have_a_meal/features/student/profile/inform_view_screen.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
-class StudentSettingScreen extends StatelessWidget {
+class SettingScreen extends StatelessWidget {
   static const routeName = "student_settings";
   static const routeURL = "student_settings";
-  const StudentSettingScreen({super.key});
+  const SettingScreen({super.key});
 
   // 로그아웃
   Future<void> onLogoutTap(BuildContext context) async {
@@ -78,7 +76,7 @@ class StudentSettingScreen extends StatelessWidget {
                 onTap: () {
                   // _userInquiryTap;
                   context.pushNamed(
-                    StudentInfromScreen.routeName,
+                    InfromViewScreen.routeName,
                   );
                 },
                 title: const Text(

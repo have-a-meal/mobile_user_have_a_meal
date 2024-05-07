@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:front_have_a_meal/models/pay_check_model.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
-class StudentPayCheckScreen extends StatefulWidget {
+class PayCheckScreen extends StatefulWidget {
   static const routeName = "student_pay_check";
   static const routeURL = "student_pay_check";
-  const StudentPayCheckScreen({super.key});
+  const PayCheckScreen({super.key});
 
   @override
-  State<StudentPayCheckScreen> createState() => _StudentPayCheckScreenState();
+  State<PayCheckScreen> createState() => _PayCheckScreenState();
 }
 
-class _StudentPayCheckScreenState extends State<StudentPayCheckScreen> {
+class _PayCheckScreenState extends State<PayCheckScreen> {
   bool _isLoading = true;
   String _payTypeFilter = "";
   String _payCourseFilter = "";

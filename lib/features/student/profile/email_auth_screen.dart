@@ -1,20 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
-import 'package:front_have_a_meal/features/student/profile/student_Infrom_update_screen.dart';
+import 'package:front_have_a_meal/features/student/profile/infrom_update_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-class StudentEmailAuthScreen extends StatefulWidget {
+class EmailAuthScreen extends StatefulWidget {
   static const routeName = "student_email_auth";
   static const routeURL = "student_email_auth";
-  const StudentEmailAuthScreen({super.key});
+  const EmailAuthScreen({super.key});
 
   @override
-  State<StudentEmailAuthScreen> createState() => _StudentEmailAuthScreenState();
+  State<EmailAuthScreen> createState() => _EmailAuthScreenState();
 }
 
-class _StudentEmailAuthScreenState extends State<StudentEmailAuthScreen> {
+class _EmailAuthScreenState extends State<EmailAuthScreen> {
   bool _isBarrier = false;
   bool _isSubmitted = false;
 
@@ -76,7 +75,7 @@ class _StudentEmailAuthScreenState extends State<StudentEmailAuthScreen> {
 
   // 내 정보 수정 페이지로 이동
   void _onPushNextPage() {
-    context.pushNamed(StudentInfromUpdateScreen.routeName);
+    context.pushNamed(InfromUpdateScreen.routeName);
   }
 
   // 이메일 인증코드 요청하기 API

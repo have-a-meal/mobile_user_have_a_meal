@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:front_have_a_meal/features/student/profile/student_Inform_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/student_setting_screen.dart';
-import 'package:front_have_a_meal/providers/user_provider.dart';
+import 'package:front_have_a_meal/features/student/profile/inform_view_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class UserProfileCard extends StatefulWidget {
   const UserProfileCard({
@@ -92,7 +89,7 @@ class _UserProfileCardState extends State<UserProfileCard> {
       color: Colors.orange.shade50,
       child: InkWell(
         onTap: () {
-          context.pushNamed(StudentInfromScreen.routeName);
+          context.pushNamed(InfromViewScreen.routeName);
         },
         customBorder: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(

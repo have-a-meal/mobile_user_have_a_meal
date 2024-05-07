@@ -4,14 +4,14 @@ import 'package:front_have_a_meal/models/menu_model.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 
-class StudentMenu extends StatefulWidget {
-  const StudentMenu({super.key});
+class MenuView extends StatefulWidget {
+  const MenuView({super.key});
 
   @override
-  State<StudentMenu> createState() => _StudentMenuState();
+  State<MenuView> createState() => _MenuViewState();
 }
 
-class _StudentMenuState extends State<StudentMenu> {
+class _MenuViewState extends State<MenuView> {
   Map<String, Map<String, List<MenuModel>>> _menuMap = {
     "조식": {
       "A코스": [],

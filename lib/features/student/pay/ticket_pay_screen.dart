@@ -1,15 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iamport_flutter/iamport_payment.dart';
 import 'package:iamport_flutter/model/payment_data.dart';
 
-class StudentTicketPayScreenArgs {
+class TicketPayScreenArgs {
   final String menuTime;
   final String menuCourse;
   final int menuPrice;
   final String payType;
 
-  StudentTicketPayScreenArgs({
+  TicketPayScreenArgs({
     required this.menuTime,
     required this.menuCourse,
     required this.menuPrice,
@@ -17,10 +18,10 @@ class StudentTicketPayScreenArgs {
   });
 }
 
-class StudentTicketPayScreen extends StatelessWidget {
+class TicketPayScreen extends StatelessWidget {
   static const routeName = "student_ticket_pay";
   static const routeURL = "student_ticket_pay";
-  const StudentTicketPayScreen({
+  const TicketPayScreen({
     super.key,
     required this.menuTime,
     required this.menuCourse,
@@ -46,21 +47,19 @@ class StudentTicketPayScreen extends StatelessWidget {
         title: Text(screenTitle),
       ),
       /* 웹뷰 로딩 컴포넌트 */
-      initialChild: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/iamport-logo.png'),
-              Container(
-                padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-                child: const Text(
-                  '잠시만 기다려주세요...',
-                  style: TextStyle(fontSize: 20.0),
-                ),
+      initialChild: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/iamport-logo.png'),
+            Container(
+              padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+              child: const Text(
+                '잠시만 기다려주세요...',
+                style: TextStyle(fontSize: 20.0),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       /* [필수입력] 가맹점 식별코드 */
@@ -82,7 +81,9 @@ class StudentTicketPayScreen extends StatelessWidget {
       ),
       /* [필수입력] 콜백 함수 */
       callback: (Map<String, String> result) {
-        print(result);
+        if (kDebugMode) {
+          print(result);
+        }
         context.pop();
       },
     );

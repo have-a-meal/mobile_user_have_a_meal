@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
-import 'package:front_have_a_meal/providers/ticket_provider.dart';
 import 'package:front_have_a_meal/providers/ticket_refund_provider.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class StudentTicketRefundScreen extends StatefulWidget {
+class TicketRefundScreen extends StatefulWidget {
   static const routeName = "student_ticket_refund";
   static const routeURL = "student_ticket_refund";
-  const StudentTicketRefundScreen({super.key});
+  const TicketRefundScreen({super.key});
 
   @override
-  State<StudentTicketRefundScreen> createState() =>
-      _StudentTicketRefundScreenState();
+  State<TicketRefundScreen> createState() => _TicketRefundScreenState();
 }
 
-class _StudentTicketRefundScreenState extends State<StudentTicketRefundScreen>
+class _TicketRefundScreenState extends State<TicketRefundScreen>
     with TickerProviderStateMixin {
   List<TicketModel> _ticketEnabledList = [];
   List<TicketModel> _ticketDisabledList = [];

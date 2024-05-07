@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
 import 'package:gap/gap.dart';

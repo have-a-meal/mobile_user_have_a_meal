@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/account/pw_reset_auth_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
-import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
+import 'package:front_have_a_meal/features/student/navigation_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
@@ -120,7 +119,7 @@ class _SignInScreenState extends State<SignInScreen> {
     //     message: response.body,
     //   );
     // }
-    context.replaceNamed(StudentNavigationScreen.routeName);
+    context.replaceNamed(NavigationScreen.routeName);
   }
 
   Future<void> _onTapSignUp() async {
