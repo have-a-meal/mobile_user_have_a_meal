@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:front_have_a_meal/providers/ticket_provider.dart';
@@ -18,13 +17,13 @@ void main() {
           create: (_) => TicketProvider(),
         ),
       ],
-      child: const MainApp(),
+      child: const HaveAMealApp(),
     ),
   );
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class HaveAMealApp extends StatelessWidget {
+  const HaveAMealApp({super.key});
 
   @override
   Widget build(BuildContext context) {

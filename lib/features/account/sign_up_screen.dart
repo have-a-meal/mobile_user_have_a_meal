@@ -10,7 +10,7 @@ enum SignUpType {
 
 class SignUpScreen extends StatefulWidget {
   static const routeName = "signUp";
-  static const routeURL = "/signUp";
+  static const routeURL = "signUp";
   const SignUpScreen({super.key});
 
   @override

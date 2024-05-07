@@ -5,16 +5,16 @@ import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-class PasswordResetScreen extends StatefulWidget {
+class pwResetScreen extends StatefulWidget {
   static const routeName = "reset_password";
   static const routeURL = "reset_password";
-  const PasswordResetScreen({super.key});
+  const pwResetScreen({super.key});
 
   @override
-  State<PasswordResetScreen> createState() => _PasswordResetScreenState();
+  State<pwResetScreen> createState() => _pwResetScreenState();
 }
 
-class _PasswordResetScreenState extends State<PasswordResetScreen> {
+class _pwResetScreenState extends State<pwResetScreen> {
   bool _isSubmitted = false;
   bool _isBarrier = false;
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/features/account/password_reset_screen.dart';
+import 'package:front_have_a_meal/features/account/pw_reset_screen.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
@@ -46,7 +46,7 @@ class _PwSearchState extends State<PwSearch> {
         ),
         ElevatedButton(
           onPressed: () {
-            context.pushNamed(PasswordResetScreen.routeName);
+            context.pushNamed(pwResetScreen.routeName);
           },
           child: const Text("네"),
         ),

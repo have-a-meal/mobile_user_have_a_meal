@@ -2,11 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:front_have_a_meal/constants/http_ip.dart';
-import 'package:front_have_a_meal/features/account/id_pw_search_screen.dart';
+import 'package:front_have_a_meal/features/account/pw_reset_auth_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
 import 'package:front_have_a_meal/features/student/student_navigation_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+
+enum LoginType {
+  student,
+  outsider,
+}
 
 class SignInScreen extends StatefulWidget {
   static const routeName = "signIn";
@@ -26,6 +31,7 @@ class _SignInScreenState extends State<SignInScreen> {
   bool _rememberMe = false;
   final bool _simpleLogin = false;
   bool _isSubmitted = true;
+  LoginType _loginType = LoginType.student;
 
   final RegExp _idRegExp = RegExp(r'^\d{8}$'); // 아이디 정규식
   // 비밀번호 정규식
@@ -103,7 +109,7 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future<void> _onTapSearch() async {
-    await context.pushNamed(IdPwSearchScreen.routeName);
+    await context.pushNamed(PwResetAuthScreen.routeName);
   }
 
   @override
@@ -177,9 +183,36 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 4,
                 child: Column(
                   children: [
+                    const Text(
+                      "로그인 유형",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    const Gap(6),
+                    SegmentedButton(
+                      showSelectedIcon: false,
+                      segments: const [
+                        ButtonSegment(
+                          value: LoginType.student,
+                          label: Text("학생"),
+                        ),
+                        ButtonSegment(
+                          value: LoginType.outsider,
+                          label: Text("외부인"),
+                        ),
+                      ],
+                      selected: <LoginType>{_loginType},
+                      onSelectionChanged: (Set<LoginType> newSelection) {
+                        setState(() {
+                          _loginType = newSelection.first;
+                        });
+                      },
+                    ),
+                    const Gap(10),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       padding: const EdgeInsets.symmetric(
@@ -205,7 +238,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                 Icons.person_outline,
                                 color: Colors.grey.shade600,
                               ),
-                              labelText: '아이디(학번)',
+                              labelText: _loginType == LoginType.student
+                                  ? '학번'
+                                  : '전화번호',
                               errorText: _idErrorText, // 아이디 오류 메시지 표시
                               labelStyle: TextStyle(
                                 color: _idErrorText == null
@@ -313,7 +348,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    "아이디 / 비밀번호 찾기",
+                                    "비밀번호 찾기",
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.blue,
