@@ -20,15 +20,16 @@
 
 # 실제 화면
 ## 로그인 / 회원가입
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/e4af55f2-3b05-441a-859a-f1bdc08955c9.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a6123e66-0430-48dd-a572-1f149c99a7e0.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/76c4a8fd-1231-4d06-a323-208f5d09ffe3.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/14ff9498-2ad6-4ede-b8e1-3d381c846f86.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/c1fd0b95-c2f3-42fd-aafb-e8a0509dcad1.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/60aeecd8-73be-413f-a8db-5cf855e6c549.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/7cb61774-c777-42ba-82da-717ad1562acd.png"  width="175" height="400"/>
 
 ## 아이디 찾기 / 비밀번호 재설정
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/2a149ed8-1e51-4128-8906-91d6772bb751.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/0108aa87-b955-4e26-a529-d536ab6558ea.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/27c785f0-3e8b-4d5c-8a79-71422357d3d8.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/36fd18ca-6d1e-4b30-a535-9af69fbd6432.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/179af06e-d447-4acd-9686-039531ad6e39.png"  width="175" height="400"/>
 
 ## 학식 조회 및 식권 결제
