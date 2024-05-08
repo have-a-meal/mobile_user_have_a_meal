@@ -43,7 +43,7 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/11978207-7295-496d-b5a5-2e450845f986.png"  width="175" height="400"/>
 
 ## 마이페이지 / 설정
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a1e62708-d6af-455d-b7a4-4910ee637f7b.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/3a37ba80-badf-4652-9e8a-e317c47facba.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a1c46807-c16d-4292-a806-f2e7f0bbc043.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/32c0bec4-994c-4af2-a005-1b9d0b9ef02f.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/928cb52c-731c-4f4d-b15e-4c79b9c6da83.png"  width="175" height="400"/>
