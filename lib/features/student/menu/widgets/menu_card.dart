@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/features/student/menu/menu_pay_screen.dart';
+import 'package:front_have_a_meal/features/student/pay/pay_select.dart';
+import 'package:front_have_a_meal/features/student/menu/qr_use_screen.dart';
 import 'package:front_have_a_meal/models/menu_model.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -21,11 +22,10 @@ class MenuCard extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () => context.pushNamed(
-        MenuPayScreen.routeName,
-        extra: MenuPayScreenArgs(
-          course: courseName,
-          price: menuData.menuPrice,
-          time: timeName,
+        QrUseScreen.routeName,
+        extra: QrUseScreenArgs(
+          ticketTime: timeName,
+          ticketCourse: courseName,
         ),
       ),
       child: Card(
@@ -41,6 +41,14 @@ class MenuCard extends StatelessWidget {
                 12,
               ),
             ),
+            border: Border.all(
+              width: 2,
+              color: courseName == "A코스"
+                  ? Colors.lightGreen.shade200
+                  : courseName == "B코스"
+                      ? Colors.lightBlue.shade200
+                      : Colors.purple.shade200,
+            ),
             color: Colors.white, // 배경색
             boxShadow: [
               BoxShadow(
@@ -51,18 +59,34 @@ class MenuCard extends StatelessWidget {
               ),
             ],
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              Text(
-                menuData.menuTitle,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    menuData.menuTitle,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const Gap(4),
+                  Text(menuData.menuContent),
+                ],
               ),
-              const Gap(4),
-              Text(menuData.menuContent),
+              const Positioned(
+                bottom: 0,
+                right: 0,
+                child: Text(
+                  "n개",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    // color: Colors.red,
+                  ),
+                ),
+              )
             ],
           ),
         ),

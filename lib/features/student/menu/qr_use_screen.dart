@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
+import 'package:gap/gap.dart';
 
 class QrUseScreenArgs {
   QrUseScreenArgs({
@@ -12,8 +15,8 @@ class QrUseScreenArgs {
 }
 
 class QrUseScreen extends StatefulWidget {
-  static const routeName = "student_ticket_qr";
-  static const routeURL = "student_ticket_qr";
+  static const routeName = "use_ticket_qr";
+  static const routeURL = "use_ticket_qr";
   const QrUseScreen({
     super.key,
     required this.ticketTime,
@@ -39,11 +42,35 @@ class _QrUseScreenState extends State<QrUseScreen> {
 
   bool _isLoading = true;
 
+  Timer? _timer;
+  int _start = 180; // 3분을 초 단위로 환산한 값
+
   @override
   void initState() {
     super.initState();
 
+    WidgetsBinding.instance.addPostFrameCallback((_) => startTimer());
     _onCheckedEnabledTicket();
+  }
+
+  void startTimer() {
+    // 타이머가 이미 실행중이면 중복 실행 방지
+    if (_timer != null) {
+      _timer!.cancel();
+    }
+
+    // 타이머 시작
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_start > 0) {
+        setState(() {
+          _start--;
+        });
+      } else {
+        // 시간이 모두 경과하면 타이머 종료
+        _timer!.cancel();
+        print("시간 종료!");
+      }
+    });
   }
 
   Future<void> _onCheckedEnabledTicket() async {
@@ -70,27 +97,46 @@ class _QrUseScreenState extends State<QrUseScreen> {
   }
 
   @override
+  void dispose() {
+    _timer?.cancel(); // 위젯이 소멸될 때 타이머도 정지
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("식권 사용"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            iconSize: 34,
-            onPressed: _onRefreshEnabledTicket,
-          )
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.refresh),
+        //     iconSize: 34,
+        //     onPressed: _onRefreshEnabledTicket,
+        //   )
+        // ],
       ),
       body: _isLoading
           ? const Center(
               child: CircularProgressIndicator.adaptive(),
             )
           : _ticketEnabledList.isNotEmpty
-              ? const Column(
+              ? Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Center(
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          _start = 180;
+                        });
+                      },
+                      icon: const Icon(Icons.refresh),
+                      label: Text(
+                        '남은 시간 : $_start초',
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    const Gap(20),
+                    const Center(
                       child: Icon(
                         Icons.qr_code_2,
                         size: 300,

@@ -107,20 +107,6 @@ class _InfromViewScreenState extends State<InfromViewScreen> {
                     ),
                     const Gap(20),
                     TextFormField(
-                      // initialValue: _userData!.password,
-                      initialValue: "0000000000",
-                      readOnly: true,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: "비밀번호",
-                        prefixIcon: Icon(
-                          Icons.lock_person_outlined,
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                    ),
-                    const Gap(20),
-                    TextFormField(
                       // initialValue: _userData!.name,
                       initialValue: "홍길동",
                       readOnly: true,

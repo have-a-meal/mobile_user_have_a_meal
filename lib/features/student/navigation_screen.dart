@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:front_have_a_meal/constants/sizes.dart';
+import 'package:front_have_a_meal/features/student/pay/pay_select.dart';
+import 'package:front_have_a_meal/features/student/pay/ticket_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/ticket/ticket_view.dart';
 import 'package:front_have_a_meal/features/student/menu/menu_view.dart';
 import 'package:front_have_a_meal/features/student/profile/user_profile.dart';
@@ -56,7 +58,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
           ),
           Offstage(
             offstage: selectedIndex != 1,
-            child: const TicketView(),
+            child: const PaySelect(
+              time: "조식",
+              course: "A코스",
+              price: "5000",
+            ),
           ),
           Offstage(
             offstage: selectedIndex != 2,
@@ -82,10 +88,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 selectedIndex: selectedIndex,
               ),
               NavTab(
-                text: "식권",
+                text: "결제",
                 isSelected: selectedIndex == 1,
-                unSelectedIcon: FontAwesomeIcons.ticket,
-                selectedIcon: FontAwesomeIcons.ticket,
+                unSelectedIcon: FontAwesomeIcons.dollarSign,
+                selectedIcon: FontAwesomeIcons.dollarSign,
                 onTap: () => _onTap(1),
                 selectedIndex: selectedIndex,
               ),

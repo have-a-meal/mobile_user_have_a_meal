@@ -192,16 +192,18 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
                             value: _payTypeFilter,
-                            items: const [
+                            items: [
                               DropdownMenuItem(
                                 value: "",
-                                child: Text("전체"),
+                                child: _payTypeFilter != ""
+                                    ? const Text("전체")
+                                    : const Text("결제여부"),
                               ),
-                              DropdownMenuItem(
+                              const DropdownMenuItem(
                                 value: "결제",
                                 child: Text("결제"),
                               ),
-                              DropdownMenuItem(
+                              const DropdownMenuItem(
                                 value: "환불",
                                 child: Text("환불"),
                               ),
@@ -228,21 +230,22 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
                             value: _payCourseFilter,
-                            hint: const Text("코스"),
-                            items: const [
+                            items: [
                               DropdownMenuItem(
                                 value: "",
-                                child: Text("전체"),
+                                child: _payCourseFilter != ""
+                                    ? const Text("전체")
+                                    : const Text("코스"),
                               ),
-                              DropdownMenuItem(
+                              const DropdownMenuItem(
                                 value: "A",
                                 child: Text("A코스"),
                               ),
-                              DropdownMenuItem(
+                              const DropdownMenuItem(
                                 value: "B",
                                 child: Text("B코스"),
                               ),
-                              DropdownMenuItem(
+                              const DropdownMenuItem(
                                 value: "C",
                                 child: Text("C코스"),
                               ),

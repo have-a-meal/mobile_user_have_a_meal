@@ -16,22 +16,8 @@ enum TicketCourse {
   c,
 }
 
-class MenuPayScreenArgs {
-  MenuPayScreenArgs({
-    required this.course,
-    required this.price,
-    required this.time,
-  });
-
-  final String time;
-  final String course;
-  final String price;
-}
-
-class MenuPayScreen extends StatefulWidget {
-  static const routeName = "student_menu_pay";
-  static const routeURL = "student_menu_pay";
-  const MenuPayScreen({
+class PaySelect extends StatefulWidget {
+  const PaySelect({
     super.key,
     required this.time,
     required this.course,
@@ -43,10 +29,10 @@ class MenuPayScreen extends StatefulWidget {
   final String price;
 
   @override
-  State<MenuPayScreen> createState() => _MenuPayScreenState();
+  State<PaySelect> createState() => _PaySelectState();
 }
 
-class _MenuPayScreenState extends State<MenuPayScreen> {
+class _PaySelectState extends State<PaySelect> {
   TicketTime _ticketTime = TicketTime.breakfast;
   TicketCourse _ticketCourse = TicketCourse.a;
 
@@ -109,60 +95,60 @@ class _MenuPayScreenState extends State<MenuPayScreen> {
       appBar: AppBar(
         title: const Text("결제"),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Gap(20),
-          SegmentedButton(
-            showSelectedIcon: false,
-            segments: const [
-              ButtonSegment(
-                value: TicketTime.breakfast,
-                label: Text("조식"),
-              ),
-              ButtonSegment(
-                value: TicketTime.lunch,
-                label: Text("중식"),
-              ),
-              ButtonSegment(
-                value: TicketTime.dinner,
-                label: Text("석식"),
-              ),
-            ],
-            selected: <TicketTime>{_ticketTime},
-            onSelectionChanged: (Set<TicketTime> newSelection) {
-              setState(() {
-                _ticketTime = newSelection.first;
-              });
-            },
-          ),
-          const Gap(20),
-          SegmentedButton(
-            showSelectedIcon: false,
-            segments: const [
-              ButtonSegment(
-                value: TicketCourse.a,
-                label: Text("A코스"),
-              ),
-              ButtonSegment(
-                value: TicketCourse.b,
-                label: Text("B코스"),
-              ),
-              ButtonSegment(
-                value: TicketCourse.c,
-                label: Text("C코스"),
-              ),
-            ],
-            selected: <TicketCourse>{_ticketCourse},
-            onSelectionChanged: (Set<TicketCourse> newSelection) {
-              setState(() {
-                _ticketCourse = newSelection.first;
-              });
-            },
-          ),
-          Expanded(
-            flex: 3,
-            child: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Gap(20),
+            SegmentedButton(
+              showSelectedIcon: false,
+              segments: const [
+                ButtonSegment(
+                  value: TicketTime.breakfast,
+                  label: Text("조식"),
+                ),
+                ButtonSegment(
+                  value: TicketTime.lunch,
+                  label: Text("중식"),
+                ),
+                ButtonSegment(
+                  value: TicketTime.dinner,
+                  label: Text("석식"),
+                ),
+              ],
+              selected: <TicketTime>{_ticketTime},
+              onSelectionChanged: (Set<TicketTime> newSelection) {
+                setState(() {
+                  _ticketTime = newSelection.first;
+                });
+              },
+            ),
+            const Gap(20),
+            SegmentedButton(
+              showSelectedIcon: false,
+              segments: const [
+                ButtonSegment(
+                  value: TicketCourse.a,
+                  label: Text("A코스"),
+                ),
+                ButtonSegment(
+                  value: TicketCourse.b,
+                  label: Text("B코스"),
+                ),
+                ButtonSegment(
+                  value: TicketCourse.c,
+                  label: Text("C코스"),
+                ),
+              ],
+              selected: <TicketCourse>{_ticketCourse},
+              onSelectionChanged: (Set<TicketCourse> newSelection) {
+                setState(() {
+                  _ticketCourse = newSelection.first;
+                });
+              },
+            ),
+            const Gap(20),
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
@@ -224,10 +210,8 @@ class _MenuPayScreenState extends State<MenuPayScreen> {
                 )
               ],
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Padding(
+            const Gap(40),
+            Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,
               ),
@@ -246,11 +230,19 @@ class _MenuPayScreenState extends State<MenuPayScreen> {
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
+                  const Gap(30),
+                  const Text(
+                    "보유중인 식권 : n개",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

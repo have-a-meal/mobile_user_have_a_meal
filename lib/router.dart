@@ -3,7 +3,6 @@ import 'package:front_have_a_meal/features/account/pw_reset_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_in_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
 import 'package:front_have_a_meal/features/error/error_screen.dart';
-import 'package:front_have_a_meal/features/student/menu/menu_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/pay/ticket_pay_screen.dart';
 import 'package:front_have_a_meal/features/student/pay/ticket_pay_type_screen.dart';
 import 'package:front_have_a_meal/features/student/profile/inform_view_screen.dart';
@@ -13,7 +12,7 @@ import 'package:front_have_a_meal/features/student/profile/email_auth_screen.dar
 import 'package:front_have_a_meal/features/student/profile/setting_screen.dart';
 import 'package:front_have_a_meal/features/student/pay_check/ticket_refund_screen.dart';
 import 'package:front_have_a_meal/features/student/navigation_screen.dart';
-import 'package:front_have_a_meal/features/student/ticket/qr_use_screen.dart';
+import 'package:front_have_a_meal/features/student/menu/qr_use_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -64,59 +63,37 @@ final router = GoRouter(
       },
       routes: [
         GoRoute(
-          path: MenuPayScreen.routeURL,
-          name: MenuPayScreen.routeName,
+          path: TicketPayTypeScreen.routeURL,
+          name: TicketPayTypeScreen.routeName,
           builder: (context, state) {
             if (state.extra != null) {
-              final args = state.extra as MenuPayScreenArgs;
-              return MenuPayScreen(
-                time: args.time,
-                course: args.course,
-                price: args.price,
+              final args = state.extra as TicketPayTypeScreenArgs;
+              return TicketPayTypeScreen(
+                menuTime: args.menuTime,
+                menuCourse: args.menuCourse,
+                menuPrice: args.menuPrice,
               );
             } else {
-              return const MenuPayScreen(
-                time: "중식",
-                course: "B코스",
-                price: "0",
-              );
+              return const ErrorScreen();
             }
           },
           routes: [
             GoRoute(
-              path: TicketPayTypeScreen.routeURL,
-              name: TicketPayTypeScreen.routeName,
+              path: TicketPayScreen.routeURL,
+              name: TicketPayScreen.routeName,
               builder: (context, state) {
                 if (state.extra != null) {
-                  final args = state.extra as TicketPayTypeScreenArgs;
-                  return TicketPayTypeScreen(
+                  final args = state.extra as TicketPayScreenArgs;
+                  return TicketPayScreen(
                     menuTime: args.menuTime,
                     menuCourse: args.menuCourse,
                     menuPrice: args.menuPrice,
+                    payType: args.payType,
                   );
                 } else {
                   return const ErrorScreen();
                 }
               },
-              routes: [
-                GoRoute(
-                  path: TicketPayScreen.routeURL,
-                  name: TicketPayScreen.routeName,
-                  builder: (context, state) {
-                    if (state.extra != null) {
-                      final args = state.extra as TicketPayScreenArgs;
-                      return TicketPayScreen(
-                        menuTime: args.menuTime,
-                        menuCourse: args.menuCourse,
-                        menuPrice: args.menuPrice,
-                        payType: args.payType,
-                      );
-                    } else {
-                      return const ErrorScreen();
-                    }
-                  },
-                ),
-              ],
             ),
           ],
         ),

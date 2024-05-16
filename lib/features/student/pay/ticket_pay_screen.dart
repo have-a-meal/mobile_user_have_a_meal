@@ -19,8 +19,8 @@ class TicketPayScreenArgs {
 }
 
 class TicketPayScreen extends StatelessWidget {
-  static const routeName = "student_ticket_pay";
-  static const routeURL = "student_ticket_pay";
+  static const routeName = "ticket_pay";
+  static const routeURL = "ticket_pay";
   const TicketPayScreen({
     super.key,
     required this.menuTime,
