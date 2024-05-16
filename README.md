@@ -32,21 +32,20 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/36fd18ca-6d1e-4b30-a535-9af69fbd6432.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/179af06e-d447-4acd-9686-039531ad6e39.png"  width="175" height="400"/>
 
-## 학식 조회 및 식권 결제
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/ab682220-3dee-4e5f-844d-3f407e4b4eee.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/556fb0ee-af91-47a5-862e-3c3802f41803.png"  width="175" height="400"/>
+## 학식 조회 및 식권 사용
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/086a05d4-fa6d-4034-b120-9d80e387ad58.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/10b4f58a-8622-495e-89af-3c3acbfe0e5b.png"  width="175" height="400"/>
+
+## 식권 결제
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/22d99840-56ac-4aa8-8ee1-c323ad0f4ebe.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/41328f1c-a6f4-4992-a6c3-8d80042b4899.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/13858905-cf1b-46bb-b15f-4f1363fa9cb3.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/11978207-7295-496d-b5a5-2e450845f986.png"  width="175" height="400"/>
 
-## 내 식권 조회 및 QR 인증
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/8726ddb5-0c72-43f2-abab-9571a9233e92.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/807f0b74-a7ca-47d3-9a1a-5a88df4b679c.png"  width="175" height="400"/>
-
 ## 마이페이지 / 설정
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a1e62708-d6af-455d-b7a4-4910ee637f7b.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/3a37ba80-badf-4652-9e8a-e317c47facba.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a1c46807-c16d-4292-a806-f2e7f0bbc043.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/1e957206-e4b3-4ef2-a09a-40f3ece234c5.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/32c0bec4-994c-4af2-a005-1b9d0b9ef02f.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/928cb52c-731c-4f4d-b15e-4c79b9c6da83.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/af6505b0-82a9-484f-886d-36ce462c1990.png"  width="175" height="400"/>
 
