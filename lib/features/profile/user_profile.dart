@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/features/student/pay_check/pay_check_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/setting_screen.dart';
-import 'package:front_have_a_meal/features/student/pay_check/ticket_refund_screen.dart';
-import 'package:front_have_a_meal/features/student/profile/widgets/profile_button.dart';
-import 'package:front_have_a_meal/features/student/profile/widgets/user_profile_card.dart';
+import 'package:front_have_a_meal/features/pay_check/pay_check_screen.dart';
+import 'package:front_have_a_meal/features/profile/setting_screen.dart';
+import 'package:front_have_a_meal/features/pay_check/ticket_refund_screen.dart';
+import 'package:front_have_a_meal/features/profile/widgets/profile_button.dart';
+import 'package:front_have_a_meal/features/profile/widgets/user_profile_card.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 

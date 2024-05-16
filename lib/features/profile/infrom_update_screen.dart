@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
-import 'package:front_have_a_meal/features/student/navigation_screen.dart';
+import 'package:front_have_a_meal/features/navigation_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 

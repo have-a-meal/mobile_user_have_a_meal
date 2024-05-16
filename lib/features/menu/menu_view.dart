@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/features/student/menu/widgets/menu_time.dart';
+import 'package:front_have_a_meal/features/menu/widgets/menu_time.dart';
 import 'package:front_have_a_meal/models/menu_model.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';

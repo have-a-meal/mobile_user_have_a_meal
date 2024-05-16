@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:front_have_a_meal/constants/sizes.dart';
-import 'package:front_have_a_meal/features/student/pay/pay_select.dart';
-import 'package:front_have_a_meal/features/student/pay/ticket_pay_screen.dart';
-import 'package:front_have_a_meal/features/student/ticket/ticket_view.dart';
-import 'package:front_have_a_meal/features/student/menu/menu_view.dart';
-import 'package:front_have_a_meal/features/student/profile/user_profile.dart';
-import 'package:front_have_a_meal/features/student/widgets/nav_tab.dart';
+import 'package:front_have_a_meal/features/pay/pay_select.dart';
+import 'package:front_have_a_meal/features/pay/ticket_pay_screen.dart';
+import 'package:front_have_a_meal/features/ticket/ticket_view.dart';
+import 'package:front_have_a_meal/features/menu/menu_view.dart';
+import 'package:front_have_a_meal/features/profile/user_profile.dart';
+import 'package:front_have_a_meal/features/widgets/nav_tab.dart';
 
 class NavigationScreenArgs {
   NavigationScreenArgs({required this.selectedIndex});

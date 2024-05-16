@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_have_a_meal/features/student/menu/qr_use_screen.dart';
+import 'package:front_have_a_meal/features/menu/qr_use_screen.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:go_router/go_router.dart';
 
