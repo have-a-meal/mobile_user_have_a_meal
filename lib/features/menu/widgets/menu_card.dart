@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:front_have_a_meal/features/pay/pay_select.dart';
 import 'package:front_have_a_meal/features/menu/qr_use_screen.dart';
 import 'package:front_have_a_meal/models/menu_model.dart';
@@ -59,20 +60,43 @@ class MenuCard extends StatelessWidget {
               ),
             ],
           ),
+          clipBehavior: Clip.hardEdge,
           child: Stack(
             children: [
-              Column(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    menuData.menuTitle,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        menuData.menuTitle,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      const Gap(4),
+                      Text(menuData.menuContent),
+                    ],
                   ),
-                  const Gap(4),
-                  Text(menuData.menuContent),
+                  Transform.scale(
+                    scale: 2,
+                    // 아이콘 위치 조정
+                    child: Transform.translate(
+                      offset: const Offset(5, 12),
+                      child: Icon(
+                        FontAwesomeIcons.ticket,
+                        color: courseName == "A코스"
+                            ? Colors.lightGreen.shade200
+                            : courseName == "B코스"
+                                ? Colors.lightBlue.shade200
+                                : Colors.purple.shade200,
+                        size: 36,
+                      ),
+                    ),
+                  )
                 ],
               ),
               const Positioned(
