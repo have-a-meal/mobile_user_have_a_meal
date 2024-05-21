@@ -28,9 +28,9 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/7cb61774-c777-42ba-82da-717ad1562acd.png"  width="175" height="400"/>
 
 ## 비밀번호 재설정
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/27c785f0-3e8b-4d5c-8a79-71422357d3d8.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/36fd18ca-6d1e-4b30-a535-9af69fbd6432.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/179af06e-d447-4acd-9686-039531ad6e39.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/f6c17e5e-e737-4801-9067-8c8e8b1c2ab0.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/767e9fff-0b7f-42f5-a3c6-f6df69f08fb7.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/8e105c43-a39f-4057-835f-bdca7d934c58.png"  width="175" height="400"/>
 
 ## 학식 조회 및 식권 사용
 <img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/002df601-b483-4289-890a-98638986daf8.png"  width="175" height="400"/>
