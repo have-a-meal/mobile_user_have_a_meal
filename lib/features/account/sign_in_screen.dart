@@ -64,7 +64,7 @@ class _SignInScreenState extends State<SignInScreen> {
       setState(() {
         _idErrorText = '전화번호를 입력하세요.';
       });
-    } else if (!_idRegExp.hasMatch(value)) {
+    } else if (!_regExpPhoneNumber.hasMatch(value)) {
       setState(() {
         _idErrorText = '전화번호 규칙에 맞게 입력하세요.';
       });

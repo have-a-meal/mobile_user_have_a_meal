@@ -42,7 +42,7 @@ class HaveAMealApp extends StatelessWidget {
         Locale('ko', 'KR'),
       ],
       debugShowCheckedModeBanner: false,
-      title: 'have_a_meal',
+      title: 'mobile_user_have_a_meal',
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.orange,

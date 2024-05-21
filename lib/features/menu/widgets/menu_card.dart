@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:front_have_a_meal/features/pay/pay_select.dart';
 import 'package:front_have_a_meal/features/menu/qr_use_screen.dart';
 import 'package:front_have_a_meal/models/menu_model.dart';
 import 'package:gap/gap.dart';
