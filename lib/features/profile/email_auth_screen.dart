@@ -4,6 +4,11 @@ import 'package:front_have_a_meal/features/profile/infrom_update_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
+enum AuthType {
+  student,
+  outsider,
+}
+
 class EmailAuthScreen extends StatefulWidget {
   static const routeName = "student_email_auth";
   static const routeURL = "student_email_auth";
@@ -14,16 +19,11 @@ class EmailAuthScreen extends StatefulWidget {
 }
 
 class _EmailAuthScreenState extends State<EmailAuthScreen> {
-  bool _isBarrier = false;
   bool _isSubmitted = false;
+  bool _isBarrier = false;
+  AuthType _authType = AuthType.student;
 
-  void _onChangeBarrier() {
-    setState(() {
-      _isBarrier = true;
-    });
-  }
-
-  void _onCheckData() {
+  void _onCheckResetData() {
     setState(() {
       _isSubmitted = (_emailController.text.trim().isNotEmpty &&
               _emailErrorText == null) &&
@@ -33,6 +33,14 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
     });
   }
 
+  void _onChangeBarrier() {
+    setState(() {
+      _isBarrier = true;
+    });
+  }
+
+  // 학번 정규식
+  final RegExp _idRegExp = RegExp(r'^\d{8}$');
   // 이메일 정규식
   final RegExp _regExpEmail = RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
@@ -43,7 +51,24 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
   String? _emailAuthErrorText;
   bool _isEmailAuth = false;
 
-  void _validateEmail(String value) {
+  void _validateStudentNumber(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        _emailErrorText = '학번을 입력하세요.';
+      });
+    } else if (!_idRegExp.hasMatch(value)) {
+      setState(() {
+        _emailErrorText = '학번을 제대로 입력해주세요!';
+      });
+    } else {
+      setState(() {
+        _emailErrorText = null;
+      });
+      _onCheckResetData();
+    }
+  }
+
+  void _validateOutsiderEmail(String value) {
     if (value.isEmpty) {
       setState(() {
         _emailErrorText = '이메일을 입력하세요.';
@@ -56,11 +81,11 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
       setState(() {
         _emailErrorText = null;
       });
-      _onCheckData();
+      _onCheckResetData();
     }
   }
 
-  void _validateEmailAuth(String value) {
+  void _validateOutsiderEmailAuth(String value) {
     if (value.isEmpty) {
       setState(() {
         _emailAuthErrorText = '인증코드를 입력하세요.';
@@ -69,13 +94,8 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
       setState(() {
         _emailAuthErrorText = null;
       });
-      _onCheckData();
+      _onCheckResetData();
     }
-  }
-
-  // 내 정보 수정 페이지로 이동
-  void _onPushNextPage() {
-    context.pushNamed(InfromUpdateScreen.routeName);
   }
 
   // 이메일 인증코드 요청하기 API
@@ -86,14 +106,27 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
     setState(() {
       _isEmailAuth = !_isEmailAuth;
     });
-    _onCheckData();
+    _onCheckResetData();
+  }
+
+  void _onInfromUpdate() async {
+    context.pushNamed(InfromUpdateScreen.routeName);
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _emailAuthController.dispose();
+
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text("이메일 인증"),
+        title: const Text("내 정보 수정 인증"),
       ),
       bottomNavigationBar: Container(
         margin: const EdgeInsets.only(
@@ -102,49 +135,101 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
           bottom: 10,
         ),
         child: BottomButton(
-          onPressed: _isSubmitted ? _onPushNextPage : null,
-          text: "다음으로",
+          onPressed: _isSubmitted ? _onInfromUpdate : null,
+          text: "내 정보 수정",
           isClicked: _isSubmitted,
         ),
       ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 10,
-              ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
               child: Column(
                 children: [
-                  const Gap(10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 30,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: SegmentedButton(
+                            showSelectedIcon: false,
+                            style: const ButtonStyle(
+                              shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            segments: const [
+                              ButtonSegment(
+                                value: AuthType.student,
+                                label: Text("학생"),
+                              ),
+                              ButtonSegment(
+                                value: AuthType.outsider,
+                                label: Text("외부인"),
+                              ),
+                            ],
+                            selected: <AuthType>{_authType},
+                            onSelectionChanged: (Set<AuthType> newSelection) {
+                              setState(() {
+                                _emailController.text = '';
+                                _emailAuthController.text = '';
+                                _emailErrorText = null;
+                                _emailAuthErrorText = null;
+                                _isEmailAuth = false;
+                                _onCheckResetData();
+                                _authType = newSelection.first;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: TextFormField(
                           controller: _emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          maxLength: 254,
+                          keyboardType: _authType == AuthType.student
+                              ? TextInputType.number
+                              : TextInputType.emailAddress,
+                          maxLength: _authType == AuthType.student ? 8 : 254,
                           decoration: InputDecoration(
-                            labelText: '이메일',
-                            errorText: _emailErrorText,
+                            labelText:
+                                _authType == AuthType.student ? '학번' : '이메일',
+                            suffixText: _authType == AuthType.student
+                                ? '@st.yc.ac.kr'
+                                : null,
                             counterText: '', // 글자수 제한 표시 없애기
+                            errorText: _emailErrorText,
                             labelStyle: TextStyle(
                               color: _emailErrorText == null
                                   ? Colors.black
                                   : Colors.red,
                             ),
                             prefixIcon: Icon(
-                              Icons.email_outlined,
+                              _authType == AuthType.student
+                                  ? Icons.person_outline
+                                  : Icons.email_outlined,
                               color: Colors.grey.shade600,
                             ),
                           ),
                           onTap: _onChangeBarrier,
-                          onChanged: _validateEmail,
+                          onChanged: _authType == AuthType.student
+                              ? _validateStudentNumber
+                              : _validateOutsiderEmail,
                           onFieldSubmitted: (value) {
                             FocusScope.of(context).unfocus();
-                            _onCheckData();
+                            _onCheckResetData();
                           },
                         ),
                       ),
@@ -170,7 +255,7 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
                       ),
                     ],
                   ),
-                  const Gap(20),
+                  const Gap(10),
                   Row(
                     children: [
                       Expanded(
@@ -191,11 +276,7 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
                             ),
                           ),
                           onTap: _onChangeBarrier,
-                          onChanged: _validateEmailAuth,
-                          onFieldSubmitted: (value) {
-                            FocusScope.of(context).unfocus();
-                            _onCheckData();
-                          },
+                          onChanged: _validateOutsiderEmailAuth,
                         ),
                       ),
                       const Gap(6),
@@ -245,22 +326,22 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
                 ],
               ),
             ),
-          ),
-          if (_isBarrier)
-            ModalBarrier(
-              // color: _barrierAnimation,
-              color: Colors.transparent,
-              // 자신을 클릭하면 onDismiss를 실행하는지에 대한 여부
-              dismissible: true,
-              // 자신을 클릭하면 실행되는 함수
-              onDismiss: () {
-                setState(() {
-                  _isBarrier = false;
-                  FocusScope.of(context).unfocus();
-                });
-              },
-            ),
-        ],
+            if (_isBarrier)
+              ModalBarrier(
+                // color: _barrierAnimation,
+                color: Colors.transparent,
+                // 자신을 클릭하면 onDismiss를 실행하는지에 대한 여부
+                dismissible: true,
+                // 자신을 클릭하면 실행되는 함수
+                onDismiss: () {
+                  setState(() {
+                    _isBarrier = false;
+                    FocusScope.of(context).unfocus();
+                  });
+                },
+              ),
+          ],
+        ),
       ),
     );
   }
