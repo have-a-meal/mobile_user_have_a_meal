@@ -46,7 +46,8 @@
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/3a37ba80-badf-4652-9e8a-e317c47facba.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a1c46807-c16d-4292-a806-f2e7f0bbc043.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/32c0bec4-994c-4af2-a005-1b9d0b9ef02f.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/928cb52c-731c-4f4d-b15e-4c79b9c6da83.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/49dfa27f-dbd1-4643-9ad0-3668dc2054c0.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/300da49a-209d-44b1-90ca-ae410326448b.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/af6505b0-82a9-484f-886d-36ce462c1990.png"  width="175" height="400"/>
 
 ## 결제 내역 / 식권 환불
