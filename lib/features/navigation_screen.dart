@@ -4,6 +4,7 @@ import 'package:front_have_a_meal/constants/sizes.dart';
 import 'package:front_have_a_meal/features/pay/pay_select.dart';
 import 'package:front_have_a_meal/features/menu/menu_view.dart';
 import 'package:front_have_a_meal/features/profile/user_profile.dart';
+import 'package:front_have_a_meal/features/ticket/ticket_view.dart';
 import 'package:front_have_a_meal/features/widgets/nav_tab.dart';
 
 class NavigationScreenArgs {
@@ -56,6 +57,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
           ),
           Offstage(
             offstage: selectedIndex != 1,
+            child: const TicketView(),
+          ),
+          Offstage(
+            offstage: selectedIndex != 2,
             child: const PaySelect(
               time: "조식",
               course: "A코스",
@@ -63,7 +68,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
             ),
           ),
           Offstage(
-            offstage: selectedIndex != 2,
+            offstage: selectedIndex != 3,
             child: const UserProfile(),
           ),
         ],
@@ -86,19 +91,27 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 selectedIndex: selectedIndex,
               ),
               NavTab(
-                text: "결제",
+                text: "식권",
                 isSelected: selectedIndex == 1,
-                unSelectedIcon: FontAwesomeIcons.dollarSign,
-                selectedIcon: FontAwesomeIcons.dollarSign,
+                unSelectedIcon: FontAwesomeIcons.ticket,
+                selectedIcon: FontAwesomeIcons.ticket,
                 onTap: () => _onTap(1),
                 selectedIndex: selectedIndex,
               ),
               NavTab(
-                text: "정보",
+                text: "결제",
                 isSelected: selectedIndex == 2,
+                unSelectedIcon: FontAwesomeIcons.dollarSign,
+                selectedIcon: FontAwesomeIcons.dollarSign,
+                onTap: () => _onTap(2),
+                selectedIndex: selectedIndex,
+              ),
+              NavTab(
+                text: "정보",
+                isSelected: selectedIndex == 3,
                 unSelectedIcon: FontAwesomeIcons.circleUser,
                 selectedIcon: FontAwesomeIcons.solidCircleUser,
-                onTap: () => _onTap(2),
+                onTap: () => _onTap(3),
                 selectedIndex: selectedIndex,
               ),
             ],
