@@ -33,17 +33,20 @@
 <img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/8e105c43-a39f-4057-835f-bdca7d934c58.png"  width="175" height="400"/>
 
 ## 학식 조회 및 식권 사용
-<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/002df601-b483-4289-890a-98638986daf8.png"  width="175" height="400"/>
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/10b4f58a-8622-495e-89af-3c3acbfe0e5b.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/61a27570-701d-4f8e-bae4-731213d6172f.png"  width="175" height="400"/>
+
+## 내 식권 조회
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/b63a12f6-2f3e-440e-81ea-a9bd9b92e12c.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/94a40cdb-9de2-4fba-a863-38e44381fc8e.png"  width="175" height="400"/>
 
 ## 식권 결제
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/22d99840-56ac-4aa8-8ee1-c323ad0f4ebe.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/61f94e98-99a1-4351-badd-68fffa556b95.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/41328f1c-a6f4-4992-a6c3-8d80042b4899.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/13858905-cf1b-46bb-b15f-4f1363fa9cb3.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/11978207-7295-496d-b5a5-2e450845f986.png"  width="175" height="400"/>
 
 ## 마이페이지 / 설정
-<img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/3a37ba80-badf-4652-9e8a-e317c47facba.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/21710b5e-f805-4d1b-9237-ad1f0e1ccff9.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a1c46807-c16d-4292-a806-f2e7f0bbc043.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/32c0bec4-994c-4af2-a005-1b9d0b9ef02f.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/49dfa27f-dbd1-4643-9ad0-3668dc2054c0.png"  width="175" height="400"/>
