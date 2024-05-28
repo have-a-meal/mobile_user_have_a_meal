@@ -78,7 +78,7 @@ class MenuCard extends StatelessWidget {
                   child: Transform.translate(
                     offset: const Offset(5, 12),
                     child: Icon(
-                      Icons.fastfood,
+                      Icons.restaurant_menu_outlined,
                       color: courseName == "A코스"
                           ? Colors.lightGreen.shade200
                           : courseName == "B코스"
