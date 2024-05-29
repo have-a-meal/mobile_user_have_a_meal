@@ -33,7 +33,7 @@
 <img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/8e105c43-a39f-4057-835f-bdca7d934c58.png"  width="175" height="400"/>
 
 ## 학식 조회 및 식권 사용
-<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/61a27570-701d-4f8e-bae4-731213d6172f.png"  width="175" height="400"/>
+<img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/32325bc9-d3ac-4758-81b3-15d9d2207a97.png"  width="175" height="400"/>
 
 ## 내 식권 조회
 <img src="https://github.com/have-a-meal/mobile_user_have_a_meal/assets/77985708/b63a12f6-2f3e-440e-81ea-a9bd9b92e12c.png"  width="175" height="400"/>
