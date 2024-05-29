@@ -6,7 +6,7 @@ import 'package:front_have_a_meal/constants/sizes.dart';
 Future<void> swagPlatformDialog({
   required BuildContext context,
   required String title,
-  required String message,
+  required Widget body,
   required List<Widget> actions,
 }) async {
   if (Platform.isIOS) {
@@ -22,13 +22,7 @@ Future<void> swagPlatformDialog({
           ),
         ),
         content: SingleChildScrollView(
-          child: Text(
-            message,
-            style: const TextStyle(
-              fontSize: Sizes.size16,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
+          child: body,
         ),
         actions: actions,
       ),
@@ -45,13 +39,7 @@ Future<void> swagPlatformDialog({
             color: Colors.black,
           ),
         ),
-        content: Text(
-          message,
-          style: const TextStyle(
-            fontSize: Sizes.size16,
-            fontWeight: FontWeight.normal,
-          ),
-        ),
+        content: body,
         actions: actions,
       ),
     );

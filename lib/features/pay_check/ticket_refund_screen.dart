@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/sizes.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:front_have_a_meal/providers/ticket_refund_provider.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
@@ -22,6 +23,8 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
   // 선택한 환불 티켓
   Set<TicketModel> _selectedRefundDisabledTicket = {};
   Set<TicketModel> _selectedRefundEnabledTicket = {};
+
+  int _refundType = 1;
 
   @override
   void initState() {
@@ -188,8 +191,53 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
                                   ? () async {
                                       await swagPlatformDialog(
                                         context: context,
-                                        title: "환불",
-                                        message: "정말 선택한 식권들을 환불 하시겠습니까?",
+                                        title: "환불 사유",
+                                        body: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 2,
+                                          ),
+                                          clipBehavior: Clip.hardEdge,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            border: Border.all(
+                                              color: Colors.grey,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                          child: StatefulBuilder(
+                                            builder: (context, setState) {
+                                              return DropdownButtonHideUnderline(
+                                                child: DropdownButton<int>(
+                                                  value: _refundType,
+                                                  isExpanded: true,
+                                                  items: const [
+                                                    DropdownMenuItem(
+                                                      value: 1,
+                                                      child: Text("사유1"),
+                                                    ),
+                                                    DropdownMenuItem(
+                                                      value: 2,
+                                                      child: Text("사유2"),
+                                                    ),
+                                                    DropdownMenuItem(
+                                                      value: 3,
+                                                      child: Text("사유3"),
+                                                    ),
+                                                  ],
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _refundType =
+                                                          value as int;
+                                                    });
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
                                         actions: [
                                           ElevatedButton(
                                             onPressed: () {
@@ -199,8 +247,8 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
                                           ),
                                           ElevatedButton(
                                             onPressed: () =>
-                                                _onEnabledTicketRefund,
-                                            child: const Text("예"),
+                                                _onEnabledTicketRefund(context),
+                                            child: const Text("환불하기"),
                                           ),
                                         ],
                                       );
@@ -310,29 +358,74 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
                                 ),
                                 backgroundColor: Colors.red,
                               ),
-                              onPressed:
-                                  _selectedRefundDisabledTicket.isNotEmpty
-                                      ? () async {
-                                          await swagPlatformDialog(
-                                            context: context,
-                                            title: "환불",
-                                            message: "정말 선택한 식권들을 환불 하시겠습니까?",
-                                            actions: [
-                                              ElevatedButton(
-                                                onPressed: () {
-                                                  context.pop();
-                                                },
-                                                child: const Text("아니오"),
-                                              ),
-                                              ElevatedButton(
-                                                onPressed: () =>
-                                                    _onDisabledTicketRefund,
-                                                child: const Text("예"),
-                                              ),
-                                            ],
-                                          );
-                                        }
-                                      : null,
+                              onPressed: _selectedRefundDisabledTicket
+                                      .isNotEmpty
+                                  ? () async {
+                                      await swagPlatformDialog(
+                                        context: context,
+                                        title: "환불 사유",
+                                        body: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 2,
+                                          ),
+                                          clipBehavior: Clip.hardEdge,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            border: Border.all(
+                                              color: Colors.grey,
+                                              width: 1.0,
+                                            ),
+                                          ),
+                                          child: StatefulBuilder(
+                                            builder: (context, setState) {
+                                              return DropdownButtonHideUnderline(
+                                                child: DropdownButton<int>(
+                                                  value: _refundType,
+                                                  items: const [
+                                                    DropdownMenuItem(
+                                                      value: 1,
+                                                      child: Text("사유1"),
+                                                    ),
+                                                    DropdownMenuItem(
+                                                      value: 2,
+                                                      child: Text("사유2"),
+                                                    ),
+                                                    DropdownMenuItem(
+                                                      value: 3,
+                                                      child: Text("사유3"),
+                                                    ),
+                                                  ],
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _refundType =
+                                                          value as int;
+                                                    });
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        actions: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              context.pop();
+                                            },
+                                            child: const Text("아니오"),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () =>
+                                                _onDisabledTicketRefund(
+                                                    context),
+                                            child: const Text("환불하기"),
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                  : null,
                               child: const Text(
                                 "환불 하기",
                                 style: TextStyle(color: Colors.white),

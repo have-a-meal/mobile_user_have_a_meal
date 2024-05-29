@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/sizes.dart';
 import 'package:front_have_a_meal/features/pay/ticket_pay_type_screen.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
@@ -64,7 +65,13 @@ class _PaySelectState extends State<PaySelect> {
     swagPlatformDialog(
       context: context,
       title: "결제",
-      message: "${widget.time} ${widget.course}를 결제하시겠습니까?",
+      body: Text(
+        "${widget.time} ${widget.course}를 결제하시겠습니까?",
+        style: const TextStyle(
+          fontSize: Sizes.size16,
+          fontWeight: FontWeight.normal,
+        ),
+      ),
       actions: [
         ElevatedButton(
           onPressed: () {

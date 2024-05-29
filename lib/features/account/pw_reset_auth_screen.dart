@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/sizes.dart';
 import 'package:front_have_a_meal/features/account/pw_reset_screen.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
@@ -45,7 +46,13 @@ class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
     swagPlatformDialog(
       context: context,
       title: "비밀번호 재설정",
-      message: "비밀번호를 재설정하시겠습니까?",
+      body: const Text(
+        "비밀번호를 재설정하시겠습니까?",
+        style: TextStyle(
+          fontSize: Sizes.size16,
+          fontWeight: FontWeight.normal,
+        ),
+      ),
       actions: [
         ElevatedButton(
           onPressed: () {

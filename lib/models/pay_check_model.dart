@@ -4,6 +4,8 @@ class PayCheckModel {
   String payCourse;
   int payPrice;
   DateTime payDate;
+  String pgName;
+  String paymentType;
 
   PayCheckModel({
     required this.payId,
@@ -11,6 +13,8 @@ class PayCheckModel {
     required this.payCourse,
     required this.payPrice,
     required this.payDate,
+    required this.pgName,
+    required this.paymentType,
   });
 
   factory PayCheckModel.fromJson(Map<String, dynamic> json) {
@@ -20,6 +24,8 @@ class PayCheckModel {
       payCourse: json['payCourse'] as String,
       payPrice: json['payPrice'] as int,
       payDate: json['payPrice'] as DateTime,
+      pgName: json['pgName'] as String,
+      paymentType: json['paymentType'] as String,
     );
   }
 
@@ -30,6 +36,8 @@ class PayCheckModel {
       'payCourse': payCourse,
       'payPrice': payPrice,
       'payDate': payDate,
+      'pgName': pgName,
+      'paymentType': paymentType,
     };
   }
 }
