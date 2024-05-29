@@ -1,11 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
 import 'package:front_have_a_meal/constants/sizes.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:front_have_a_meal/providers/ticket_refund_provider.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+
+class RefundReasonModel {
+  int refundId;
+  String refundValue;
+
+  RefundReasonModel({
+    required this.refundId,
+    required this.refundValue,
+  });
+}
 
 class TicketRefundScreen extends StatefulWidget {
   static const routeName = "student_ticket_refund";
@@ -24,6 +36,8 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
   Set<TicketModel> _selectedRefundDisabledTicket = {};
   Set<TicketModel> _selectedRefundEnabledTicket = {};
 
+  List<RefundReasonModel> _refundReason = [];
+
   int _refundType = 1;
 
   @override
@@ -31,6 +45,7 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
     super.initState();
 
     _onInitEnabledTicket();
+    _onInitRefundReason();
   }
 
   // 티켓 리스트 초기화 API
@@ -116,6 +131,16 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
       return;
     }
     context.pop();
+  }
+
+  // 환불 사유 리스트 호출 API
+  Future<void> _onInitRefundReason() async {
+    _refundReason = [
+      RefundReasonModel(refundId: 1, refundValue: "사유1"),
+      RefundReasonModel(refundId: 2, refundValue: "사유2"),
+      RefundReasonModel(refundId: 3, refundValue: "사유3"),
+    ];
+    setState(() {});
   }
 
   @override
@@ -213,19 +238,23 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
                                                 child: DropdownButton<int>(
                                                   value: _refundType,
                                                   isExpanded: true,
-                                                  items: const [
-                                                    DropdownMenuItem(
-                                                      value: 1,
-                                                      child: Text("사유1"),
-                                                    ),
-                                                    DropdownMenuItem(
-                                                      value: 2,
-                                                      child: Text("사유2"),
-                                                    ),
-                                                    DropdownMenuItem(
-                                                      value: 3,
-                                                      child: Text("사유3"),
-                                                    ),
+                                                  items: [
+                                                    for (RefundReasonModel item
+                                                        in _refundReason)
+                                                      DropdownMenuItem(
+                                                        value: item.refundId,
+                                                        child: Text(
+                                                          item.refundValue,
+                                                        ),
+                                                      ),
+                                                    // const DropdownMenuItem(
+                                                    //   value: 2,
+                                                    //   child: Text("사유2"),
+                                                    // ),
+                                                    // const DropdownMenuItem(
+                                                    //   value: 3,
+                                                    //   child: Text("사유3"),
+                                                    // ),
                                                   ],
                                                   onChanged: (value) {
                                                     setState(() {
@@ -243,7 +272,7 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
                                             onPressed: () {
                                               context.pop();
                                             },
-                                            child: const Text("아니오"),
+                                            child: const Text("취소"),
                                           ),
                                           ElevatedButton(
                                             onPressed: () =>
@@ -384,19 +413,15 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
                                               return DropdownButtonHideUnderline(
                                                 child: DropdownButton<int>(
                                                   value: _refundType,
-                                                  items: const [
-                                                    DropdownMenuItem(
-                                                      value: 1,
-                                                      child: Text("사유1"),
-                                                    ),
-                                                    DropdownMenuItem(
-                                                      value: 2,
-                                                      child: Text("사유2"),
-                                                    ),
-                                                    DropdownMenuItem(
-                                                      value: 3,
-                                                      child: Text("사유3"),
-                                                    ),
+                                                  items: [
+                                                    for (RefundReasonModel item
+                                                        in _refundReason)
+                                                      DropdownMenuItem(
+                                                        value: item.refundId,
+                                                        child: Text(
+                                                          item.refundValue,
+                                                        ),
+                                                      ),
                                                   ],
                                                   onChanged: (value) {
                                                     setState(() {
@@ -414,7 +439,7 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
                                             onPressed: () {
                                               context.pop();
                                             },
-                                            child: const Text("아니오"),
+                                            child: const Text("취소"),
                                           ),
                                           ElevatedButton(
                                             onPressed: () =>
