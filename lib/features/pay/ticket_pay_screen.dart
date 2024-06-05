@@ -1,19 +1,20 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/features/pay/enums/ticket_type_enum.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iamport_flutter/iamport_payment.dart';
 import 'package:iamport_flutter/model/payment_data.dart';
 
 class TicketPayScreenArgs {
-  final String menuTime;
-  final String menuCourse;
-  final int menuPrice;
+  final TicketTimeEnum ticketTime;
+  final TicketCourseEnum ticketCourse;
+  final int ticketPrice;
   final String payType;
 
   TicketPayScreenArgs({
-    required this.menuTime,
-    required this.menuCourse,
-    required this.menuPrice,
+    required this.ticketTime,
+    required this.ticketCourse,
+    required this.ticketPrice,
     required this.payType,
   });
 }
@@ -23,15 +24,15 @@ class TicketPayScreen extends StatelessWidget {
   static const routeURL = "ticket_pay";
   const TicketPayScreen({
     super.key,
-    required this.menuTime,
-    required this.menuCourse,
-    required this.menuPrice,
+    required this.ticketTime,
+    required this.ticketCourse,
+    required this.ticketPrice,
     required this.payType,
   });
 
-  final String menuTime;
-  final String menuCourse;
-  final int menuPrice;
+  final TicketTimeEnum ticketTime;
+  final TicketCourseEnum ticketCourse;
+  final int ticketPrice;
   final String payType;
 
   @override
@@ -69,9 +70,10 @@ class TicketPayScreen extends StatelessWidget {
       data: PaymentData(
         pg: payType, // PG사
         payMethod: 'card', // 결제수단
-        name: '$menuTime $menuCourse', // 주문명
+        name:
+            '${ticketPrice == 5000 ? "외부인" : "내부인"} ${ticketTime == TicketTimeEnum.breakfast ? "조식" : ticketTime == TicketTimeEnum.lunch ? "조식" : "석식"} ${ticketCourse == TicketCourseEnum.a ? "A코스" : ticketCourse == TicketCourseEnum.b ? "B코스" : "C코스"}', // 주문명
         merchantUid: 'mid_${DateTime.now().millisecondsSinceEpoch}', // 주문번호
-        amount: 100, // 결제금액
+        amount: ticketPrice, // 결제금액
         buyerName: '이재현', // 구매자 이름
         buyerTel: '01049049193', // 구매자 연락처
         buyerEmail: 'dlwogus1027@naver.com', // 구매자 이메일
@@ -84,6 +86,8 @@ class TicketPayScreen extends StatelessWidget {
         if (kDebugMode) {
           print(result);
         }
+        context.pop();
+        context.pop();
         context.pop();
       },
     );

@@ -1,41 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/constants/sizes.dart';
+import 'package:front_have_a_meal/features/pay/enums/ticket_type_enum.dart';
 import 'package:front_have_a_meal/features/pay/ticket_pay_type_screen.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-enum TicketTime {
-  breakfast,
-  lunch,
-  dinner,
-}
-
-enum TicketCourse {
-  a,
-  b,
-  c,
-}
-
 class PaySelect extends StatefulWidget {
   const PaySelect({
     super.key,
-    required this.time,
-    required this.course,
-    required this.price,
   });
-
-  final String time;
-  final String course;
-  final String price;
 
   @override
   State<PaySelect> createState() => _PaySelectState();
 }
 
 class _PaySelectState extends State<PaySelect> {
-  TicketTime _ticketTime = TicketTime.breakfast;
-  TicketCourse _ticketCourse = TicketCourse.a;
+  TicketTimeEnum _TicketTimeEnum = TicketTimeEnum.breakfast;
+  TicketCourseEnum _TicketCourseEnum = TicketCourseEnum.a;
+
+  int _ticketPrice = 4200;
+  bool _isOutsider = false;
 
   final DateTime now = DateTime.now();
 
@@ -43,21 +28,34 @@ class _PaySelectState extends State<PaySelect> {
   void initState() {
     super.initState();
 
-    if (widget.time == "조식") {
-      _ticketTime = TicketTime.breakfast;
-    } else if (widget.time == "중식") {
-      _ticketTime = TicketTime.lunch;
-    } else if (widget.time == "석식") {
-      _ticketTime = TicketTime.dinner;
-    }
+    _onChangePrice();
+  }
 
-    if (widget.course == "A코스") {
-      _ticketCourse = TicketCourse.a;
-    } else if (widget.course == "B코스") {
-      _ticketCourse = TicketCourse.b;
-    } else if (widget.course == "C코스") {
-      _ticketCourse = TicketCourse.c;
+  void _onChangePrice() {
+    if (_isOutsider) {
+      _ticketPrice = 5000;
+    } else {
+      const priceMatrix = {
+        TicketTimeEnum.breakfast: {
+          TicketCourseEnum.a: 4200,
+          TicketCourseEnum.b: 4200,
+          TicketCourseEnum.c: 4200,
+        },
+        TicketTimeEnum.lunch: {
+          TicketCourseEnum.a: 4200,
+          TicketCourseEnum.b: 4600,
+          TicketCourseEnum.c: 4900,
+        },
+        TicketTimeEnum.dinner: {
+          TicketCourseEnum.a: 4200,
+          TicketCourseEnum.b: 9500,
+          TicketCourseEnum.c: 4900,
+        },
+      };
+
+      _ticketPrice = priceMatrix[_TicketTimeEnum]![_TicketCourseEnum]!;
     }
+    setState(() {});
   }
 
   // 티켓 결제 API
@@ -66,7 +64,7 @@ class _PaySelectState extends State<PaySelect> {
       context: context,
       title: "결제",
       body: Text(
-        "${widget.time} ${widget.course}를 결제하시겠습니까?",
+        "${_TicketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _TicketTimeEnum == TicketTimeEnum.lunch ? "조식" : "석식"} ${_TicketCourseEnum == TicketCourseEnum.a ? "A코스" : _TicketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스"}를 결제하시겠습니까?",
         style: const TextStyle(
           fontSize: Sizes.size16,
           fontWeight: FontWeight.normal,
@@ -84,9 +82,9 @@ class _PaySelectState extends State<PaySelect> {
             context.pushNamed(
               TicketPayTypeScreen.routeName,
               extra: TicketPayTypeScreenArgs(
-                menuTime: widget.time,
-                menuCourse: widget.course,
-                menuPrice: int.parse(widget.price),
+                ticketTime: _TicketTimeEnum,
+                ticketCourse: _TicketCourseEnum,
+                ticketPrice: _ticketPrice,
               ),
             );
           },
@@ -111,23 +109,24 @@ class _PaySelectState extends State<PaySelect> {
               showSelectedIcon: false,
               segments: const [
                 ButtonSegment(
-                  value: TicketTime.breakfast,
+                  value: TicketTimeEnum.breakfast,
                   label: Text("조식"),
                 ),
                 ButtonSegment(
-                  value: TicketTime.lunch,
+                  value: TicketTimeEnum.lunch,
                   label: Text("중식"),
                 ),
                 ButtonSegment(
-                  value: TicketTime.dinner,
+                  value: TicketTimeEnum.dinner,
                   label: Text("석식"),
                 ),
               ],
-              selected: <TicketTime>{_ticketTime},
-              onSelectionChanged: (Set<TicketTime> newSelection) {
+              selected: <TicketTimeEnum>{_TicketTimeEnum},
+              onSelectionChanged: (Set<TicketTimeEnum> newSelection) {
                 setState(() {
-                  _ticketTime = newSelection.first;
+                  _TicketTimeEnum = newSelection.first;
                 });
+                _onChangePrice();
               },
             ),
             const Gap(20),
@@ -135,24 +134,36 @@ class _PaySelectState extends State<PaySelect> {
               showSelectedIcon: false,
               segments: const [
                 ButtonSegment(
-                  value: TicketCourse.a,
+                  value: TicketCourseEnum.a,
                   label: Text("A코스"),
                 ),
                 ButtonSegment(
-                  value: TicketCourse.b,
+                  value: TicketCourseEnum.b,
                   label: Text("B코스"),
                 ),
                 ButtonSegment(
-                  value: TicketCourse.c,
+                  value: TicketCourseEnum.c,
                   label: Text("C코스"),
                 ),
               ],
-              selected: <TicketCourse>{_ticketCourse},
-              onSelectionChanged: (Set<TicketCourse> newSelection) {
+              selected: <TicketCourseEnum>{_TicketCourseEnum},
+              onSelectionChanged: (Set<TicketCourseEnum> newSelection) {
                 setState(() {
-                  _ticketCourse = newSelection.first;
+                  _TicketCourseEnum = newSelection.first;
                 });
+                _onChangePrice();
               },
+            ),
+            const Gap(20),
+            CheckboxListTile.adaptive(
+              value: _isOutsider,
+              onChanged: (value) {
+                setState(() {
+                  _isOutsider = value!;
+                });
+                _onChangePrice();
+              },
+              title: const Text("외부인"),
             ),
             const Gap(20),
             Column(
@@ -174,7 +185,7 @@ class _PaySelectState extends State<PaySelect> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "시간 : ${_ticketTime == TicketTime.breakfast ? "조식" : _ticketTime == TicketTime.lunch ? "중식" : "석식"}",
+                        "시간 : ${_TicketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _TicketTimeEnum == TicketTimeEnum.lunch ? "중식" : "석식"}",
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -182,7 +193,7 @@ class _PaySelectState extends State<PaySelect> {
                       ),
                       const Gap(10),
                       Text(
-                        "코스 : ${_ticketCourse == TicketCourse.a ? "A코스" : _ticketCourse == TicketCourse.b ? "B코스" : "C코스"}",
+                        "코스 : ${_TicketCourseEnum == TicketCourseEnum.a ? "A코스" : _TicketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스"}",
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -190,7 +201,7 @@ class _PaySelectState extends State<PaySelect> {
                       ),
                       const Gap(10),
                       Text(
-                        "가격 : ${widget.price}원",
+                        "가격 : $_ticketPrice원",
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

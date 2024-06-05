@@ -61,11 +61,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           ),
           Offstage(
             offstage: selectedIndex != 2,
-            child: const PaySelect(
-              time: "조식",
-              course: "A코스",
-              price: "5000",
-            ),
+            child: const PaySelect(),
           ),
           Offstage(
             offstage: selectedIndex != 3,

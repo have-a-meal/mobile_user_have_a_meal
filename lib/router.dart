@@ -69,9 +69,9 @@ final router = GoRouter(
             if (state.extra != null) {
               final args = state.extra as TicketPayTypeScreenArgs;
               return TicketPayTypeScreen(
-                menuTime: args.menuTime,
-                menuCourse: args.menuCourse,
-                menuPrice: args.menuPrice,
+                ticketTime: args.ticketTime,
+                ticketCourse: args.ticketCourse,
+                ticketPrice: args.ticketPrice,
               );
             } else {
               return const ErrorScreen();
@@ -85,9 +85,9 @@ final router = GoRouter(
                 if (state.extra != null) {
                   final args = state.extra as TicketPayScreenArgs;
                   return TicketPayScreen(
-                    menuTime: args.menuTime,
-                    menuCourse: args.menuCourse,
-                    menuPrice: args.menuPrice,
+                    ticketTime: args.ticketTime,
+                    ticketCourse: args.ticketCourse,
+                    ticketPrice: args.ticketPrice,
                     payType: args.payType,
                   );
                 } else {

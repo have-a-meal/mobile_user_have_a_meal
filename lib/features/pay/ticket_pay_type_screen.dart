@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/features/pay/enums/ticket_type_enum.dart';
 import 'package:front_have_a_meal/features/pay/ticket_pay_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class TicketPayTypeScreenArgs {
-  final String menuTime;
-  final String menuCourse;
-  final int menuPrice;
+  final TicketTimeEnum ticketTime;
+  final TicketCourseEnum ticketCourse;
+  final int ticketPrice;
 
   TicketPayTypeScreenArgs({
-    required this.menuTime,
-    required this.menuCourse,
-    required this.menuPrice,
+    required this.ticketTime,
+    required this.ticketCourse,
+    required this.ticketPrice,
   });
 }
 
@@ -19,14 +20,14 @@ class TicketPayTypeScreen extends StatelessWidget {
   static const routeURL = "ticket_pay_type";
   const TicketPayTypeScreen({
     super.key,
-    required this.menuTime,
-    required this.menuCourse,
-    required this.menuPrice,
+    required this.ticketTime,
+    required this.ticketCourse,
+    required this.ticketPrice,
   });
 
-  final String menuTime;
-  final String menuCourse;
-  final int menuPrice;
+  final TicketTimeEnum ticketTime;
+  final TicketCourseEnum ticketCourse;
+  final int ticketPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +52,9 @@ class TicketPayTypeScreen extends StatelessWidget {
               context.pushNamed(
                 TicketPayScreen.routeName,
                 extra: TicketPayScreenArgs(
-                  menuTime: menuTime,
-                  menuCourse: menuCourse,
-                  menuPrice: menuPrice,
+                  ticketTime: ticketTime,
+                  ticketCourse: ticketCourse,
+                  ticketPrice: ticketPrice,
                   payType: "kakaopay",
                 ),
               );
@@ -88,9 +89,9 @@ class TicketPayTypeScreen extends StatelessWidget {
               context.pushNamed(
                 TicketPayScreen.routeName,
                 extra: TicketPayScreenArgs(
-                  menuTime: menuTime,
-                  menuCourse: menuCourse,
-                  menuPrice: menuPrice,
+                  ticketTime: ticketTime,
+                  ticketCourse: ticketCourse,
+                  ticketPrice: ticketPrice,
                   payType: "tosspay",
                 ),
               );
