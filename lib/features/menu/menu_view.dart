@@ -77,7 +77,6 @@ class _MenuViewState extends State<MenuView> {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       try {
         final jsonResponse = jsonDecode(response.body) as List<dynamic>;
-        print(jsonResponse);
 
         if (jsonResponse.isNotEmpty) {
           _addMenuData(jsonResponse);

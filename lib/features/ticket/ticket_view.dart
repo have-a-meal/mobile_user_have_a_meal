@@ -26,8 +26,6 @@ class _TicketViewState extends State<TicketView> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _oninitTicket();
-
-      _isFirstLoading = false;
     });
 
     // _oninitTicket();
@@ -35,7 +33,7 @@ class _TicketViewState extends State<TicketView> {
 
   Future<void> _oninitTicket() async {
     final url = Uri.parse(
-        "${HttpIp.apiUrl}/menu/${context.read<UserProvider>().userData?.memberId}");
+        "${HttpIp.apiUrl}/ticket/${context.read<UserProvider>().userData?.memberId}");
     final response = await http.get(url);
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -53,6 +51,10 @@ class _TicketViewState extends State<TicketView> {
         message: response.body,
       );
     }
+
+    setState(() {
+      _isFirstLoading = false;
+    });
   }
 
   Future<void> _onRefresh() async {

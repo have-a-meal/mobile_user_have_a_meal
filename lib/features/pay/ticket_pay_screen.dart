@@ -1,21 +1,28 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/pay/enums/ticket_type_enum.dart';
+import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iamport_flutter/iamport_payment.dart';
 import 'package:iamport_flutter/model/payment_data.dart';
+import 'package:http/http.dart' as http;
 
 class TicketPayScreenArgs {
   final TicketTimeEnum ticketTime;
   final TicketCourseEnum ticketCourse;
   final int ticketPrice;
   final String payType;
+  final String paymentId;
 
   TicketPayScreenArgs({
     required this.ticketTime,
     required this.ticketCourse,
     required this.ticketPrice,
     required this.payType,
+    required this.paymentId,
   });
 }
 
@@ -28,15 +35,18 @@ class TicketPayScreen extends StatelessWidget {
     required this.ticketCourse,
     required this.ticketPrice,
     required this.payType,
+    required this.paymentId,
   });
 
   final TicketTimeEnum ticketTime;
   final TicketCourseEnum ticketCourse;
   final int ticketPrice;
   final String payType;
+  final String paymentId;
 
   @override
   Widget build(BuildContext context) {
+    print(paymentId);
     String screenTitle = "";
     if (payType == "kakaopay") {
       screenTitle = "카카오페이 결제";
@@ -82,13 +92,46 @@ class TicketPayScreen extends StatelessWidget {
         appScheme: 'example', // 앱 URL scheme
       ),
       /* [필수입력] 콜백 함수 */
-      callback: (Map<String, String> result) {
+      callback: (Map<String, String> result) async {
         if (kDebugMode) {
           print(result);
         }
-        context.pop();
-        context.pop();
-        context.pop();
+
+        const String baseUrl = "${HttpIp.apiUrl}/payment/verify";
+        final Map<String, String> queryParams = {
+          'paymentId': paymentId,
+          'impUid': "${result["imp_uid"]}",
+        };
+        final Uri uri =
+            Uri.parse(baseUrl).replace(queryParameters: queryParams);
+        final response = await http.get(uri);
+
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          final jsonResponse = jsonDecode(response.body);
+          print(jsonResponse);
+
+          swagPlatformDialog(
+            context: context,
+            title: "결제 완료",
+            body: const Text("구매가 정상적으로 완료되었습니다"),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  context.pop();
+                  context.pop();
+                  context.pop();
+                },
+                child: const Text("확인"),
+              ),
+            ],
+          );
+        } else {
+          HttpIp.errorPrint(
+            context: context,
+            title: "통신 오류",
+            message: response.body,
+          );
+        }
       },
     );
   }

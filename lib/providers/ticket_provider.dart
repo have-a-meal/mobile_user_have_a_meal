@@ -63,4 +63,8 @@ class TicketProvider extends ChangeNotifier {
     notifyListeners();
     // return true;
   }
+
+  int onSearchTicketLength(String timing, String courseType) {
+    return _ticketMap[timing]![courseType]!.length;
+  }
 }

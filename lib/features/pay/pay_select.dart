@@ -1,10 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/constants/sizes.dart';
 import 'package:front_have_a_meal/features/pay/enums/ticket_type_enum.dart';
 import 'package:front_have_a_meal/features/pay/ticket_pay_type_screen.dart';
+import 'package:front_have_a_meal/providers/ticket_provider.dart';
+import 'package:front_have_a_meal/providers/user_provider.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class PaySelect extends StatefulWidget {
   const PaySelect({
@@ -19,43 +26,57 @@ class _PaySelectState extends State<PaySelect> {
   TicketTimeEnum _ticketTimeEnum = TicketTimeEnum.breakfast;
   TicketCourseEnum _ticketCourseEnum = TicketCourseEnum.a;
 
-  int _ticketPrice = 4200;
-  bool _isOutsider = false;
-
-  final DateTime now = DateTime.now();
+  int? _ticketPrice;
+  int? _courseId;
 
   @override
   void initState() {
     super.initState();
 
     _onChangePrice();
+    _onChangeTicketLength();
   }
 
-  void _onChangePrice() {
-    if (_isOutsider) {
-      _ticketPrice = 5000;
-    } else {
-      const priceMatrix = {
-        TicketTimeEnum.breakfast: {
-          TicketCourseEnum.a: 4200,
-          TicketCourseEnum.b: 4200,
-          TicketCourseEnum.c: 4200,
-        },
-        TicketTimeEnum.lunch: {
-          TicketCourseEnum.a: 4200,
-          TicketCourseEnum.b: 4600,
-          TicketCourseEnum.c: 4900,
-        },
-        TicketTimeEnum.dinner: {
-          TicketCourseEnum.a: 4200,
-          TicketCourseEnum.b: 9500,
-          TicketCourseEnum.c: 4900,
-        },
-      };
+  Future<void> _onChangeTicketLength() async {}
 
-      _ticketPrice = priceMatrix[_ticketTimeEnum]![_ticketCourseEnum]!;
+  Future<void> _onChangePrice() async {
+    setState(() {
+      _ticketPrice = null;
+      _courseId = null;
+    });
+
+    const String baseUrl = "${HttpIp.apiUrl}/payment/ticketPrice";
+    final Map<String, String> queryParams = {
+      'timing': _ticketTimeEnum == TicketTimeEnum.breakfast
+          ? "조식"
+          : _ticketTimeEnum == TicketTimeEnum.lunch
+              ? "조식"
+              : "석식",
+      'courseType': _ticketCourseEnum == TicketCourseEnum.a
+          ? "A"
+          : _ticketCourseEnum == TicketCourseEnum.b
+              ? "B"
+              : "C",
+      'memberId': context.read<UserProvider>().userData!.memberId,
+    };
+    final Uri uri = Uri.parse(baseUrl).replace(queryParameters: queryParams);
+    final response = await http.get(uri);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      final jsonResponse = jsonDecode(response.body);
+
+      setState(() {
+        _ticketPrice = jsonResponse['price'];
+        _courseId = jsonResponse['courseId'];
+      });
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
     }
-    setState(() {});
   }
 
   // 티켓 결제 API
@@ -79,14 +100,30 @@ class _PaySelectState extends State<PaySelect> {
         ),
         ElevatedButton(
           onPressed: () {
-            context.pushNamed(
-              TicketPayTypeScreen.routeName,
-              extra: TicketPayTypeScreenArgs(
-                ticketTime: _ticketTimeEnum,
-                ticketCourse: _ticketCourseEnum,
-                ticketPrice: _ticketPrice,
-              ),
-            );
+            if (_ticketPrice != null) {
+              context.pop();
+              context.pushNamed(
+                TicketPayTypeScreen.routeName,
+                extra: TicketPayTypeScreenArgs(
+                  ticketTime: _ticketTimeEnum,
+                  ticketCourse: _ticketCourseEnum,
+                  ticketPrice: _ticketPrice!,
+                  courseId: _courseId!,
+                ),
+              );
+            } else {
+              swagPlatformDialog(
+                context: context,
+                title: "통신 오류",
+                body: const Text("가격 정보가 존재하지 않습니다!"),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () => context.pop(),
+                    child: const Text("확인"),
+                  ),
+                ],
+              );
+            }
           },
           child: const Text("확인"),
         ),
@@ -94,11 +131,27 @@ class _PaySelectState extends State<PaySelect> {
     );
   }
 
+  Future<void> _onRefresh() async {
+    setState(() {});
+    _ticketPrice = null;
+    _onChangeTicketLength();
+    _onChangePrice();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("결제"),
+        actions: [
+          IconButton(
+            onPressed: _onRefresh,
+            icon: const Icon(Icons.refresh),
+            iconSize: 34,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -155,79 +208,94 @@ class _PaySelectState extends State<PaySelect> {
               },
             ),
             const Gap(20),
-            CheckboxListTile.adaptive(
-              value: _isOutsider,
-              onChanged: (value) {
-                setState(() {
-                  _isOutsider = value!;
-                });
-                _onChangePrice();
-              },
-              title: const Text("외부인"),
-            ),
-            const Gap(20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  padding: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.orange.shade200,
-                      width: 6,
+            // CheckboxListTile.adaptive(
+            //   value: _isOutsider,
+            //   onChanged: (value) {
+            //     setState(() {
+            //       _isOutsider = value!;
+            //     });
+            //     _onChangePrice();
+            //   },
+            //   title: const Text("외부인"),
+            // ),
+            // const Gap(20),
+            _ticketPrice == null && _courseId == null
+                ? const Center(
+                    child: Column(
+                      children: [
+                        Gap(40),
+                        CircularProgressIndicator.adaptive(
+                          strokeAlign: 10,
+                          strokeWidth: 6,
+                        ),
+                      ],
                     ),
-                    borderRadius: BorderRadius.circular(20), // 여기도 둥근 모서리를 적용
-                    color: Colors.white, // 배경색 지정
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "시간 : ${_ticketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _ticketTimeEnum == TicketTimeEnum.lunch ? "중식" : "석식"}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        width: double.infinity,
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.orange.shade200,
+                            width: 6,
+                          ),
+                          borderRadius:
+                              BorderRadius.circular(20), // 여기도 둥근 모서리를 적용
+                          color: Colors.white, // 배경색 지정
                         ),
-                      ),
-                      const Gap(10),
-                      Text(
-                        "코스 : ${_ticketCourseEnum == TicketCourseEnum.a ? "A코스" : _ticketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스"}",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Gap(10),
-                      Text(
-                        "가격 : $_ticketPrice원",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "시간 : ${_ticketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _ticketTimeEnum == TicketTimeEnum.lunch ? "중식" : "석식"}",
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Gap(10),
+                            Text(
+                              "코스 : ${_ticketCourseEnum == TicketCourseEnum.a ? "A코스" : _ticketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스"}",
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Gap(10),
+                            Text(
+                              _ticketPrice == 0
+                                  ? "로딩중..."
+                                  : "가격 : $_ticketPrice원",
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const Gap(10),
+                            const Text(
+                              "유효 기간 : 현재 학기",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const Gap(10),
                       const Text(
-                        "유효 기간 : 현재 학기",
+                        "식권의 유효 기간이 지나면 환급 받을 수 있습니다",
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.red,
                         ),
-                      ),
+                      )
                     ],
                   ),
-                ),
-                const Gap(10),
-                const Text(
-                  "식권의 유효 기간이 지나면 환급 받을 수 있습니다",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.red,
-                  ),
-                )
-              ],
-            ),
             const Gap(40),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -249,9 +317,9 @@ class _PaySelectState extends State<PaySelect> {
                     ),
                   ),
                   const Gap(30),
-                  const Text(
-                    "보유중인 식권 : n개",
-                    style: TextStyle(
+                  Text(
+                    "보유중인 식권 : ${context.watch<TicketProvider>().onSearchTicketLength(_ticketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _ticketTimeEnum == TicketTimeEnum.lunch ? "중식" : "석식", _ticketCourseEnum == TicketCourseEnum.a ? "A코스" : _ticketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스")}개",
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),

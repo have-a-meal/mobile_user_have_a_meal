@@ -72,6 +72,7 @@ final router = GoRouter(
                 ticketTime: args.ticketTime,
                 ticketCourse: args.ticketCourse,
                 ticketPrice: args.ticketPrice,
+                courseId: args.courseId,
               );
             } else {
               return const ErrorScreen();
@@ -89,6 +90,7 @@ final router = GoRouter(
                     ticketCourse: args.ticketCourse,
                     ticketPrice: args.ticketPrice,
                     payType: args.payType,
+                    paymentId: args.paymentId,
                   );
                 } else {
                   return const ErrorScreen();

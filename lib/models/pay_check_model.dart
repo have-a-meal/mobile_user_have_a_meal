@@ -1,43 +1,45 @@
 class PayCheckModel {
-  String payId;
-  String payType;
-  String payCourse;
-  int payPrice;
-  DateTime payDate;
-  String pgName;
-  String paymentType;
+  String paymentId;
+  int courseId;
+  String timing;
+  String courseType;
+  DateTime accountDate;
+  String status;
+  int price;
 
   PayCheckModel({
-    required this.payId,
-    required this.payType,
-    required this.payCourse,
-    required this.payPrice,
-    required this.payDate,
-    required this.pgName,
-    required this.paymentType,
+    required this.paymentId,
+    required this.courseId,
+    required this.timing,
+    required this.courseType,
+    required this.accountDate,
+    required this.status,
+    required this.price,
   });
 
+  // fromJson 메서드
   factory PayCheckModel.fromJson(Map<String, dynamic> json) {
     return PayCheckModel(
-      payId: json['payId'] as String,
-      payType: json['payType'] as String,
-      payCourse: json['payCourse'] as String,
-      payPrice: json['payPrice'] as int,
-      payDate: json['payPrice'] as DateTime,
-      pgName: json['pgName'] as String,
-      paymentType: json['paymentType'] as String,
+      paymentId: json['paymentId'],
+      courseId: json['courseId'],
+      timing: json['timing'],
+      courseType: json['courseType'],
+      accountDate: DateTime.parse(json['accountDate']),
+      status: json['status'],
+      price: json['price'],
     );
   }
 
+  // toJson 메서드 (추가)
   Map<String, dynamic> toJson() {
     return {
-      'payId': payId,
-      'payType': payType,
-      'payCourse': payCourse,
-      'payPrice': payPrice,
-      'payDate': payDate,
-      'pgName': pgName,
-      'paymentType': paymentType,
+      'paymentId': paymentId,
+      'courseId': courseId,
+      'timing': timing,
+      'courseType': courseType,
+      'accountDate': accountDate.toIso8601String(),
+      'status': status,
+      'price': price,
     };
   }
 }

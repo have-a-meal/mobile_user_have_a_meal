@@ -1,17 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/pay/enums/ticket_type_enum.dart';
 import 'package:front_have_a_meal/features/pay/ticket_pay_screen.dart';
+import 'package:front_have_a_meal/providers/user_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class TicketPayTypeScreenArgs {
   final TicketTimeEnum ticketTime;
   final TicketCourseEnum ticketCourse;
   final int ticketPrice;
+  final int courseId;
 
   TicketPayTypeScreenArgs({
     required this.ticketTime,
     required this.ticketCourse,
     required this.ticketPrice,
+    required this.courseId,
   });
 }
 
@@ -23,11 +31,13 @@ class TicketPayTypeScreen extends StatelessWidget {
     required this.ticketTime,
     required this.ticketCourse,
     required this.ticketPrice,
+    required this.courseId,
   });
 
   final TicketTimeEnum ticketTime;
   final TicketCourseEnum ticketCourse;
   final int ticketPrice;
+  final int courseId;
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +58,39 @@ class TicketPayTypeScreen extends StatelessWidget {
         ),
         children: [
           InkWell(
-            onTap: () {
-              context.pushNamed(
-                TicketPayScreen.routeName,
-                extra: TicketPayScreenArgs(
-                  ticketTime: ticketTime,
-                  ticketCourse: ticketCourse,
-                  ticketPrice: ticketPrice,
-                  payType: "kakaopay",
-                ),
-              );
+            onTap: () async {
+              final url = Uri.parse("${HttpIp.apiUrl}/payment");
+              final headers = {'Content-Type': 'application/json'};
+              final data = {
+                "memberId": context.read<UserProvider>().userData!.memberId,
+                "courseId": courseId,
+                "pgProvider": "kakaopay",
+                "payMethod": "kakaopay"
+              };
+              final response = await http.post(url,
+                  headers: headers, body: jsonEncode(data));
+
+              if (response.statusCode >= 200 && response.statusCode < 300) {
+                final jsonResponse = jsonDecode(response.body);
+                print(jsonResponse);
+
+                context.pushNamed(
+                  TicketPayScreen.routeName,
+                  extra: TicketPayScreenArgs(
+                    ticketTime: ticketTime,
+                    ticketCourse: ticketCourse,
+                    ticketPrice: ticketPrice,
+                    payType: "kakaopay",
+                    paymentId: jsonResponse['paymentId'],
+                  ),
+                );
+              } else {
+                HttpIp.errorPrint(
+                  context: context,
+                  title: "통신 오류",
+                  message: response.body,
+                );
+              }
             },
             child: Card(
               child: Column(
@@ -85,16 +118,39 @@ class TicketPayTypeScreen extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () {
-              context.pushNamed(
-                TicketPayScreen.routeName,
-                extra: TicketPayScreenArgs(
-                  ticketTime: ticketTime,
-                  ticketCourse: ticketCourse,
-                  ticketPrice: ticketPrice,
-                  payType: "tosspay",
-                ),
-              );
+            onTap: () async {
+              final url = Uri.parse("${HttpIp.apiUrl}/payment");
+              final headers = {'Content-Type': 'application/json'};
+              final data = {
+                "memberId": context.read<UserProvider>().userData!.memberId,
+                "courseId": courseId,
+                "pgProvider": "tosspay",
+                "payMethod": "tosspay"
+              };
+              final response = await http.post(url,
+                  headers: headers, body: jsonEncode(data));
+
+              if (response.statusCode >= 200 && response.statusCode < 300) {
+                final jsonResponse = jsonDecode(response.body);
+                print(jsonResponse);
+
+                context.pushNamed(
+                  TicketPayScreen.routeName,
+                  extra: TicketPayScreenArgs(
+                    ticketTime: ticketTime,
+                    ticketCourse: ticketCourse,
+                    ticketPrice: ticketPrice,
+                    payType: "tosspay",
+                    paymentId: jsonResponse['paymentId'],
+                  ),
+                );
+              } else {
+                HttpIp.errorPrint(
+                  context: context,
+                  title: "통신 오류",
+                  message: response.body,
+                );
+              }
             },
             child: Card(
               child: Column(

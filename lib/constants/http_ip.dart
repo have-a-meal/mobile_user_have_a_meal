@@ -24,7 +24,7 @@ class HttpIp {
       actions: [
         TextButton(
           onPressed: () => context.pop(),
-          child: const Text("알겠습니다"),
+          child: const Text("확인"),
         ),
       ],
     );

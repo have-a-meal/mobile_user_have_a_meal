@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/models/pay_check_model.dart';
+import 'package:front_have_a_meal/providers/user_provider.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class PayCheckScreen extends StatefulWidget {
   static const routeName = "student_pay_check";
@@ -14,7 +20,7 @@ class PayCheckScreen extends StatefulWidget {
 
 class _PayCheckScreenState extends State<PayCheckScreen> {
   bool _isLoading = true;
-  String _payTypeFilter = "";
+  String _payTimeFilter = "";
   String _payCourseFilter = "";
   String _payDateFilter = "최근순";
   final List<PayCheckModel> _payCheckListData = [];
@@ -32,119 +38,30 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
       _isLoading = true;
     });
 
-    _payCheckListData.addAll([
-      PayCheckModel(
-        payId: "1",
-        payType: "환불",
-        payCourse: "A",
-        payPrice: 5000,
-        payDate: DateTime.now(),
-        pgName: "kakaopay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "1",
-        payType: "결제",
-        payCourse: "A",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 1)),
-        pgName: "kakaopay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "2",
-        payType: "결제",
-        payCourse: "B",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 2)),
-        pgName: "kakaopay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "3",
-        payType: "결제",
-        payCourse: "C",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 3)),
-        pgName: "tosspay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "4",
-        payType: "결제",
-        payCourse: "A",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 4)),
-        pgName: "kakaopay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "5",
-        payType: "환불",
-        payCourse: "B",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 5)),
-        pgName: "tosspay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "5",
-        payType: "결제",
-        payCourse: "B",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 6)),
-        pgName: "tosspay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "6",
-        payType: "결제",
-        payCourse: "C",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 7)),
-        pgName: "kakaopay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "7",
-        payType: "결제",
-        payCourse: "A",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 8)),
-        pgName: "tosspay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "8",
-        payType: "결제",
-        payCourse: "B",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 9)),
-        pgName: "kakaopay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "9",
-        payType: "환불",
-        payCourse: "C",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 10)),
-        pgName: "kakaopay",
-        paymentType: "신용카드",
-      ),
-      PayCheckModel(
-        payId: "9",
-        payType: "결제",
-        payCourse: "C",
-        payPrice: 5000,
-        payDate: DateTime.now().subtract(const Duration(days: 11)),
-        pgName: "tosspay",
-        paymentType: "신용카드",
-      ),
-    ]);
+    Uri url = Uri.parse(
+        "${HttpIp.apiUrl}/payment/transaction/${context.read<UserProvider>().userData!.memberId}");
+    final response = await http.get(url);
 
-    _payCheckListView.addAll(_payCheckListData);
-    _payCheckListView.sort((a, b) => b.payDate.compareTo(a.payDate));
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      final jsonResponse = jsonDecode(response.body);
+      print(jsonResponse);
+
+      setState(() {
+        _payCheckListData.clear(); // 기존 데이터 초기화
+        for (var item in jsonResponse) {
+          _payCheckListData.add(PayCheckModel.fromJson(item));
+        }
+      });
+
+      _filterList();
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
+    }
 
     setState(() {
       _isLoading = false;
@@ -154,7 +71,7 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
   Future<void> _onRefreshPayList() async {
     _payCheckListView = [];
     _payCheckListView.addAll(_payCheckListData);
-    _payTypeFilter = "";
+    _payTimeFilter = "";
     _payCourseFilter = "";
     _payDateFilter = "최근순";
 
@@ -164,19 +81,19 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
   }
 
   void _filterList() {
-    if (_payTypeFilter.isNotEmpty && _payCourseFilter.isNotEmpty) {
+    if (_payTimeFilter.isNotEmpty && _payCourseFilter.isNotEmpty) {
       _payCheckListView = _payCheckListData
           .where((payCheck) =>
-              payCheck.payType == _payTypeFilter &&
-              payCheck.payCourse == _payCourseFilter)
+              payCheck.timing == _payTimeFilter &&
+              payCheck.courseType == _payCourseFilter)
           .toList();
-    } else if (_payTypeFilter.isNotEmpty) {
+    } else if (_payTimeFilter.isNotEmpty) {
       _payCheckListView = _payCheckListData
-          .where((payCheck) => payCheck.payType == _payTypeFilter)
+          .where((payCheck) => payCheck.timing == _payTimeFilter)
           .toList();
     } else if (_payCourseFilter.isNotEmpty) {
       _payCheckListView = _payCheckListData
-          .where((payCheck) => payCheck.payCourse == _payCourseFilter)
+          .where((payCheck) => payCheck.courseType == _payCourseFilter)
           .toList();
     } else {
       _payCheckListView = _payCheckListData.toList();
@@ -184,9 +101,9 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
 
     // 날짜 필터 적용
     if (_payDateFilter == "최신순") {
-      _payCheckListView.sort((a, b) => b.payDate.compareTo(a.payDate));
+      _payCheckListView.sort((a, b) => b.accountDate.compareTo(a.accountDate));
     } else if (_payDateFilter == "오래된순") {
-      _payCheckListView.sort((a, b) => a.payDate.compareTo(b.payDate));
+      _payCheckListView.sort((a, b) => a.accountDate.compareTo(b.accountDate));
     }
 
     setState(() {});
@@ -227,25 +144,29 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
                         ),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton(
-                            value: _payTypeFilter,
+                            value: _payTimeFilter,
                             items: [
                               DropdownMenuItem(
                                 value: "",
-                                child: _payTypeFilter != ""
+                                child: _payTimeFilter != ""
                                     ? const Text("전체")
-                                    : const Text("결제여부"),
+                                    : const Text("시간"),
                               ),
                               const DropdownMenuItem(
-                                value: "결제",
-                                child: Text("결제"),
+                                value: "조식",
+                                child: Text("조식"),
                               ),
                               const DropdownMenuItem(
-                                value: "환불",
-                                child: Text("환불"),
+                                value: "중식",
+                                child: Text("중식"),
+                              ),
+                              const DropdownMenuItem(
+                                value: "석식",
+                                child: Text("석식"),
                               ),
                             ],
                             onChanged: (value) {
-                              _payTypeFilter = value as String;
+                              _payTimeFilter = value as String;
                               _filterList();
                             },
                           ),
@@ -346,7 +267,7 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
                           child: ListView.separated(
                             padding: const EdgeInsets.symmetric(
                               vertical: 10,
-                              horizontal: 30,
+                              horizontal: 20,
                             ),
                             itemCount: _payCheckListView.length,
                             separatorBuilder: (context, index) => const Gap(10),
@@ -365,79 +286,84 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          _payCheckListView[index].payCourse ==
+                                          _payCheckListView[index].courseType ==
                                                   "A"
-                                              ? const Text(
-                                                  "A코스",
-                                                  style: TextStyle(
+                                              ? Text(
+                                                  "${_payCheckListView[index].timing} A코스",
+                                                  style: const TextStyle(
                                                     fontSize: 24,
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.lightGreen,
                                                   ),
                                                 )
                                               : _payCheckListView[index]
-                                                          .payCourse ==
+                                                          .courseType ==
                                                       "B"
-                                                  ? const Text(
-                                                      "B코스",
-                                                      style: TextStyle(
+                                                  ? Text(
+                                                      "${_payCheckListView[index].timing} B코스",
+                                                      style: const TextStyle(
                                                         fontSize: 24,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         color: Colors.lightBlue,
                                                       ),
                                                     )
-                                                  : const Text(
-                                                      "C코스",
-                                                      style: TextStyle(
+                                                  : Text(
+                                                      "${_payCheckListView[index].timing} C코스",
+                                                      style: const TextStyle(
                                                         fontSize: 24,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         color: Colors.purple,
                                                       ),
                                                     ),
-                                          _payCheckListView[index].payType ==
-                                                  "환불"
-                                              ? Text(
-                                                  "[${_payCheckListView[index].payType}]",
-                                                  style: const TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.red,
-                                                  ),
-                                                )
-                                              : Text(
-                                                  "[${_payCheckListView[index].payType}]",
-                                                  style: const TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
+                                          // _payCheckListView[index]. ==
+                                          //         "환불"
+                                          //     ? Text(
+                                          //         "[${_payCheckListView[index].payType}]",
+                                          //         style: const TextStyle(
+                                          //           fontSize: 20,
+                                          //           fontWeight: FontWeight.bold,
+                                          //           color: Colors.red,
+                                          //         ),
+                                          //       )
+                                          //     :
+                                          Text(
+                                            _payCheckListView[index].status ==
+                                                    "paid"
+                                                ? "[결제완료]"
+                                                : "[결제 실패]",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: _payCheckListView[index]
+                                                          .status ==
+                                                      "paid"
+                                                  ? Colors.black
+                                                  : Colors.red,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                       const Divider(),
                                       Text(
-                                        _payCheckListView[index].payType == "환불"
-                                            ? "환불날짜 : ${DateFormat('yyyy-MM-dd(E) HH:mm', 'ko_KR').format(_payCheckListView[index].payDate)}"
-                                            : "구매날짜 : ${DateFormat('yyyy-MM-dd(E) HH:mm', 'ko_KR').format(_payCheckListView[index].payDate)}",
+                                        "구매날짜 : ${DateFormat('yyyy-MM-dd(E) HH:mm', 'ko_KR').format(_payCheckListView[index].accountDate)}",
                                         style: const TextStyle(
                                           fontSize: 16,
                                         ),
                                       ),
                                       Text(
-                                        _payCheckListView[index].payType == "환불"
-                                            ? "환불가격 : ${_payCheckListView[index].payPrice}원"
-                                            : "구매가격 : ${_payCheckListView[index].payPrice}원",
+                                        "구매가격 : ${_payCheckListView[index].price}원",
                                         style: const TextStyle(
                                           fontSize: 16,
                                         ),
                                       ),
-                                      Text(
-                                        "결제수단 : ${_payCheckListView[index].pgName} - ${_payCheckListView[index].paymentType}",
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
+                                      // Text(
+                                      //   "결제수단 : ${_payCheckListView[index].pgName} - ${_payCheckListView[index].paymentType}",
+                                      //   style: const TextStyle(
+                                      //     fontSize: 16,
+                                      //   ),
+                                      // ),
                                       // Text(
                                       //   "결제수단 : ${_payCheckListView[index].paymentType}",
                                       //   style: const TextStyle(

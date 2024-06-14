@@ -128,10 +128,6 @@ class _SignInScreenState extends State<SignInScreen> {
         await http.post(url, headers: headers, body: jsonEncode(data));
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
-      if (kDebugMode) {
-        print(response.body);
-      }
-
       final jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
       final userData = UserModel.fromJson(jsonResponse);
 
