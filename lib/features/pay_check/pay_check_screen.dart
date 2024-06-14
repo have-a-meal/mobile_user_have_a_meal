@@ -44,8 +44,6 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       final jsonResponse = jsonDecode(response.body);
-      print(jsonResponse);
-
       setState(() {
         _payCheckListData.clear(); // 기존 데이터 초기화
         for (var item in jsonResponse) {
@@ -100,7 +98,7 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
     }
 
     // 날짜 필터 적용
-    if (_payDateFilter == "최신순") {
+    if (_payDateFilter == "최근순") {
       _payCheckListView.sort((a, b) => b.accountDate.compareTo(a.accountDate));
     } else if (_payDateFilter == "오래된순") {
       _payCheckListView.sort((a, b) => a.accountDate.compareTo(b.accountDate));
@@ -133,7 +131,9 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 2), // 여백을 조정합니다.
+                          horizontal: 12,
+                          vertical: 2,
+                        ), // 여백을 조정합니다.
                         decoration: BoxDecoration(
                           color: Colors.white, // 배경색 설정
                           borderRadius: BorderRadius.circular(10.0), // 모서리 둥글게
@@ -286,48 +286,37 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          _payCheckListView[index].courseType ==
-                                                  "A"
-                                              ? Text(
-                                                  "${_payCheckListView[index].timing} A코스",
-                                                  style: const TextStyle(
+                                          RichText(
+                                            text: TextSpan(
+                                              text:
+                                                  "${_payCheckListView[index].timing} ",
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 24,
+                                              ),
+                                              children: [
+                                                TextSpan(
+                                                  text:
+                                                      "${_payCheckListView[index].courseType}코스",
+                                                  style: TextStyle(
                                                     fontSize: 24,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.lightGreen,
+                                                    color: _payCheckListView[
+                                                                    index]
+                                                                .courseType ==
+                                                            "A"
+                                                        ? Colors.lightGreen
+                                                        : _payCheckListView[
+                                                                        index]
+                                                                    .courseType ==
+                                                                "B"
+                                                            ? Colors.lightBlue
+                                                            : Colors.purple,
                                                   ),
                                                 )
-                                              : _payCheckListView[index]
-                                                          .courseType ==
-                                                      "B"
-                                                  ? Text(
-                                                      "${_payCheckListView[index].timing} B코스",
-                                                      style: const TextStyle(
-                                                        fontSize: 24,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.lightBlue,
-                                                      ),
-                                                    )
-                                                  : Text(
-                                                      "${_payCheckListView[index].timing} C코스",
-                                                      style: const TextStyle(
-                                                        fontSize: 24,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.purple,
-                                                      ),
-                                                    ),
-                                          // _payCheckListView[index]. ==
-                                          //         "환불"
-                                          //     ? Text(
-                                          //         "[${_payCheckListView[index].payType}]",
-                                          //         style: const TextStyle(
-                                          //           fontSize: 20,
-                                          //           fontWeight: FontWeight.bold,
-                                          //           color: Colors.red,
-                                          //         ),
-                                          //       )
-                                          //     :
+                                              ],
+                                            ),
+                                          ),
                                           Text(
                                             _payCheckListView[index].status ==
                                                     "paid"
@@ -347,13 +336,13 @@ class _PayCheckScreenState extends State<PayCheckScreen> {
                                       ),
                                       const Divider(),
                                       Text(
-                                        "구매날짜 : ${DateFormat('yyyy-MM-dd(E) HH:mm', 'ko_KR').format(_payCheckListView[index].accountDate)}",
+                                        "날짜 : ${DateFormat('yyyy-MM-dd(E) HH:mm', 'ko_KR').format(_payCheckListView[index].accountDate)}",
                                         style: const TextStyle(
                                           fontSize: 16,
                                         ),
                                       ),
                                       Text(
-                                        "구매가격 : ${_payCheckListView[index].price}원",
+                                        "가격 : ${_payCheckListView[index].price}원",
                                         style: const TextStyle(
                                           fontSize: 16,
                                         ),

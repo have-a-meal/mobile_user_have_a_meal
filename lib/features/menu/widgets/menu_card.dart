@@ -51,34 +51,6 @@ class MenuCard extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: Stack(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      menuData.main,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const Gap(4),
-                    for (String item in menuData.sub) Text(item),
-                  ],
-                ),
-                // Transform.scale(
-                //   scale: 2,
-                //   // 아이콘 위치 조정
-                //   child: Transform.translate(
-                //     offset: const Offset(5, 12),
-                //     child:
-                //   ),
-                // ),
-              ],
-            ),
             Positioned(
               bottom: 0,
               right: 0,
@@ -91,7 +63,21 @@ class MenuCard extends StatelessWidget {
                         : Colors.purple.shade200,
                 size: 50,
               ),
-            )
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  menuData.main,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+                const Gap(4),
+                for (String item in menuData.sub) Text(item),
+              ],
+            ),
           ],
         ),
       ),

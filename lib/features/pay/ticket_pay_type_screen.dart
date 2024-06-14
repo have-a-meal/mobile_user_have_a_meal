@@ -72,7 +72,6 @@ class TicketPayTypeScreen extends StatelessWidget {
 
               if (response.statusCode >= 200 && response.statusCode < 300) {
                 final jsonResponse = jsonDecode(response.body);
-                print(jsonResponse);
 
                 context.pushNamed(
                   TicketPayScreen.routeName,
@@ -132,7 +131,6 @@ class TicketPayTypeScreen extends StatelessWidget {
 
               if (response.statusCode >= 200 && response.statusCode < 300) {
                 final jsonResponse = jsonDecode(response.body);
-                print(jsonResponse);
 
                 context.pushNamed(
                   TicketPayScreen.routeName,

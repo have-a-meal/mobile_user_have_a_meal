@@ -49,7 +49,8 @@ class TicketProvider extends ChangeNotifier {
 
   Future<void> addTicket(List<TicketModel> ticketList) async {
     for (TicketModel ticketModel in ticketList) {
-      _ticketMap[ticketModel.timing]![ticketModel.courseType]!.add(ticketModel);
+      _ticketMap[ticketModel.timing]!["${ticketModel.courseType}코스"]!
+          .add(ticketModel);
     }
 
     notifyListeners();

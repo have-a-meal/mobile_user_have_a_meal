@@ -4,11 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/pay/enums/ticket_type_enum.dart';
+import 'package:front_have_a_meal/providers/user_provider.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iamport_flutter/iamport_payment.dart';
 import 'package:iamport_flutter/model/payment_data.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class TicketPayScreenArgs {
   final TicketTimeEnum ticketTime;
@@ -46,7 +48,6 @@ class TicketPayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(paymentId);
     String screenTitle = "";
     if (payType == "kakaopay") {
       screenTitle = "카카오페이 결제";
@@ -81,7 +82,7 @@ class TicketPayScreen extends StatelessWidget {
         pg: payType, // PG사
         payMethod: 'card', // 결제수단
         name:
-            '${ticketPrice == 5000 ? "외부인" : "내부인"} ${ticketTime == TicketTimeEnum.breakfast ? "조식" : ticketTime == TicketTimeEnum.lunch ? "조식" : "석식"} ${ticketCourse == TicketCourseEnum.a ? "A코스" : ticketCourse == TicketCourseEnum.b ? "B코스" : "C코스"}', // 주문명
+            '${context.watch<UserProvider>().userData!.memberType} ${ticketTime == TicketTimeEnum.breakfast ? "조식" : ticketTime == TicketTimeEnum.lunch ? "조식" : "석식"} ${ticketCourse == TicketCourseEnum.a ? "A코스" : ticketCourse == TicketCourseEnum.b ? "B코스" : "C코스"}', // 주문명
         merchantUid: 'mid_${DateTime.now().millisecondsSinceEpoch}', // 주문번호
         amount: ticketPrice, // 결제금액
         buyerName: '이재현', // 구매자 이름
@@ -93,9 +94,10 @@ class TicketPayScreen extends StatelessWidget {
       ),
       /* [필수입력] 콜백 함수 */
       callback: (Map<String, String> result) async {
-        if (kDebugMode) {
-          print(result);
-        }
+        // if (kDebugMode) {
+        //   print(paymentId);
+        //   print(result);
+        // }
 
         const String baseUrl = "${HttpIp.apiUrl}/payment/verify";
         final Map<String, String> queryParams = {
@@ -107,9 +109,6 @@ class TicketPayScreen extends StatelessWidget {
         final response = await http.get(uri);
 
         if (response.statusCode >= 200 && response.statusCode < 300) {
-          final jsonResponse = jsonDecode(response.body);
-          print(jsonResponse);
-
           swagPlatformDialog(
             context: context,
             title: "결제 완료",
@@ -126,10 +125,19 @@ class TicketPayScreen extends StatelessWidget {
             ],
           );
         } else {
-          HttpIp.errorPrint(
+          swagPlatformDialog(
             context: context,
             title: "통신 오류",
-            message: response.body,
+            body: Text(response.body),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  context.pop();
+                  context.pop();
+                },
+                child: const Text("확인"),
+              ),
+            ],
           );
         }
       },

@@ -47,7 +47,7 @@ class _TicketViewState extends State<TicketView> {
       if (!mounted) return;
       HttpIp.errorPrint(
         context: context,
-        title: "통신 오류",
+        title: "통신 오류 TicketView",
         message: response.body,
       );
     }

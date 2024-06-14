@@ -252,11 +252,16 @@ class _MenuViewState extends State<MenuView> {
           : _menuMap.entries.every((mealEntry) => mealEntry.value.entries
                   .every((courseEntry) => courseEntry.value.isEmpty))
               ? Center(
-                  child: IconButton(
-                    iconSize: MediaQuery.of(context).size.width / 3,
-                    color: Colors.grey.shade400,
-                    icon: const Icon(Icons.refresh_outlined),
-                    onPressed: _onRefresh,
+                  child: Column(
+                    children: [
+                      IconButton(
+                        iconSize: MediaQuery.of(context).size.width / 3,
+                        color: Colors.grey.shade400,
+                        icon: const Icon(Icons.refresh_outlined),
+                        onPressed: _onRefresh,
+                      ),
+                      const Text("메뉴가 존재하지 않습니다!"),
+                    ],
                   ),
                 )
               : RefreshIndicator.adaptive(

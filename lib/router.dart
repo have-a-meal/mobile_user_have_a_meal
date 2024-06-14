@@ -12,7 +12,7 @@ import 'package:front_have_a_meal/features/profile/email_auth_screen.dart';
 import 'package:front_have_a_meal/features/profile/setting_screen.dart';
 import 'package:front_have_a_meal/features/pay_check/ticket_refund_screen.dart';
 import 'package:front_have_a_meal/features/navigation_screen.dart';
-import 'package:front_have_a_meal/features/menu/qr_use_screen.dart';
+import 'package:front_have_a_meal/features/ticket/qr_use_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(

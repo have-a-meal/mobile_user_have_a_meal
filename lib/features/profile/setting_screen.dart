@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/account/sign_in_screen.dart';
 import 'package:front_have_a_meal/features/profile/inform_view_screen.dart';
+import 'package:front_have_a_meal/providers/user_provider.dart';
+import 'package:front_have_a_meal/storages/login_storage.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {
   static const routeName = "student_settings";
@@ -9,41 +12,17 @@ class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
   // 로그아웃
-  Future<void> onLogoutTap(BuildContext context) async {
-    // LoginStorage.resetLoginData();
-    // context.pop();
+  void onLogoutTap(BuildContext context) async {
+    await context.read<UserProvider>().logout();
+    await LoginStorage.deleteLoginData();
     context.goNamed(SignInScreen.routeName);
-    // await context.read<UserProvider>().logout();
   }
 
   // 계정 삭제
-  Future<void> _onDeleteTap(BuildContext context) async {
-    // LoginStorage.resetLoginData();
-    // context.pop();
+  void _onDeleteTap(BuildContext context) async {
+    await context.read<UserProvider>().logout();
+    await LoginStorage.deleteLoginData();
     context.goNamed(SignInScreen.routeName);
-    // await context.read<UserProvider>().logout();
-
-    // final url = Uri.parse("${HttpIp.userUrl}/together/delete");
-    // final data = {
-    //   "userId": "${context.read<UserProvider>().userData?.userId}",
-    // };
-
-    // final response = await http.post(url, body: data);
-
-    // if (response.statusCode >= 200 && response.statusCode < 300) {
-    //   if (!mounted) return;
-    //   context.read<UserProvider>().logout();
-    //   LoginStorage.resetLoginData();
-    //   context.read<MainNavigationProvider>().changeIndex(0);
-    //   context.pop();
-    // } else {
-    //   if (!mounted) return;
-    //   HttpIp.errorPrint(
-    //     context: context,
-    //     title: "계정 삭제 실패!",
-    //     message: "${response.statusCode.toString()} : ${response.body}",
-    //   );
-    // }
   }
 
   Widget _title({required String title}) {

@@ -21,11 +21,11 @@ class LoginStorage {
   static Future<List<String?>> getLoginData() async {
     final id = await storage.read(key: _keyLoginDataId);
     final pw = await storage.read(key: _keyLoginDataPw);
-    final isStored = await storage.read(key: _keyLoginDataType);
+    final isStudent = await storage.read(key: _keyLoginDataType);
     return [
       id,
       pw,
-      isStored,
+      isStudent,
     ];
   }
 

@@ -99,10 +99,10 @@ class _PaySelectState extends State<PaySelect> {
           child: const Text("취소"),
         ),
         ElevatedButton(
-          onPressed: () {
+          onPressed: () async {
             if (_ticketPrice != null) {
               context.pop();
-              context.pushNamed(
+              await context.pushNamed(
                 TicketPayTypeScreen.routeName,
                 extra: TicketPayTypeScreenArgs(
                   ticketTime: _ticketTimeEnum,
@@ -111,6 +111,8 @@ class _PaySelectState extends State<PaySelect> {
                   courseId: _courseId!,
                 ),
               );
+
+              // context.read<TicketProvider>().
             } else {
               swagPlatformDialog(
                 context: context,

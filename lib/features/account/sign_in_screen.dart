@@ -113,9 +113,41 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
+
+    _onCheckAutoLogin();
   }
 
-  void _onCheckAutoLogin() {}
+  void _onCheckAutoLogin() async {
+    List<String?> loginData = await LoginStorage.getLoginData();
+
+    if (loginData[0] != null && loginData[1] != null && loginData[2] != null) {
+      final url = Uri.parse("${HttpIp.apiUrl}/members/login");
+      final headers = {'Content-Type': 'application/json'};
+      final data = {
+        'memberId': loginData[0],
+        'password': loginData[1],
+      };
+      final response =
+          await http.post(url, headers: headers, body: jsonEncode(data));
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        final jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        final userData = UserModel.fromJson(jsonResponse);
+
+        if (!mounted) return;
+        await context.read<UserProvider>().login(userData);
+        if (!mounted) return;
+        context.replaceNamed(NavigationScreen.routeName);
+      } else {
+        if (!mounted) return;
+        HttpIp.errorPrint(
+          context: context,
+          title: "통신 오류",
+          message: response.body,
+        );
+      }
+    }
+  }
 
   void _handleLogin() async {
     final url = Uri.parse("${HttpIp.apiUrl}/members/login");
