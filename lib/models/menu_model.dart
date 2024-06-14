@@ -1,31 +1,31 @@
 class MenuModel {
-  String menuId;
-  String menuTitle;
-  String menuContent;
-  String menuPrice;
+  String timing;
+  String courseType;
+  String main;
+  List<String> sub;
 
   MenuModel({
-    required this.menuId,
-    required this.menuTitle,
-    required this.menuContent,
-    required this.menuPrice,
+    required this.timing,
+    required this.courseType,
+    required this.main,
+    required this.sub,
   });
 
   factory MenuModel.fromJson(Map<String, dynamic> json) {
     return MenuModel(
-      menuId: json['menuId'] as String,
-      menuTitle: json['menuTitle'] as String,
-      menuContent: json['menuContent'] as String,
-      menuPrice: json['menuPrice'] as String,
+      timing: json['timing'],
+      courseType: json['courseType'],
+      main: json['main'],
+      sub: List<String>.from(json['sub']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'menuId': menuId,
-      'menuTitle': menuTitle,
-      'menuContent': menuContent,
-      'menuPrice': menuPrice,
+      'timing': timing,
+      'courseType': courseType,
+      'main': main,
+      'sub': sub,
     };
   }
 }

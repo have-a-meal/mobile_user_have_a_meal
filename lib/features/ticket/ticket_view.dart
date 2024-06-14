@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/ticket/widgets/ticket_time.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:front_have_a_meal/providers/ticket_provider.dart';
+import 'package:front_have_a_meal/providers/user_provider.dart';
 import 'package:provider/provider.dart';
+
+import 'package:http/http.dart' as http;
 
 class TicketView extends StatefulWidget {
   const TicketView({super.key});
@@ -28,48 +34,25 @@ class _TicketViewState extends State<TicketView> {
   }
 
   Future<void> _oninitTicket() async {
-    await context.read<TicketProvider>().addTicket([
-      TicketModel(
-          ticketId: "1",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "2",
-          ticketTime: "조식",
-          ticketCourse: "B코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "3",
-          ticketTime: "중식",
-          ticketCourse: "B코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "4",
-          ticketTime: "중식",
-          ticketCourse: "C코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "5",
-          ticketTime: "석식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "6",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "7",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-      TicketModel(
-          ticketId: "8",
-          ticketTime: "조식",
-          ticketCourse: "A코스",
-          ticketPrice: "5000"),
-    ]);
+    final url = Uri.parse(
+        "${HttpIp.apiUrl}/menu/${context.read<UserProvider>().userData?.memberId}");
+    final response = await http.get(url);
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      final jsonResponse = jsonDecode(response.body) as List;
+      List<TicketModel> ticketList =
+          jsonResponse.map((json) => TicketModel.fromJson(json)).toList();
+
+      if (!mounted) return;
+      await context.read<TicketProvider>().addTicket(ticketList);
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
+    }
   }
 
   Future<void> _onRefresh() async {

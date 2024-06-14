@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:front_have_a_meal/features/menu/qr_use_screen.dart';
 import 'package:front_have_a_meal/models/menu_model.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard({
@@ -62,46 +59,39 @@ class MenuCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      menuData.menuTitle,
+                      menuData.main,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
                     ),
                     const Gap(4),
-                    Text(menuData.menuContent),
+                    for (String item in menuData.sub) Text(item),
                   ],
                 ),
-                Transform.scale(
-                  scale: 2,
-                  // 아이콘 위치 조정
-                  child: Transform.translate(
-                    offset: const Offset(5, 12),
-                    child: Icon(
-                      Icons.restaurant_menu_outlined,
-                      color: courseName == "A코스"
-                          ? Colors.lightGreen.shade200
-                          : courseName == "B코스"
-                              ? Colors.lightBlue.shade200
-                              : Colors.purple.shade200,
-                      size: 36,
-                    ),
-                  ),
-                )
+                // Transform.scale(
+                //   scale: 2,
+                //   // 아이콘 위치 조정
+                //   child: Transform.translate(
+                //     offset: const Offset(5, 12),
+                //     child:
+                //   ),
+                // ),
               ],
             ),
-            // const Positioned(
-            //   bottom: 0,
-            //   right: 0,
-            //   child: Text(
-            //     "n개",
-            //     style: TextStyle(
-            //       fontWeight: FontWeight.bold,
-            //       fontSize: 22,
-            //       // color: Colors.red,
-            //     ),
-            //   ),
-            // )
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Icon(
+                Icons.restaurant_menu_outlined,
+                color: courseName == "A코스"
+                    ? Colors.lightGreen.shade200
+                    : courseName == "B코스"
+                        ? Colors.lightBlue.shade200
+                        : Colors.purple.shade200,
+                size: 50,
+              ),
+            )
           ],
         ),
       ),

@@ -16,8 +16,8 @@ class PaySelect extends StatefulWidget {
 }
 
 class _PaySelectState extends State<PaySelect> {
-  TicketTimeEnum _TicketTimeEnum = TicketTimeEnum.breakfast;
-  TicketCourseEnum _TicketCourseEnum = TicketCourseEnum.a;
+  TicketTimeEnum _ticketTimeEnum = TicketTimeEnum.breakfast;
+  TicketCourseEnum _ticketCourseEnum = TicketCourseEnum.a;
 
   int _ticketPrice = 4200;
   bool _isOutsider = false;
@@ -53,7 +53,7 @@ class _PaySelectState extends State<PaySelect> {
         },
       };
 
-      _ticketPrice = priceMatrix[_TicketTimeEnum]![_TicketCourseEnum]!;
+      _ticketPrice = priceMatrix[_ticketTimeEnum]![_ticketCourseEnum]!;
     }
     setState(() {});
   }
@@ -64,7 +64,7 @@ class _PaySelectState extends State<PaySelect> {
       context: context,
       title: "결제",
       body: Text(
-        "${_TicketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _TicketTimeEnum == TicketTimeEnum.lunch ? "조식" : "석식"} ${_TicketCourseEnum == TicketCourseEnum.a ? "A코스" : _TicketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스"}를 결제하시겠습니까?",
+        "${_ticketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _ticketTimeEnum == TicketTimeEnum.lunch ? "조식" : "석식"} ${_ticketCourseEnum == TicketCourseEnum.a ? "A코스" : _ticketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스"}를 결제하시겠습니까?",
         style: const TextStyle(
           fontSize: Sizes.size16,
           fontWeight: FontWeight.normal,
@@ -82,8 +82,8 @@ class _PaySelectState extends State<PaySelect> {
             context.pushNamed(
               TicketPayTypeScreen.routeName,
               extra: TicketPayTypeScreenArgs(
-                ticketTime: _TicketTimeEnum,
-                ticketCourse: _TicketCourseEnum,
+                ticketTime: _ticketTimeEnum,
+                ticketCourse: _ticketCourseEnum,
                 ticketPrice: _ticketPrice,
               ),
             );
@@ -121,10 +121,10 @@ class _PaySelectState extends State<PaySelect> {
                   label: Text("석식"),
                 ),
               ],
-              selected: <TicketTimeEnum>{_TicketTimeEnum},
+              selected: <TicketTimeEnum>{_ticketTimeEnum},
               onSelectionChanged: (Set<TicketTimeEnum> newSelection) {
                 setState(() {
-                  _TicketTimeEnum = newSelection.first;
+                  _ticketTimeEnum = newSelection.first;
                 });
                 _onChangePrice();
               },
@@ -146,10 +146,10 @@ class _PaySelectState extends State<PaySelect> {
                   label: Text("C코스"),
                 ),
               ],
-              selected: <TicketCourseEnum>{_TicketCourseEnum},
+              selected: <TicketCourseEnum>{_ticketCourseEnum},
               onSelectionChanged: (Set<TicketCourseEnum> newSelection) {
                 setState(() {
-                  _TicketCourseEnum = newSelection.first;
+                  _ticketCourseEnum = newSelection.first;
                 });
                 _onChangePrice();
               },
@@ -185,7 +185,7 @@ class _PaySelectState extends State<PaySelect> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "시간 : ${_TicketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _TicketTimeEnum == TicketTimeEnum.lunch ? "중식" : "석식"}",
+                        "시간 : ${_ticketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _ticketTimeEnum == TicketTimeEnum.lunch ? "중식" : "석식"}",
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -193,7 +193,7 @@ class _PaySelectState extends State<PaySelect> {
                       ),
                       const Gap(10),
                       Text(
-                        "코스 : ${_TicketCourseEnum == TicketCourseEnum.a ? "A코스" : _TicketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스"}",
+                        "코스 : ${_ticketCourseEnum == TicketCourseEnum.a ? "A코스" : _ticketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스"}",
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

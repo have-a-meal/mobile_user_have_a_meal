@@ -185,7 +185,7 @@ class _PwResetAuthScreenState extends State<PwResetAuthScreen> {
                           child: SegmentedButton(
                             showSelectedIcon: false,
                             style: const ButtonStyle(
-                              shape: MaterialStatePropertyAll(
+                              shape: WidgetStatePropertyAll(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(10),

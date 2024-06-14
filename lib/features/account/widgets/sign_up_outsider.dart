@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 
 class SignUpOutsider extends StatefulWidget {
   const SignUpOutsider({super.key});
@@ -38,17 +43,79 @@ class _SignUpOutsiderState extends State<SignUpOutsider> {
   }
 
   // 외부인 회원가입 API
-  void _onSignUpOutsider() async {}
+  void _onSignUpOutsider() async {
+    final url = Uri.parse("${HttpIp.apiUrl}/members");
+    final headers = {'Content-Type': 'application/json'};
+    final data = {
+      "memberId": _outsiderEmailController.text.trim(),
+      "password": _outsiderPwAuthController.text.trim(),
+      "name": _outsiderNameController.text.trim(),
+      "phone": _outsiderPhoneNumberController.text.trim(),
+    };
+
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(data));
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      if (!mounted) return;
+      context.pop();
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
+    }
+  }
 
   // 이메일 인증코드 요청하기 API
-  void _onRequestEmailAuthCode() async {}
+  void _onRequestEmailAuthCode() async {
+    final url = Uri.parse("${HttpIp.apiUrl}/members/email");
+    final headers = {'Content-Type': 'application/json'};
+    final data = {
+      'memberId': _outsiderEmailController.text.trim(),
+    };
+
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(data));
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
+    }
+  }
 
   // 이메일 인증하기 API
   void _onCheckEmailAuthCode() async {
-    setState(() {
-      _isEmailAuth = !_isEmailAuth;
-    });
-    _onCheckOutsiderData();
+    final url = Uri.parse("${HttpIp.apiUrl}/members/emailCheck");
+    final headers = {'Content-Type': 'application/json'};
+    final data = {
+      'email': _outsiderEmailController.text.trim(),
+      'authNum': _outsiderEmailAuthController.text.trim(),
+    };
+
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(data));
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      setState(() {
+        _isEmailAuth = !_isEmailAuth;
+      });
+      _onCheckOutsiderData();
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
+    }
   }
 
   // 비밀번호 정규식

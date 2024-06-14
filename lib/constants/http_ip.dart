@@ -4,7 +4,7 @@ import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
 import 'package:go_router/go_router.dart';
 
 class HttpIp {
-  static const httpIp = "http://61.39.251.231:8080";
+  static const apiUrl = "http://158.180.74.116:8080";
 
   static void errorPrint({
     required BuildContext context,

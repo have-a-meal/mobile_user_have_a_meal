@@ -1,8 +1,13 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/menu/widgets/menu_time.dart';
 import 'package:front_have_a_meal/models/menu_model.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 
 class MenuView extends StatefulWidget {
   const MenuView({super.key});
@@ -14,19 +19,19 @@ class MenuView extends StatefulWidget {
 class _MenuViewState extends State<MenuView> {
   Map<String, Map<String, List<MenuModel>>> _menuMap = {
     "조식": {
-      "A코스": [],
-      "B코스": [],
-      "C코스": [],
+      "A": [],
+      "B": [],
+      "C": [],
     },
     "중식": {
-      "A코스": [],
-      "B코스": [],
-      "C코스": [],
+      "A": [],
+      "B": [],
+      "C": [],
     },
     "석식": {
-      "A코스": [],
-      "B코스": [],
-      "C코스": [],
+      "A": [],
+      "B": [],
+      "C": [],
     },
   };
 
@@ -47,55 +52,72 @@ class _MenuViewState extends State<MenuView> {
       _isFirstLoading = true;
     });
 
-    // final url = Uri.parse("${HttpIp.httpIp}/marine/stores");
-    // final headers = {'Content-Type': 'application/json'};
-    // final response = await http.get(url, headers: headers);
+    _menuMap = {
+      "조식": {
+        "A": [],
+        "B": [],
+        "C": [],
+      },
+      "중식": {
+        "A": [],
+        "B": [],
+        "C": [],
+      },
+      "석식": {
+        "A": [],
+        "B": [],
+        "C": [],
+      },
+    };
 
-    // if (response.statusCode >= 200 && response.statusCode < 300) {
-    //   print("가게 리스트 호출 : 성공");
-    //   final jsonResponse = jsonDecode(response.body) as List<dynamic>;
+    final url = Uri.parse(
+        "${HttpIp.apiUrl}/menu/${DateFormat('yyyy-MM-dd', 'ko_KR').format(_selectedDate)}");
+    final response = await http.get(url);
 
-    //   setState(() {
-    //     _storeList =
-    //         jsonResponse.map((data) => StoreModel.fromJson(data)).toList();
-    //   });
-    // } else {
-    //   if (!mounted) return;
-    //   HttpIp.errorPrint(
-    //     context: context,
-    //     title: "통신 오류",
-    //     message: response.body,
-    //   );
-    // }
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      try {
+        final jsonResponse = jsonDecode(response.body) as List<dynamic>;
+        print(jsonResponse);
 
-    _menuMap["조식"]!["A코스"]!.add(MenuModel(
-        menuId: "1",
-        menuTitle: "조식 A코스 메뉴1",
-        menuContent: "조식 A코스 설명",
-        menuPrice: "5000"));
-    _menuMap["조식"]!["B코스"]!.add(MenuModel(
-        menuId: "1",
-        menuTitle: "조식 B코스 메뉴1",
-        menuContent: "조식 B코스 설명",
-        menuPrice: "5000"));
-    _menuMap["중식"]!["B코스"]!.add(MenuModel(
-        menuId: "2",
-        menuTitle: "중식 B코스 메뉴1",
-        menuContent: "중식 B코스 설명",
-        menuPrice: "5000"));
-    _menuMap["중식"]!["C코스"]!.add(MenuModel(
-        menuId: "2",
-        menuTitle: "중식 C코스 메뉴1",
-        menuContent: "중식 C코스 설명",
-        menuPrice: "5000"));
-    _menuMap["석식"]!["A코스"]!.add(MenuModel(
-        menuId: "3",
-        menuTitle: "석식 A코스 메뉴1",
-        menuContent: "석식 A코스 설명",
-        menuPrice: "5000"));
+        if (jsonResponse.isNotEmpty) {
+          _addMenuData(jsonResponse);
+        } else {
+          if (kDebugMode) {
+            print("응답 데이터가 비어 있습니다.");
+          }
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print("JSON 파싱 오류: $e");
+        }
+      }
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
+    }
 
     setState(() {
       _isFirstLoading = false;
+    });
+  }
+
+  // 데이터를 _menuMap에 추가하는 함수
+  void _addMenuData(List<dynamic> data) {
+    setState(() {
+      for (var item in data) {
+        MenuModel menu = MenuModel.fromJson(item);
+        String timing = menu.timing;
+        String courseKey = menu.courseType;
+
+        if (_menuMap.containsKey(timing) &&
+            _menuMap[timing]!.containsKey(courseKey)) {
+          _menuMap[timing]![courseKey]!.add(menu);
+        }
+      }
     });
   }
 
@@ -116,6 +138,7 @@ class _MenuViewState extends State<MenuView> {
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
+        _initMenu();
       });
     }
   }
@@ -129,23 +152,23 @@ class _MenuViewState extends State<MenuView> {
     _now = DateTime.now();
     _menuMap = {
       "조식": {
-        "A코스": [],
-        "B코스": [],
-        "C코스": [],
+        "A": [],
+        "B": [],
+        "C": [],
       },
       "중식": {
-        "A코스": [],
-        "B코스": [],
-        "C코스": [],
+        "A": [],
+        "B": [],
+        "C": [],
       },
       "석식": {
-        "A코스": [],
-        "B코스": [],
-        "C코스": [],
+        "A": [],
+        "B": [],
+        "C": [],
       },
     };
 
-    _initMenu();
+    await _initMenu();
 
     setState(() {
       _isFirstLoading = false;
@@ -180,6 +203,7 @@ class _MenuViewState extends State<MenuView> {
                         setState(() {
                           _selectedDate = DateTime(_selectedDate.year,
                               _selectedDate.month, _selectedDate.day - 1);
+                          _initMenu();
                         });
                       },
                 icon: const Icon(Icons.chevron_left_rounded),
@@ -208,10 +232,11 @@ class _MenuViewState extends State<MenuView> {
                             _now.day + (7 - _now.weekday))
                     ? null
                     : () {
-                        _selectedDate = DateTime(_selectedDate.year,
-                            _selectedDate.month, _selectedDate.day + 1);
-
-                        setState(() {});
+                        setState(() {
+                          _selectedDate = DateTime(_selectedDate.year,
+                              _selectedDate.month, _selectedDate.day + 1);
+                          _initMenu();
+                        });
                       },
                 icon: const Icon(Icons.chevron_right_rounded),
                 color: Colors.black,

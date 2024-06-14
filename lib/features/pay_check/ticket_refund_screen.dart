@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'package:front_have_a_meal/constants/sizes.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:front_have_a_meal/providers/ticket_refund_provider.dart';
 import 'package:front_have_a_meal/widget_tools/swag_platform_dialog.dart';
@@ -30,8 +29,8 @@ class TicketRefundScreen extends StatefulWidget {
 
 class _TicketRefundScreenState extends State<TicketRefundScreen>
     with TickerProviderStateMixin {
-  List<TicketModel> _ticketEnabledList = [];
-  List<TicketModel> _ticketDisabledList = [];
+  final List<TicketModel> _ticketEnabledList = [];
+  final List<TicketModel> _ticketDisabledList = [];
   // 선택한 환불 티켓
   Set<TicketModel> _selectedRefundDisabledTicket = {};
   Set<TicketModel> _selectedRefundEnabledTicket = {};
@@ -44,57 +43,57 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
   void initState() {
     super.initState();
 
-    _onInitEnabledTicket();
+    // _onInitEnabledTicket();
     _onInitRefundReason();
   }
 
   // 티켓 리스트 초기화 API
-  Future<void> _onInitEnabledTicket() async {
-    _ticketEnabledList = [];
-    _ticketDisabledList = [];
+  // Future<void> _onInitEnabledTicket() async {
+  //   _ticketEnabledList = [];
+  //   _ticketDisabledList = [];
 
-    for (TicketModel ticket in [
-      TicketModel(
-        ticketId: "1",
-        ticketTime: "조식",
-        ticketCourse: "A코스",
-        ticketPrice: "5000",
-      ),
-      TicketModel(
-        ticketId: "2",
-        ticketTime: "중식",
-        ticketCourse: "B코스",
-        ticketPrice: "5000",
-      ),
-      TicketModel(
-        ticketId: "3",
-        ticketTime: "중식",
-        ticketCourse: "C코스",
-        ticketPrice: "5000",
-      ),
-    ]) {
-      if (int.parse(ticket.ticketId) % 2 == 0) {
-        _ticketEnabledList.add(ticket);
-      } else {
-        _ticketDisabledList.add(ticket);
-      }
-    }
+  //   for (TicketModel ticket in [
+  //     TicketModel(
+  //       ticketId: "1",
+  //       ticketTime: "조식",
+  //       ticketCourse: "A코스",
+  //       ticketPrice: "5000",
+  //     ),
+  //     TicketModel(
+  //       ticketId: "2",
+  //       ticketTime: "중식",
+  //       ticketCourse: "B코스",
+  //       ticketPrice: "5000",
+  //     ),
+  //     TicketModel(
+  //       ticketId: "3",
+  //       ticketTime: "중식",
+  //       ticketCourse: "C코스",
+  //       ticketPrice: "5000",
+  //     ),
+  //   ]) {
+  //     if (int.parse(ticket.ticketId) % 2 == 0) {
+  //       _ticketEnabledList.add(ticket);
+  //     } else {
+  //       _ticketDisabledList.add(ticket);
+  //     }
+  //   }
 
-    if (_ticketDisabledList.isNotEmpty) {
-      _selectedRefundDisabledTicket.add(_ticketDisabledList[0]);
-    }
-    if (_ticketEnabledList.isNotEmpty) {
-      _selectedRefundEnabledTicket.add(_ticketEnabledList[0]);
-    }
-    if (_ticketEnabledList.isNotEmpty) {
-      // _selectedQRTicket = _ticketEnabledList[0].ticketId;
-    }
+  //   if (_ticketDisabledList.isNotEmpty) {
+  //     _selectedRefundDisabledTicket.add(_ticketDisabledList[0]);
+  //   }
+  //   if (_ticketEnabledList.isNotEmpty) {
+  //     _selectedRefundEnabledTicket.add(_ticketEnabledList[0]);
+  //   }
+  //   if (_ticketEnabledList.isNotEmpty) {
+  //     // _selectedQRTicket = _ticketEnabledList[0].ticketId;
+  //   }
 
-    setState(() {});
-  }
+  //   setState(() {});
+  // }
 
   Future<void> _onRefreshTicketList() async {
-    _onInitEnabledTicket();
+    // _onInitEnabledTicket();
   }
 
   Future<void> _onEnabledTicketRefund(BuildContext context) async {
@@ -318,8 +317,8 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
                                   }
                                   setState(() {});
                                 },
-                                title: Text(
-                                    "[${_ticketEnabledList[index].ticketTime} - ${_ticketEnabledList[index].ticketCourse}] n일 남음"),
+                                // title: Text(
+                                //     "[${_ticketEnabledList[index].ticketTime} - ${_ticketEnabledList[index].ticketCourse}] n일 남음"),
                               ),
                             ),
                           ),
@@ -486,8 +485,8 @@ class _TicketRefundScreenState extends State<TicketRefundScreen>
                                   }
                                   setState(() {});
                                 },
-                                title: Text(
-                                    "[${_ticketDisabledList[index].ticketTime} - ${_ticketDisabledList[index].ticketCourse}] 기간 만료"),
+                                // title: Text(
+                                //     "[${_ticketDisabledList[index].ticketTime} - ${_ticketDisabledList[index].ticketCourse}] 기간 만료"),
                               ),
                             ),
                           ),

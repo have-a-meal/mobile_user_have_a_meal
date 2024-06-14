@@ -8,7 +8,7 @@ class UserProvider extends ChangeNotifier {
   bool get isLogined => _isLogined;
   UserModel? get userData => _userData;
 
-  Future<void> login(UserModel userData, int destinationId) async {
+  Future<void> login(UserModel userData) async {
     _isLogined = true;
     _userData = userData;
     notifyListeners();

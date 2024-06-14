@@ -49,17 +49,15 @@ class TicketProvider extends ChangeNotifier {
 
   Future<void> addTicket(List<TicketModel> ticketList) async {
     for (TicketModel ticketModel in ticketList) {
-      _ticketMap[ticketModel.ticketTime]![ticketModel.ticketCourse]!
-          .add(ticketModel);
+      _ticketMap[ticketModel.timing]![ticketModel.courseType]!.add(ticketModel);
     }
 
     notifyListeners();
-    // return true;
   }
 
   Future<void> removeTicket(Set<TicketModel> ticketList) async {
     for (TicketModel ticketModel in ticketList) {
-      _ticketMap[ticketModel.ticketTime]![ticketModel.ticketCourse]!
+      _ticketMap[ticketModel.timing]![ticketModel.courseType]!
           .remove(ticketModel);
     }
     notifyListeners();

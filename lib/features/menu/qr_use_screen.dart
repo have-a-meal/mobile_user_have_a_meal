@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/models/ticket_model.dart';
 import 'package:gap/gap.dart';
@@ -38,7 +39,7 @@ class QrUseScreen extends StatefulWidget {
 }
 
 class _QrUseScreenState extends State<QrUseScreen> {
-  List<TicketModel> _ticketEnabledList = [];
+  final List<TicketModel> _ticketEnabledList = [];
 
   bool _isLoading = true;
 
@@ -68,7 +69,9 @@ class _QrUseScreenState extends State<QrUseScreen> {
       } else {
         // 시간이 모두 경과하면 타이머 종료
         _timer!.cancel();
-        print("시간 종료!");
+        if (kDebugMode) {
+          print("시간 종료!");
+        }
       }
     });
   }
@@ -78,22 +81,15 @@ class _QrUseScreenState extends State<QrUseScreen> {
       _isLoading = true;
     });
 
-    _ticketEnabledList = [
-      TicketModel(
-        ticketId: "1",
-        ticketTime: "조식",
-        ticketCourse: "A코스",
-        ticketPrice: "5000",
-      )
-    ]; // 사용 가능한 식권 불러오기 통신
-
     setState(() {
       _isLoading = false;
     });
   }
 
   Future<void> _onRefreshEnabledTicket() async {
-    _onCheckedEnabledTicket();
+    setState(() {
+      _start = 180;
+    });
   }
 
   @override
@@ -124,11 +120,7 @@ class _QrUseScreenState extends State<QrUseScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton.icon(
-                      onPressed: () {
-                        setState(() {
-                          _start = 180;
-                        });
-                      },
+                      onPressed: _onRefreshEnabledTicket,
                       icon: const Icon(Icons.refresh),
                       label: Text(
                         '남은 시간 : $_start초',

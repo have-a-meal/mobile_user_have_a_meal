@@ -59,26 +59,26 @@ class MenuTime extends StatelessWidget {
               ),
             ],
           ),
-          if (menuCourse["A코스"]!.isNotEmpty)
+          if (menuCourse["A"]!.isNotEmpty)
             MenuCourse(
               timeName: timeName,
               courseName: "A코스",
               courseColor: Colors.lightGreen,
-              menuList: menuCourse["A코스"]!,
+              menuList: menuCourse["A"]!,
             ),
-          if (menuCourse["B코스"]!.isNotEmpty)
+          if (menuCourse["B"]!.isNotEmpty)
             MenuCourse(
               timeName: timeName,
               courseName: "B코스",
               courseColor: Colors.lightBlue,
-              menuList: menuCourse["B코스"]!,
+              menuList: menuCourse["B"]!,
             ),
-          if (menuCourse["C코스"]!.isNotEmpty)
+          if (menuCourse["C"]!.isNotEmpty)
             MenuCourse(
               timeName: timeName,
               courseName: "C코스",
               courseColor: Colors.purple,
-              menuList: menuCourse["C코스"]!,
+              menuList: menuCourse["C"]!,
             ),
         ],
       ),

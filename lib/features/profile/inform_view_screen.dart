@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
 import 'package:front_have_a_meal/features/profile/email_auth_screen.dart';
 import 'package:front_have_a_meal/models/user_model.dart';
+import 'package:front_have_a_meal/providers/user_provider.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class InfromViewScreen extends StatefulWidget {
   static const routeName = "student_infrom";
@@ -15,8 +17,6 @@ class InfromViewScreen extends StatefulWidget {
 }
 
 class _InfromViewScreenState extends State<InfromViewScreen> {
-  UserModel? _userData;
-
   bool _isFirstLoading = false;
 
   @override
@@ -64,6 +64,7 @@ class _InfromViewScreenState extends State<InfromViewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    UserModel userData = context.watch<UserProvider>().userData!;
     return Scaffold(
       appBar: AppBar(
         title: const Text("회원 정보 조회"),
@@ -95,7 +96,7 @@ class _InfromViewScreenState extends State<InfromViewScreen> {
                     const Gap(10),
                     TextFormField(
                       // initialValue: _userData!.userId,
-                      initialValue: "00000000",
+                      initialValue: userData.memberId,
                       readOnly: true,
                       decoration: InputDecoration(
                         labelText: "아이디",
@@ -108,7 +109,7 @@ class _InfromViewScreenState extends State<InfromViewScreen> {
                     const Gap(20),
                     TextFormField(
                       // initialValue: _userData!.name,
-                      initialValue: "홍길동",
+                      initialValue: userData.name,
                       readOnly: true,
                       decoration: InputDecoration(
                         labelText: "이름(실명)",
@@ -121,7 +122,7 @@ class _InfromViewScreenState extends State<InfromViewScreen> {
                     const Gap(20),
                     TextFormField(
                       // initialValue: _userData!.phoneNumber,
-                      initialValue: "010-0000-0000",
+                      initialValue: userData.phone,
                       readOnly: true,
                       decoration: InputDecoration(
                         labelText: "전화번호",

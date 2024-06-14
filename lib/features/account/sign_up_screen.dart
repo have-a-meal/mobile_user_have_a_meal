@@ -41,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: SegmentedButton(
                       showSelectedIcon: false,
                       style: const ButtonStyle(
-                        shape: MaterialStatePropertyAll(
+                        shape: WidgetStatePropertyAll(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),

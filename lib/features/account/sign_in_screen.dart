@@ -1,9 +1,18 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/account/pw_reset_auth_screen.dart';
 import 'package:front_have_a_meal/features/account/sign_up_screen.dart';
 import 'package:front_have_a_meal/features/navigation_screen.dart';
+import 'package:front_have_a_meal/models/user_model.dart';
+import 'package:front_have_a_meal/providers/user_provider.dart';
+import 'package:front_have_a_meal/storages/login_storage.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 enum LoginType {
   student,
@@ -20,9 +29,11 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _idController =
+      TextEditingController(text: "22471026");
   final FocusNode _idFocusNode = FocusNode();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordController =
+      TextEditingController(text: "Test@1234");
   final FocusNode _pwFocusNode = FocusNode();
 
   bool _rememberMe = false;
@@ -99,27 +110,51 @@ class _SignInScreenState extends State<SignInScreen> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _onCheckAutoLogin() {}
+
   void _handleLogin() async {
-    // final url = Uri.parse("${HttpIp.httpIp}/marine/users/auth");
-    // final headers = {'Content-Type': 'application/json'};
-    // final data = {
-    //   'userId': _idController.text.trim(),
-    //   'password': _passwordController.text.trim(),
-    // };
-    // final response =
-    //     await http.post(url, headers: headers, body: jsonEncode(data));
+    final url = Uri.parse("${HttpIp.apiUrl}/members/login");
+    final headers = {'Content-Type': 'application/json'};
+    final data = {
+      'memberId': _idController.text.trim(),
+      'password': _passwordController.text.trim(),
+    };
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(data));
 
-    // if (response.statusCode >= 200 && response.statusCode < 300) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      if (kDebugMode) {
+        print(response.body);
+      }
 
-    // } else {
-    //   if (!mounted) return;
-    //   HttpIp.errorPrint(
-    //     context: context,
-    //     title: "통신 오류",
-    //     message: response.body,
-    //   );
-    // }
-    context.replaceNamed(NavigationScreen.routeName);
+      final jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+      final userData = UserModel.fromJson(jsonResponse);
+
+      if (_rememberMe) {
+        await LoginStorage.saveLoginData(
+          id: userData.memberId,
+          pw: _passwordController.text.trim(),
+          isStudent: userData.memberType,
+        );
+      }
+
+      if (!mounted) return;
+      await context.read<UserProvider>().login(userData);
+      if (!mounted) return;
+      context.replaceNamed(NavigationScreen.routeName);
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
+    }
   }
 
   Future<void> _onTapSignUp() async {
@@ -219,7 +254,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             child: SegmentedButton(
                               showSelectedIcon: false,
                               style: const ButtonStyle(
-                                shape: MaterialStatePropertyAll(
+                                shape: WidgetStatePropertyAll(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(10),

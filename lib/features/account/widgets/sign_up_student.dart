@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:front_have_a_meal/constants/http_ip.dart';
 import 'package:front_have_a_meal/features/account/widgets/bottom_button.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 
 class SignUpStudent extends StatefulWidget {
   const SignUpStudent({super.key});
@@ -36,18 +41,80 @@ class _SignUpStudentState extends State<SignUpStudent> {
   }
 
   // 학번 인증코드 요청하기 API
-  void _onRequestIdCode() async {}
+  void _onRequestIdCode() async {
+    final url = Uri.parse("${HttpIp.apiUrl}/members/email");
+    final headers = {'Content-Type': 'application/json'};
+    final data = {
+      'memberId': '${_studentIdController.text.trim()}@st.yc.ac.kr',
+    };
+
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(data));
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
+    }
+  }
 
   // 학번 인증하기 API
   void _onCheckIdAuthCode() async {
-    setState(() {
-      _studentIdAuth = !_studentIdAuth;
-    });
-    _onCheckStudentData();
+    final url = Uri.parse("${HttpIp.apiUrl}/members/emailCheck");
+    final headers = {'Content-Type': 'application/json'};
+    final data = {
+      'email': '${_studentIdController.text.trim()}@st.yc.ac.kr',
+      'authNum': _studentIdAuthController.text.trim(),
+    };
+
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(data));
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      setState(() {
+        _studentIdAuth = !_studentIdAuth;
+      });
+      _onCheckStudentData();
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
+    }
   }
 
   // 학생 회원가입 API
-  void _onSignUpStudent() async {}
+  Future<void> _onSignUpStudent() async {
+    final url = Uri.parse("${HttpIp.apiUrl}/members");
+    final headers = {'Content-Type': 'application/json'};
+    final data = {
+      "memberId": _studentIdController.text.trim(),
+      "password": _studentPwAuthController.text.trim(),
+      "name": _studentNameController.text.trim(),
+      "phone": _studentPhoneNumberController.text.trim(),
+    };
+
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(data));
+
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      if (!mounted) return;
+      context.pop();
+    } else {
+      if (!mounted) return;
+      HttpIp.errorPrint(
+        context: context,
+        title: "통신 오류",
+        message: response.body,
+      );
+    }
+  }
 
   // 학번 정규식
   final RegExp _regExpId = RegExp(r'^\d{8}$');
@@ -87,7 +154,9 @@ class _SignUpStudentState extends State<SignUpStudent> {
     } else {
       setState(() {
         _studentIdErrorText = null;
+        _studentIdAuth = false;
       });
+
       _onCheckStudentData();
     }
   }
