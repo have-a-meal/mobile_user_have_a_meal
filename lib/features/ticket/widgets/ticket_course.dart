@@ -33,9 +33,9 @@ class TicketCourse extends StatelessWidget {
           color: Colors.white,
           border: Border.all(
             width: 4,
-            color: ticketCourse == "A코스"
+            color: ticketCourse == "A"
                 ? Colors.lightGreen
-                : ticketCourse == "B코스"
+                : ticketCourse == "B"
                     ? Colors.lightBlue
                     : Colors.purple,
           ),
@@ -55,13 +55,13 @@ class TicketCourse extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  ticketCourse,
+                  "$ticketCourse코스",
                   style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
-                    color: ticketCourse == "A코스"
+                    color: ticketCourse == "A"
                         ? Colors.lightGreen
-                        : ticketCourse == "B코스"
+                        : ticketCourse == "B"
                             ? Colors.lightBlue
                             : Colors.purple,
                   ),

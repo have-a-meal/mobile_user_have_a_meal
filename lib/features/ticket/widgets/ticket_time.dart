@@ -61,19 +61,19 @@ class TicketTime extends StatelessWidget {
             if (ticketMap["A코스"]!.isNotEmpty)
               TicketCourse(
                 ticketTime: ticketTime,
-                ticketCourse: "A코스",
+                ticketCourse: "A",
                 ticketList: ticketMap["A코스"]!,
               ),
             if (ticketMap["B코스"]!.isNotEmpty)
               TicketCourse(
                 ticketTime: ticketTime,
-                ticketCourse: "B코스",
+                ticketCourse: "B",
                 ticketList: ticketMap["B코스"]!,
               ),
             if (ticketMap["C코스"]!.isNotEmpty)
               TicketCourse(
                 ticketTime: ticketTime,
-                ticketCourse: "C코스",
+                ticketCourse: "C",
                 ticketList: ticketMap["C코스"]!,
               ),
           ],

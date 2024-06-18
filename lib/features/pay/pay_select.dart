@@ -50,7 +50,7 @@ class _PaySelectState extends State<PaySelect> {
       'timing': _ticketTimeEnum == TicketTimeEnum.breakfast
           ? "조식"
           : _ticketTimeEnum == TicketTimeEnum.lunch
-              ? "조식"
+              ? "중식"
               : "석식",
       'courseType': _ticketCourseEnum == TicketCourseEnum.a
           ? "A"
@@ -85,7 +85,7 @@ class _PaySelectState extends State<PaySelect> {
       context: context,
       title: "결제",
       body: Text(
-        "${_ticketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _ticketTimeEnum == TicketTimeEnum.lunch ? "조식" : "석식"} ${_ticketCourseEnum == TicketCourseEnum.a ? "A코스" : _ticketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스"}를 결제하시겠습니까?",
+        "${_ticketTimeEnum == TicketTimeEnum.breakfast ? "조식" : _ticketTimeEnum == TicketTimeEnum.lunch ? "중식" : "석식"} ${_ticketCourseEnum == TicketCourseEnum.a ? "A코스" : _ticketCourseEnum == TicketCourseEnum.b ? "B코스" : "C코스"}를 결제하시겠습니까?",
         style: const TextStyle(
           fontSize: Sizes.size16,
           fontWeight: FontWeight.normal,

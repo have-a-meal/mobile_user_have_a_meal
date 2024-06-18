@@ -124,7 +124,7 @@ class _MenuViewState extends State<MenuView> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime now = DateTime.now();
     final DateTime firstDate = DateTime(now.year, now.month, now.day); // 오늘 날짜
-    int daysUntilNextSunday = 7 - now.weekday; // 현재 요일로부터 이번 주 일요일까지의 일수
+    int daysUntilNextSunday = 7 - now.weekday + 7; // 다음주 일요일까지의 일수
     final DateTime lastDate = DateTime(
         now.year, now.month, now.day + daysUntilNextSunday); // 선택 가능한 늦은 날짜
 
@@ -228,7 +228,7 @@ class _MenuViewState extends State<MenuView> {
                 onPressed: DateTime(_selectedDate.year, _selectedDate.month,
                             _selectedDate.day) ==
                         DateTime(_now.year, _now.month,
-                            _now.day + (7 - _now.weekday))
+                            _now.day + (7 - _now.weekday + 7))
                     ? null
                     : () {
                         setState(() {
@@ -253,6 +253,7 @@ class _MenuViewState extends State<MenuView> {
                   .every((courseEntry) => courseEntry.value.isEmpty))
               ? Center(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
                         iconSize: MediaQuery.of(context).size.width / 3,

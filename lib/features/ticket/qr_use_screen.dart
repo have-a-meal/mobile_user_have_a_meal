@@ -52,7 +52,7 @@ class _QrUseScreenState extends State<QrUseScreen> {
   bool _isLoading = true;
 
   Timer? _timer;
-  int _start = 10; // 3분을 초 단위로 환산한 값
+  int _start = 180; // 3분을 초 단위로 환산한 값
 
   @override
   void initState() {
@@ -104,8 +104,8 @@ class _QrUseScreenState extends State<QrUseScreen> {
       setState(() {
         _qrImage = jsonResponse['qrCode'];
         _qrImageBase64 = base64Decode(jsonResponse['qrCode']);
-        _accessToken = jsonResponse['accessToken'];
-        _refreshToken = jsonResponse['refreshToken'];
+        _accessToken = jsonResponse['token']['accessToken'];
+        _refreshToken = jsonResponse['token']['refreshToken'];
         startTimer();
       });
     } else {
@@ -144,6 +144,7 @@ class _QrUseScreenState extends State<QrUseScreen> {
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       final jsonResponse = jsonDecode(response.body);
+      print(jsonResponse);
 
       setState(() {
         _qrImage = jsonResponse['qrCode'];
