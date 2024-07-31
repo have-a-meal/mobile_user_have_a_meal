@@ -41,7 +41,7 @@
 - iamport_flutter: ^0.10.18 (아임포트 결제 관리 라이브러리)
 
 
-# 실제 화면
+# 프로토타입 화면
 ## 로그인 / 회원가입
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/a6123e66-0430-48dd-a572-1f149c99a7e0.png"  width="175" height="400"/>
 <img src="https://github.com/have-a-meal/front_have_a_meal/assets/77985708/76c4a8fd-1231-4d06-a323-208f5d09ffe3.png"  width="175" height="400"/>
