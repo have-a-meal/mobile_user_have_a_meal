@@ -1,4 +1,5 @@
-# 프로젝트 정보
+# Have a Meal(사용자/앱)
+## 프로젝트 정보
 
 <a><img src="https://img.shields.io/badge/-Flutter-387ADF?style=flat-plastic&logo=Flutter&logoColor=white"/>
 <img src="https://img.shields.io/badge/-Provider-FBA834?style=flat-plastic&logo=Provider&logoColor=white"/>
